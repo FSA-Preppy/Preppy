@@ -1,3 +1,4 @@
+import Image from "components/Image";
 import { authService } from "fbase";
 import React from "react";
 // import { useHistory } from "react-router";
@@ -10,6 +11,7 @@ const Home = () => {
   };
   return (
     <>
+    <div><Image /></div>
       <button onClick={onClick}>Log Out</button>
     </>
   );

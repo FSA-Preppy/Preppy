@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 
 const Camera = () => {
-    const [recipeData, setRecipeData] = useState(null);
+  console.log(document.getElementById("videoFile"))
+  const [recipeData, setRecipeData] = useState(null);
   const [recipes, setRecipe] = useState("");
 
   function handleChange(e) {
@@ -20,6 +21,8 @@ const Camera = () => {
         console.log("error");
       });
     }
+
+
     return (
         <div>
         <div className="App">
