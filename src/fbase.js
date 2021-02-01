@@ -1,5 +1,7 @@
 import firebase from "firebase/app";
 import  "firebase/auth"
+import  "firebase/storage"
+
 //only for github.
 //REACT_APP_ is required if you created an app using create-react-app command
 
@@ -18,3 +20,4 @@ firebase.initializeApp(firebaseConfig);
 
 export const firebaseInstance = firebase;
 export const authService = firebase.auth()
+export const storageService = firebase.storage()
