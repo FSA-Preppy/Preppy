@@ -1,11 +1,11 @@
 import { authService, firebaseInstance } from "fbase";
 import React, { useState, useEffect } from "react";
-import "./authstyle.css";
+import "../assets/authstyle.css";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [newAccount, setNewAccount] = useState(true);
+  const [newAccount, setNewAccount] = useState(false);
   const [error, setError] = useState("");
 
   const onChange = (evt) => {
@@ -17,15 +17,16 @@ const Auth = () => {
   };
 
   const onSubmit = async (evt) => {
-    evt.preventDefault();
-
-    const {
-      target: { value },
-    } = evt;
-
     try {
+      evt.preventDefault();
+
+      const {
+        target: { value },
+      } = evt;
+
       let data;
-      if (value === "signup") {
+      if (newAccount) {
+        console.log("test");
         //If the new account was created, the user is signed in automatically.
         data = await authService.createUserWithEmailAndPassword(
           email,
@@ -34,7 +35,6 @@ const Auth = () => {
       } else {
         data = await authService.signInWithEmailAndPassword(email, password);
       }
-      console.log(data);
     } catch (error) {
       setError(error.message);
     }
@@ -51,7 +51,11 @@ const Auth = () => {
     await authService.signInWithPopup(provider);
   };
 
-  const toggleAcct = () => setNewAccount((prev) => !prev);
+  const reset = () => {
+    setEmail("");
+    setPassword("");
+    setNewAccount(!newAccount);
+  };
 
   //CSS related functions*****
   useEffect(() => {
@@ -90,6 +94,7 @@ const Auth = () => {
                 onChange={onChange}
               />
             </div>
+            <span>{error}</span>
             <div className="input-field">
               <i className="fas fa-lock"></i>
               <input
@@ -138,6 +143,7 @@ const Auth = () => {
                 onChange={onChange}
               />
             </div>
+            <span>{error}</span>
             <div className="input-field">
               <i className="fas fa-lock"></i>
               <input
@@ -149,7 +155,9 @@ const Auth = () => {
                 onChange={onChange}
               />
             </div>
-            <input type="submit" className="btn" value="Sign Up" required />
+            <button type="submit" className="btn">
+              Sign Up
+            </button>
           </form>
         </div>
       </div>
@@ -159,7 +167,11 @@ const Auth = () => {
           <div className="content">
             <h3>New here ?</h3>
             <p>Sign up here, and start with Preppy today!</p>
-            <button className="btn transparent" id="sign-up-btn">
+            <button
+              className="btn transparent"
+              id="sign-up-btn"
+              onClick={() => reset()}
+            >
               Sign up
             </button>
           </div>
@@ -173,7 +185,11 @@ const Auth = () => {
           <div className="content">
             <h3>One of us ?</h3>
             <p>Sign in here, and starting preppin' your recipes with Preppy!</p>
-            <button className="btn transparent" id="sign-in-btn">
+            <button
+              className="btn transparent"
+              id="sign-in-btn"
+              onClick={() => reset()}
+            >
               Sign in
             </button>
           </div>

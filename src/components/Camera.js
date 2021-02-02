@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
 
 const Camera = () => {
-  console.log(document.getElementById("videoFile"))
+  console.log(document.getElementById("videoFile"));
   const [recipeData, setRecipeData] = useState(null);
   const [recipes, setRecipe] = useState("");
 
@@ -20,34 +20,33 @@ const Camera = () => {
       .catch(() => {
         console.log("error");
       });
-    }
+  }
 
-
-    return (
-        <div>
-        <div className="App">
-          <header className="App-header">
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <p>
-              <label for="videoFile">Upload a video:</label>
-              <input
-                type="file"
-                id="videoFile"
-                capture="environment"
-                accept="camera/*"
-              />
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
+  return (
+    <div>
+      <div className="App">
+        <header className="App-header">
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <p>
+            <label for="videoFile">Upload a video:</label>
+            <input
+              type="file"
+              id="videoFile"
+              capture="environment"
+              accept="camera/*"
+            />
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+        </header>
         <div>
           <input
             type="string"
@@ -59,8 +58,8 @@ const Camera = () => {
           </div>
         </div>
       </div>
-      </div>
-    )
-}
+    </div>
+  );
+};
 
-export default Camera
+export default Camera;
