@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import Quagga from 'quagga';
+import React, { useState } from "react";
+import Quagga from "quagga";
 
 //todo, replace axios calls with thunks; manually add items(possibly with autocomplete via an api); add items using returned barcode information
 
 const Search = () => {
+  let _scannerIsRunning = false;
   //console.log(document.getElementById('videoFile'));
   //const [recipeData, setRecipeData] = useState(null);
-  const [item, setItem] = useState('');
+  const [item, setItem] = useState("");
 
   function handleChange(e) {
     setItem(e.target.value);
@@ -26,26 +27,26 @@ const Search = () => {
         console.log(data);
       })
       .catch(() => {
-        console.log('error returning product via upc');
+        console.log("error returning product via upc");
       });
   }
 
-  function getBarCode() {
-    console.log('init starting');
+  async function getBarCode() {
+    console.log("init starting");
     Quagga.init(
       {
         inputStream: {
-          name: 'Live',
-          type: 'LiveStream',
-          target: document.getElementById('scanner'),
+          name: "Live",
+          type: "LiveStream",
+          target: document.getElementById("scanner"),
           constraints: {
             width: 480,
             height: 320,
-            facingMode: 'environment',
+            facingMode: "environment",
           },
         },
         decoder: {
-          readers: ['upc_reader'],
+          readers: ["upc_reader"],
         },
       },
       function (err) {
@@ -54,7 +55,7 @@ const Search = () => {
           return;
         }
 
-        console.log('Initialization finished. Ready to start');
+        console.log("Initialization finished. Ready to start");
         Quagga.start();
 
         // Set flag to is running
@@ -62,14 +63,15 @@ const Search = () => {
       }
     );
 
-    Quagga.onDetected(function (result) {
+    await Quagga.onDetected(function (result) {
       console.log(
-        'Barcode detected and processed : [' + result.codeResult.code + ']',
+        "Barcode detected and processed : [" + result.codeResult.code + "]",
         typeof result.codeResult.code
         //query spoonacular for the product
       );
-      Quagga.stop();
+
       getProduct(result.codeResult.code);
+      Quagga.stop();
     });
   }
 
