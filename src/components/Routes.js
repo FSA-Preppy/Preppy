@@ -1,18 +1,16 @@
-import { auth } from "fbase";
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Auth from "../routes/Auth";
-import Home from "../routes/Home";
+import Auth from "./Auth";
+import Home from "./Home";
 //You can also get the currently signed-in user by using the currentUser property. If a user isn't signed in, currentUser is null:
-import { authService } from "fbase";
-import Navigation from "./Navigation";
+import NavBar from "./NavBar";
 
 const Routes = ({ isLoggedIn }) => {
   // console.log(authService.currentUser) this will return "null"
 
   return (
     <Router>
-      {isLoggedIn && <Navigation />}
+      {isLoggedIn && <NavBar />}
       <Switch>
         {isLoggedIn ? (
           <>

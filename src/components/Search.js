@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Quagga from 'quagga';
+import React, { useState } from "react";
+import Quagga from "quagga";
 
 //todo, replace axios calls with thunks; manually add items(possibly with autocomplete via an); add items using returned barcode information
 
@@ -7,9 +7,10 @@ const Search = () => {
   let codeCollection = [];
   let _scannerIsRunning = false;
   let QuaggaInit = false;
+
   //console.log(document.getElementById('videoFile'));
   //const [recipeData, setRecipeData] = useState(null);
-  const [item, setItem] = useState('');
+  const [item, setItem] = useState("");
 
   function handleChange(e) {
     setItem(e.target.value);
@@ -29,9 +30,10 @@ const Search = () => {
         console.log(data);
       })
       .catch(() => {
-        console.log('error returning product via upc');
+        console.log("error returning product via upc");
       });
   }
+
 
   function getBarCode() {
     let toggle = document.getElementById('scanner');
@@ -39,21 +41,22 @@ const Search = () => {
     toggle.style.display = 'block';
     console.log('init starting');
 
+
     Quagga.init(
       {
         inputStream: {
-          name: 'Live',
-          type: 'LiveStream',
-          target: document.getElementById('scanner'),
+          name: "Live",
+          type: "LiveStream",
+          target: document.getElementById("scanner"),
           constraints: {
             width: 480,
             height: 320,
-            facingMode: 'environment',
+            facingMode: "environment",
           },
           frequency: 1,
         },
         decoder: {
-          readers: ['upc_reader'],
+          readers: ["upc_reader"],
         },
       },
       function (err) {
@@ -62,7 +65,7 @@ const Search = () => {
           return;
         }
 
-        console.log('Initialization finished. Ready to start');
+        console.log("Initialization finished. Ready to start");
         Quagga.start();
 
         // Set flag to is running
@@ -70,6 +73,7 @@ const Search = () => {
       }
     );
     QuaggaInit = true;
+
 
     Quagga.onDetected(function (result) {
       //TODO: scanner currently returns current + all prior scans on each scan, only want current
@@ -87,6 +91,7 @@ const Search = () => {
       codeCollection = codeCollection.slice(0, 1);
       toggle.style.display = 'none';
       _scannerIsRunning = false;
+
     });
   }
 
