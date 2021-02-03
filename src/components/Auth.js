@@ -1,6 +1,6 @@
-import { authService, firebaseInstance } from "fbase";
+import { authService, firebaseInstance } from "../fbase";
 import React, { useState, useEffect } from "react";
-import "../assets/authstyle.css";
+import "../styles/authstyle.css";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -78,7 +78,7 @@ const Auth = () => {
             <h2 className="title">
               <img
                 className="preppy-logo"
-                src="https://firebasestorage.googleapis.com/v0/b/preppy-food.appspot.com/o/PreppyLogo3.png?alt=media&token=363494e0-ffbb-4da8-8da9-110c6304e564"
+                src="images/PreppyLogo3.png"
                 alt="Preppy"
               />
               Sign in
@@ -127,7 +127,7 @@ const Auth = () => {
             <h2 className="title">
               <img
                 className="preppy-logo"
-                src="https://firebasestorage.googleapis.com/v0/b/preppy-food.appspot.com/o/PreppyLogo3.png?alt=media&token=363494e0-ffbb-4da8-8da9-110c6304e564"
+                src="images/PreppyLogo3.png"
                 alt="Preppy"
               />
               Sign up
@@ -175,11 +175,7 @@ const Auth = () => {
               Sign up
             </button>
           </div>
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/preppy-food.appspot.com/o/chefNoBG.png?alt=media&token=a985e22d-c41c-4eab-9d7d-afdceea0da11"
-            className="image"
-            alt=""
-          />
+          <img src="images/chefNoBG.png" className="image" alt="" />
         </div>
         <div className="panel right-panel">
           <div className="content">
@@ -193,11 +189,7 @@ const Auth = () => {
               Sign in
             </button>
           </div>
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/preppy-food.appspot.com/o/signinNoBG.png?alt=media&token=895f759f-551d-4513-ae7e-bf5305c3ba3e"
-            className="image"
-            alt=""
-          />
+          <img src="images/signinNoBG.png" className="image" alt="" />
         </div>
       </div>
     </div>

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { storageService } from "fbase";
+import { storageService } from "../fbase";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
 const Image = () => {
   const { register, handleSubmit } = useForm();
-  //   console.log(document.getElementById("videoFile"));
+
   const onFileChange = async (data) => {
     try {
       const storageRef = storageService.ref();
@@ -25,8 +25,8 @@ const Image = () => {
           }
         );
         console.log({ data });
-        // if (data) upload.ref.delete()
         window.alert(data.category.name);
+        if (data) upload.ref.delete();
       }
     } catch (error) {
       console.error(error.message);
