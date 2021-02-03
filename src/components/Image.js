@@ -1,10 +1,16 @@
-import React, { useState } from "react";
-import { storageService } from "../fbase";
+import React, { useState, useEffect } from "react";
+import { storageService, dbService } from "../fbase";
 import { useForm } from "react-hook-form";
+import { fetchIngredients } from "../store";
 import axios from "axios";
+import { connect } from "react-redux";
 
-const Image = () => {
+const Image = (props) => {
   const { register, handleSubmit } = useForm();
+
+  useEffect(() => {
+    props.getIngredients(props.user);
+  }, []);
 
   const onFileChange = async (data) => {
     try {
@@ -26,6 +32,12 @@ const Image = () => {
         );
         console.log({ data });
         window.alert(data.category.name);
+
+        dbService.collection("ingredients").add({
+          name: data.category.name,
+          createdAt: Date.now(),
+          creatorId: props.user,
+        });
         if (data) upload.ref.delete();
       }
     } catch (error) {
@@ -35,7 +47,7 @@ const Image = () => {
 
   return (
     <>
-      <div></div>
+      <div>{props.ingredients}</div>
       <form onSubmit={handleSubmit(onFileChange)}>
         <label htmlFor="videoFile">Upload a video:</label>
         <input
@@ -51,4 +63,18 @@ const Image = () => {
     </>
   );
 };
-export default Image;
+
+const mapState = (state) => {
+  return {
+    user: state.user,
+    ingredients: state.ingredients,
+  };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    getIngredients: (userId) => dispatch(fetchIngredients(userId)),
+  };
+};
+
+export default connect(mapState, mapDispatch)(Image);
