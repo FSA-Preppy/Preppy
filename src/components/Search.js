@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Quagga from 'quagga';
 
-//todo, replace axios calls with thunks; manually add items(possibly with autocomplete via an api); add items using returned barcode information
+//todo, replace axios calls with thunks; manually add items(possibly with autocomplete via an); add items using returned barcode information
 
 const Search = () => {
+  let codeCollection = [];
+  let _scannerIsRunning = false;
+  let QuaggaInit = false;
   //console.log(document.getElementById('videoFile'));
   //const [recipeData, setRecipeData] = useState(null);
   const [item, setItem] = useState('');
@@ -31,7 +34,11 @@ const Search = () => {
   }
 
   function getBarCode() {
+    let toggle = document.getElementById('scanner');
+
+    toggle.style.display = 'block';
     console.log('init starting');
+
     Quagga.init(
       {
         inputStream: {
@@ -43,6 +50,7 @@ const Search = () => {
             height: 320,
             facingMode: 'environment',
           },
+          frequency: 1,
         },
         decoder: {
           readers: ['upc_reader'],
@@ -61,36 +69,43 @@ const Search = () => {
         _scannerIsRunning = true;
       }
     );
+    QuaggaInit = true;
 
     Quagga.onDetected(function (result) {
+      //TODO: scanner currently returns current + all prior scans on each scan, only want current
+      //TODO: scanner should close frame after scanning is complete
+      let code = result.codeResult.code;
+      codeCollection.push(code);
       console.log(
-        'Barcode detected and processed : [' + result.codeResult.code + ']',
+        'Barcode detected and processed : [' + code + ']',
+        result,
         typeof result.codeResult.code
         //query spoonacular for the product
       );
       Quagga.stop();
-      getProduct(result.codeResult.code);
+      getProduct(codeCollection[0]);
+      codeCollection = codeCollection.slice(0, 1);
+      toggle.style.display = 'none';
+      _scannerIsRunning = false;
     });
   }
 
   return (
     <div>
       <header className="scan-header">
-        <div id="scanner">
-          <button
-            id="scanButton"
-            onClick={() => {
-              if (_scannerIsRunning) {
-                Quagga.stop();
-                _scannerIsRunning = false;
-              } else {
-                getBarCode();
-              }
-            }}
-          >
-            Start/Stop Scan
-          </button>
-        </div>
+        <button
+          id="scanButton"
+          onClick={() => {
+            // if (_scannerIsRunning) {
+            //   Quagga.stop();
+            //   _scannerIsRunning = false;
+            // } else {
+            getBarCode();
+          }}
+        >
+          Start/Stop Scan
+        </button>
+        <div id="scanner"></div>
       </header>
       <div>
         <input
