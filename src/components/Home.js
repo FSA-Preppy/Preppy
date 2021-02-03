@@ -1,8 +1,8 @@
-import Image from "../components/Image";
+import Image from "./Image";
 import { authService } from "../fbase";
 import React from "react";
 // import { useHistory } from "react-router";
-import Search from "../components/Search";
+import Search from "./Search";
 
 const Home = () => {
   // const history =useHistory
