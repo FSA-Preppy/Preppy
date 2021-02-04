@@ -3,13 +3,15 @@ import { authService } from "../fbase";
 import React from "react";
 // import { useHistory } from "react-router";
 import Search from "./Search";
+import { Link } from "react-router-dom";
 
 const Home = () => {
-  // const history =useHistory
+  // const history = useHistory;
   const onClick = () => {
     authService.signOut();
-    // history.push("/")
+    // history.push("/");
   };
+
   return (
     <>
       <div>
@@ -18,7 +20,9 @@ const Home = () => {
       <div>
         <Search />
       </div>
-      <button onClick={onClick}>Log Out</button>
+      <Link to="/auth">
+        <button onClick={onClick}>Log Out</button>
+      </Link>
     </>
   );
 };
