@@ -1,6 +1,9 @@
 import { authService, firebaseInstance } from "../fbase";
 import React, { useState, useEffect } from "react";
 import "../styles/authstyle.css";
+import chefImg from "../styles/images/chefNoBG.png";
+import signinBG from "../styles/images/signinNoBG.png";
+import preppyLogo from "../styles/images/PreppyLogoFinal.png";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -26,7 +29,6 @@ const Auth = () => {
 
       let data;
       if (newAccount) {
-        console.log("test");
         //If the new account was created, the user is signed in automatically.
         data = await authService.createUserWithEmailAndPassword(
           email,
@@ -76,11 +78,7 @@ const Auth = () => {
         <div className="signin-signup">
           <form onSubmit={onSubmit} className="sign-in-form">
             <h2 className="title">
-              <img
-                className="preppy-logo"
-                src="images/PreppyLogo3.png"
-                alt="Preppy"
-              />
+              <img className="preppy-logo" src={preppyLogo} alt="Preppy" />
               Sign in
             </h2>
             <div className="input-field">
@@ -125,11 +123,7 @@ const Auth = () => {
           </form>
           <form onSubmit={onSubmit} className="sign-up-form" value="signup">
             <h2 className="title">
-              <img
-                className="preppy-logo"
-                src="images/PreppyLogo3.png"
-                alt="Preppy"
-              />
+              <img className="preppy-logo" src={preppyLogo} alt="Preppy" />
               Sign up
             </h2>
             <div className="input-field">
@@ -175,7 +169,7 @@ const Auth = () => {
               Sign up
             </button>
           </div>
-          <img src="images/chefNoBG.png" className="image" alt="" />
+          <img src={chefImg} className="image" alt="" />
         </div>
         <div className="panel right-panel">
           <div className="content">
@@ -189,7 +183,7 @@ const Auth = () => {
               Sign in
             </button>
           </div>
-          <img src="images/signinNoBG.png" className="image" alt="" />
+          <img src={signinBG} className="image" alt="" />
         </div>
       </div>
     </div>

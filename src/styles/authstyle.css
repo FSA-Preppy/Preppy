@@ -356,9 +356,9 @@ form.sign-in-form {
   form {
     padding: 0 1.5rem;
   }
-  /* .image {
+  .image {
     display: none;
-  } */
+  }
   .panel .content {
     padding: 0.5rem 1rem;
   }
