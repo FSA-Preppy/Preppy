@@ -4,25 +4,25 @@ import Auth from "./Auth";
 import Home from "./Home";
 //You can also get the currently signed-in user by using the currentUser property. If a user isn't signed in, currentUser is null:
 import NavBar from "./NavBar";
+import LandingPage from "./LandingPage";
 
 const Routes = ({ isLoggedIn }) => {
   // console.log(authService.currentUser) this will return "null"
 
   return (
     <Router>
-      {isLoggedIn && <NavBar />}
+      {/* {isLoggedIn && <NavBar />} */}
+      <Route exact path="/" component={LandingPage} />
       <Switch>
-        {isLoggedIn ? (
+        {isLoggedIn && (
           <>
-            <Route exact path="/">
+            <Route path="/">
               <Home />
+              <NavBar />
             </Route>
           </>
-        ) : (
-          <Route>
-            <Auth exact path="/" />
-          </Route>
         )}
+        <Route exact path="/auth" component={Auth} />
       </Switch>
     </Router>
   );
