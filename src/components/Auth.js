@@ -5,7 +5,7 @@ import chefImg from "../styles/images/chefNoBG.png";
 import signinBG from "../styles/images/signinNoBG.png";
 import preppyLogo from "../styles/images/PreppyLogoFinal.png";
 
-const Auth = () => {
+const Auth = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(false);
@@ -22,7 +22,7 @@ const Auth = () => {
   const onSubmit = async (evt) => {
     try {
       evt.preventDefault();
-
+      console.log("props-->", props);
       const {
         target: { value },
       } = evt;
@@ -34,8 +34,10 @@ const Auth = () => {
           email,
           password
         );
+        props.history.push("/home");
       } else {
         data = await authService.signInWithEmailAndPassword(email, password);
+        props.history.push("/home");
       }
     } catch (error) {
       setError(error.message);
@@ -43,14 +45,21 @@ const Auth = () => {
   };
 
   const onClickWithSocial = async (evt) => {
-    const {
-      target: { name },
-    } = evt;
-    let provider;
-    if (name === "google") {
-      provider = new firebaseInstance.auth.GoogleAuthProvider();
+    try {
+      const {
+        target: { name },
+      } = evt;
+      let provider;
+      if (name === "google") {
+        provider = new firebaseInstance.auth.GoogleAuthProvider();
+      }
+      const response = await authService.signInWithPopup(provider);
+      if (response) {
+        props.history.push("/home");
+      }
+    } catch (error) {
+      console.log(error);
     }
-    await authService.signInWithPopup(provider);
   };
 
   const reset = () => {
@@ -117,7 +126,7 @@ const Auth = () => {
                 name="google"
                 onClick={onClickWithSocial}
               >
-                <i className="fab fa-google"></i>
+                Google Icon
               </button>
             </div>
           </form>

@@ -379,3 +379,13 @@ form.sign-in-form {
   width: 100px;
   height: 100px;
 }
+
+#google-icon {
+  height: 50px;
+  width: 60px;
+}
+
+#google-button {
+  height: 30px;
+  width: 60px;
+}

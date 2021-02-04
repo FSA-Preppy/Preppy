@@ -36,13 +36,13 @@ const LandingPage = () => {
         <SwiperSlide>
           <div className="image-container">
             <img src={search} alt="" />
-            <p className="landingDesc">SCAN YOUR FOOD BARCODE.</p>
+            <p className="landingDesc">SCAN YOUR FOOD.</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className="image-container">
             <img src={fridge} alt="" />
-            <p className="landingDesc">SAVE INGREDIENTS IN YOUR FRIDGE BOX.</p>
+            <p className="landingDesc">STORE INGREDIENTS IN YOUR FRIDGE.</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
