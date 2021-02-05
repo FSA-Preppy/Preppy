@@ -18,7 +18,7 @@ function App(props) {
     });
   }, []);
 
-  return <>{init ? <Routes isLoggedIn={isLoggedIn} /> : "Loading..."}</>;
+  return <>{init ? <Routes isLoggedIn={isLoggedIn} /> : null}</>;
 }
 
 const mapState = (state) => {
