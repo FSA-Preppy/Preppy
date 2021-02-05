@@ -1,0 +1,9 @@
+.navbar-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.navbar-icon {
+  height: 100px;
+  width: 100px;
+}

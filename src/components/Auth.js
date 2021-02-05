@@ -1,8 +1,11 @@
 import { authService, firebaseInstance } from "../fbase";
 import React, { useState, useEffect } from "react";
 import "../styles/authstyle.css";
+import signinBG from "../styles/images/signinNoBG.png";
+import preppyLogo from "../styles/images/PreppyLogoFinal.png";
+import loginImg from "../styles/images/login.png";
 
-const Auth = () => {
+const Auth = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(false);
@@ -19,21 +22,22 @@ const Auth = () => {
   const onSubmit = async (evt) => {
     try {
       evt.preventDefault();
-
+      console.log("props-->", props);
       const {
         target: { value },
       } = evt;
 
       let data;
       if (newAccount) {
-        console.log("test");
         //If the new account was created, the user is signed in automatically.
         data = await authService.createUserWithEmailAndPassword(
           email,
           password
         );
+        props.history.push("/home");
       } else {
         data = await authService.signInWithEmailAndPassword(email, password);
+        props.history.push("/home");
       }
     } catch (error) {
       setError(error.message);
@@ -41,14 +45,21 @@ const Auth = () => {
   };
 
   const onClickWithSocial = async (evt) => {
-    const {
-      target: { name },
-    } = evt;
-    let provider;
-    if (name === "google") {
-      provider = new firebaseInstance.auth.GoogleAuthProvider();
+    try {
+      const {
+        target: { name },
+      } = evt;
+      let provider;
+      if (name === "google") {
+        provider = new firebaseInstance.auth.GoogleAuthProvider();
+      }
+      const response = await authService.signInWithPopup(provider);
+      if (response) {
+        props.history.push("/home");
+      }
+    } catch (error) {
+      console.log(error);
     }
-    await authService.signInWithPopup(provider);
   };
 
   const reset = () => {
@@ -76,12 +87,8 @@ const Auth = () => {
         <div className="signin-signup">
           <form onSubmit={onSubmit} className="sign-in-form">
             <h2 className="title">
-              <img
-                className="preppy-logo"
-                src="images/PreppyLogo3.png"
-                alt="Preppy"
-              />
-              Sign in
+              <img className="preppy-logo" src={preppyLogo} alt="Preppy" />
+              Log In
             </h2>
             <div className="input-field">
               <i className="fas fa-envelope"></i>
@@ -119,18 +126,14 @@ const Auth = () => {
                 name="google"
                 onClick={onClickWithSocial}
               >
-                <i className="fab fa-google"></i>
+                <i className="fab fa-google" />
               </button>
             </div>
           </form>
           <form onSubmit={onSubmit} className="sign-up-form" value="signup">
             <h2 className="title">
-              <img
-                className="preppy-logo"
-                src="images/PreppyLogo3.png"
-                alt="Preppy"
-              />
-              Sign up
+              <img className="preppy-logo" src={preppyLogo} alt="Preppy" />
+              Sign Up
             </h2>
             <div className="input-field">
               <i className="fas fa-envelope"></i>
@@ -164,18 +167,22 @@ const Auth = () => {
 
       <div className="panels-container">
         <div className="panel left-panel">
-          <div className="content">
-            <h3>New here ?</h3>
-            <p>Sign up here, and start with Preppy today!</p>
-            <button
-              className="btn transparent"
-              id="sign-up-btn"
-              onClick={() => reset()}
-            >
-              Sign up
-            </button>
+          <div className="content-container">
+            <div className="content">
+              <h3>New here ?</h3>
+              <p>Sign up here, and start with Preppy today!</p>
+              <button
+                className="btn transparent"
+                id="sign-up-btn"
+                onClick={() => reset()}
+              >
+                Sign up
+              </button>
+            </div>
           </div>
-          <img src="images/chefNoBG.png" className="image" alt="" />
+          <div className="loginImg-container">
+            <img src={loginImg} className="image" alt="" />
+          </div>
         </div>
         <div className="panel right-panel">
           <div className="content">
@@ -186,10 +193,10 @@ const Auth = () => {
               id="sign-in-btn"
               onClick={() => reset()}
             >
-              Sign in
+              Log In
             </button>
           </div>
-          <img src="images/signinNoBG.png" className="image" alt="" />
+          <img src={signinBG} className="image" alt="" />
         </div>
       </div>
     </div>

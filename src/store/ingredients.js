@@ -1,11 +1,35 @@
-import { dbService } from '../fbase';
 
-const GET_INGREDIENTS = 'GET_INGREDIENTS';
+import { IfFirebaseAuthed } from "@react-firebase/auth";
+import { dbService } from "../fbase";
+
+const GET_INGREDIENTS = "GET_INGREDIENTS";
+const EDIT_INGREDIENTS = "EDIT_INGREDIENTS";
+const DELETE_INGREDIENTS = "DELETE_INGREDIENTS";
+const ADD_INGREDIENTS = "ADD_INGREDIENTS";
 const SET_INGREDIENT = 'SET_INGREDIENT';
 
 const getIngredients = (ingredients) => {
   return {
     type: GET_INGREDIENTS,
+    ingredients,
+  };
+};
+const addIngredients = (ingredient) => {
+  return {
+    type: ADD_INGREDIENTS,
+    ingredient,
+  };
+};
+const editIngredients = (ingredients) => {
+  return {
+    type: EDIT_INGREDIENTS,
+    ingredients,
+  };
+};
+
+const deleteIngredients = (ingredients) => {
+  return {
+    type: DELETE_INGREDIENTS,
     ingredients,
   };
 };
@@ -35,6 +59,22 @@ export const fetchIngredients = (userId) => {
   };
 };
 
+export const addIngredientThunk = (userId, ingredient) => {
+  return async (dispatch) => {
+    try {
+      const str = `${ingredient} has been added`
+      window.confirm(str)
+      const res = await dbService.collection("ingredients").add({
+        name: ingredient,
+        createdAt: Date.now(),
+        creatorId: userId,
+      });
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+};
+
 export const setIngredient = (ingredient, userId) => {
   return async (dispatch) => {
     try {
@@ -42,9 +82,7 @@ export const setIngredient = (ingredient, userId) => {
       await dbService.collection('ingredients').add({
         name: ingredient,
         createdAt: Date.now(),
-        creatorId: userId,
-      });
-
+        creatorId: userId,})
       dispatch(_setIngredient(ingredient));
     } catch (error) {
       console.log(error);
@@ -52,17 +90,50 @@ export const setIngredient = (ingredient, userId) => {
   };
 };
 
-export default (state = [], action) => {
+export const deleteIngredientThunk = (userId, ingredient) => {
+  return async (dispatch) => {
+    try {
+       await dbService
+        .collection("ingredients")
+        .onSnapshot((snapshot) => {
+          snapshot.docs.filter(
+            (doc) =>
+              doc.data().creatorId === userId && doc.data().name === ingredient
+          ).map(item => {
+            dbService.doc(`ingredients/${item.id}`).delete();
+          })
+        });
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+};
+export const editIngredientThunk = (userId, ingredient, newName) => {
+  return async (dispatch) => {
+    try {
+       await dbService
+        .collection("ingredients")
+        .onSnapshot((snapshot) => {
+          snapshot.docs.filter(
+            (doc) =>
+              doc.data().creatorId === userId && doc.data().name === ingredient
+          ).map(item => {
+            dbService.doc(`ingredients/${item.id}`).update({
+              name: newName
+            });
+          })
+        });
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+};
+let initialState = [];
+export default (state = initialState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS:
       return action.ingredients;
-
     case SET_INGREDIENT:
-      console.log(
-        'REDUCER',
-        action.ingredient,
-        state.includes(action.ingredient)
-      );
       if (state.includes(action.ingredient)) {
         console.log(`STATE ALREADY INCLUDES ${action.ingredient}`);
         return state;
@@ -70,6 +141,6 @@ export default (state = [], action) => {
         return [...state, action.ingredient];
       }
     default:
-      return [];
+      return state;
   }
 };
