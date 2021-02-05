@@ -11,7 +11,10 @@ import cameraIcon from "@iconify-icons/mdi/camera";
 const NavBar = () => (
   <nav className="navbar-container">
     <Link to="/home">
-      <Icon icon={cameraIcon} className="navbar-icon" />
+      <Icon icon={cameraIcon} className="navbar-icon"></Icon>
+    </Link>
+    <Link to="/home">
+      <Icon icon={barcodeScan} className="navbar-icon" />
     </Link>
     <Link to="/fridge">
       <Icon icon={fridgeIcon} className="navbar-icon" />
