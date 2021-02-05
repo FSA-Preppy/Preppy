@@ -1,10 +1,10 @@
-import Image from "./Image";
-import { authService } from "../fbase";
-import React from "react";
+import Image from './Image';
+import { authService } from '../fbase';
+import React from 'react';
 // import { useHistory } from "react-router";
-import Search from "./Search";
+import Search from './Search';
 
-const Home = () => {
+const Home = (props) => {
   // const history =useHistory
   const onClick = () => {
     authService.signOut();
@@ -12,11 +12,11 @@ const Home = () => {
   };
   return (
     <>
-      <div>
+      {/* <div>
         <Image />
-      </div>
+      </div> */}
       <div>
-        <Search />
+        <Search history={props.history} />
       </div>
       <button onClick={onClick}>Log Out</button>
     </>

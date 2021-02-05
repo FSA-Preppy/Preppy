@@ -1,9 +1,9 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import user, { setUser } from "./user";
-import ingredients, { fetchIngredients } from "./ingredients";
-import { createLogger } from "redux-logger";
-import thunkMiddleware from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import user, { setUser } from './user';
+import ingredients, { fetchIngredients, setIngredient } from './ingredients';
+import { createLogger } from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const reducer = combineReducers({
   user,
@@ -16,5 +16,5 @@ const middleware = composeWithDevTools(
 
 const store = createStore(reducer, middleware);
 
-export { setUser, fetchIngredients };
+export { setUser, fetchIngredients, setIngredient };
 export default store;
