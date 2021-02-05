@@ -12,6 +12,7 @@ import NavBar from "./NavBar";
 import LandingPage from "./LandingPage";
 import Fridge from "./Fridge";
 import Recipe from "./Recipe";
+import Edit from "./Edit";
 
 const Routes = ({ isLoggedIn }) => {
   // console.log(authService.currentUser) this will return "null"
@@ -23,6 +24,7 @@ const Routes = ({ isLoggedIn }) => {
         {isLoggedIn ? (
           <>
             <Switch>
+            <Route exact path="/fridge/:name/edit" component={Edit} />
               <Route exact path="/home" component={Home} />
               <Route exact path="/fridge" component={Fridge} />
               <Route exact path="/recipe" component={Recipe} />

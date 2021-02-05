@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { storageService, dbService } from "../fbase";
 import { useForm } from "react-hook-form";
-import { fetchIngredients } from "../store";
+import {
+  fetchIngredients,
+  addIngredientThunk,
+  deleteIngredientThunk,
+} from "../store";
 import axios from "axios";
 import { connect } from "react-redux";
+import Fridge from "./Fridge";
 
 const Image = (props) => {
   const { register, handleSubmit } = useForm();
@@ -11,7 +16,6 @@ const Image = (props) => {
   useEffect(() => {
     props.getIngredients(props.user);
   }, []);
-
   const onFileChange = async (data) => {
     try {
       const storageRef = storageService.ref();
@@ -25,29 +29,38 @@ const Image = (props) => {
           `https://api.spoonacular.com/food/images/analyze`,
           {
             params: {
-              apiKey: "90fcba9c343249e8b9f8982669437c5c",
+              apiKey: "4b34c62d3a0844dda95902bf18ec9dc1",
               imageUrl: url,
             },
           }
         );
-        console.log({ data });
-        window.alert(data.category.name);
+        // console.log(props.addIngredient)
+        // console.log(props.user)
+        // console.log(data.category.name);
 
-        dbService.collection("ingredients").add({
-          name: data.category.name,
-          createdAt: Date.now(),
-          creatorId: props.user,
-        });
+        // console.log(props.deleteIngredient(props.user, data.category.name))
+
+        if (!props.ingredients.includes(data.category.name)) {
+          props.addIngredient(props.user, data.category.name);
+          // window.alert(data.category.name);
+          // dbService.collection("ingredients").add({
+          //   name: data.category.name,
+          //   createdAt: Date.now(),
+          //   creatorId: props.user,
+          // });
+        } else {
+          window.alert("Same item cannot be added");
+        }
         if (data) upload.ref.delete();
       }
     } catch (error) {
       console.error(error.message);
     }
   };
+  console.log(props.ingredients);
 
   return (
     <>
-      <div>{props.ingredients}</div>
       <form onSubmit={handleSubmit(onFileChange)}>
         <label htmlFor="videoFile">Upload a video:</label>
         <input
@@ -74,6 +87,10 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     getIngredients: (userId) => dispatch(fetchIngredients(userId)),
+    addIngredient: (userId, ingredient) =>
+      dispatch(addIngredientThunk(userId, ingredient)),
+    deleteIngredient: (userId, ingredient) =>
+      dispatch(deleteIngredientThunk(userId, ingredient)),
   };
 };
 
