@@ -3,6 +3,7 @@
   justify-content: center;
   flex-direction: row;
 }
+
 .navbar-icon {
   height: 65px;
   width: 65px;
@@ -13,7 +14,6 @@
   background-color: #fdc500;
   border-radius: 50%;
 }
-
 .navbar-icon:hover {
   height: 65px;
   width: 65px;

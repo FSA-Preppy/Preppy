@@ -9,19 +9,19 @@ import barcodeScan from "@iconify-icons/mdi/barcode-scan";
 import cameraIcon from "@iconify-icons/mdi/camera";
 
 const NavBar = () => (
-  <nav className="navbar-container">
-    <Link to="/home">
+  <div className="navbar-container">
+    <Link to="/home" className="link">
       <Icon icon={cameraIcon} className="navbar-icon"></Icon>
     </Link>
-    <Link to="/home">
+    <Link to="/home" className="link">
       <Icon icon={barcodeScan} className="navbar-icon" />
     </Link>
-    <Link to="/fridge">
+    <Link to="/fridge" className="link">
       <Icon icon={fridgeIcon} className="navbar-icon" />
     </Link>
-    <Link to="/recipe">
+    <Link to="/recipe" className="link">
       <Icon icon={silverwareForkKnife} className="navbar-icon" />
     </Link>
-  </nav>
+  </div>
 );
 export default NavBar;
