@@ -1,19 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { dbService, storageService } from '../fbase';
-import Quagga from 'quagga';
+import Quagga from '@ericblade/quagga2';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
+import Image from './Image';
+import { setIngredient, fetchIngredients } from '../store/index';
+import { useHistory } from 'react-router-dom';
+import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
 
 //todo, replace axios calls with thunks; manually add items(possibly with autocomplete via an); add items using returned barcode information
 
-const Search = () => {
+const Search = (props) => {
+  let history = useHistory();
   let codeCollection = [];
   let _scannerIsRunning = false;
   let QuaggaInit = false;
 
   //console.log(document.getElementById('videoFile'));
   //const [recipeData, setRecipeData] = useState(null);
-  const [item, setItem] = useState('');
+  const [item, setItem] = useState('test');
+  const [productList, setProductList] = useState([]);
+  const [recipes, setRecipes] = useState([]);
+  const [data, setData] = useState('Not Found');
+  let [code, setCode] = useState('');
+
+  useEffect(() => {
+    setProductList(props.ingredients);
+  }, []);
 
   function handleChange(e) {
     setItem(e.target.value);
@@ -21,56 +35,6 @@ const Search = () => {
 
   function handleSubmit() {
     //todo: add function for manually submitting food item to users fridge collection
-  }
-
-  function getProduct(code) {
-    let product = '';
-    fetch(
-      `https://api.edamam.com/api/food-database/v2/parser?upc=${code}&app_id=2b951423&app_key=
-      0a3f7f60c2858ebe6e8ed1059ef0052e`
-
-      //app ID ee8d7e3a
-      //app key f2876f55d65442e23c22ec308974a5f7
-      //https://api.edamam.com/search?r={code}&app_id=ee8d7e3a&app_key=f2876f55d65442e23c22ec308974a5f7
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.hints[0].food.label);
-        product = data.hints[0].food.label;
-        //dbService.collection('ingredients').add
-      })
-      .then(() => {
-        console.log(product);
-        getRecipe(product);
-      })
-      .catch((err) => {
-        console.log('error returning product via upc', err);
-      });
-    //console.log('after exiting fetch in getProduct', product);
-  }
-
-  function getRecipe(product) {
-    let name = '';
-    for (let i = 0; i < product.length; i++) {
-      if (product[i] === ' ') {
-        name += '+';
-      } else {
-        name += product[i];
-      }
-    }
-    console.log(name);
-
-    fetch(
-      `https://api.edamam.com/search?q=${name}&app_id=ee8d7e3a&app_key=f2876f55d65442e23c22ec308974a5f7&`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        //dbService.collection('ingredients').add
-      })
-      .catch(() => {
-        console.log('error returning recipes with name');
-      });
   }
 
   function getBarCode() {
@@ -111,23 +75,98 @@ const Search = () => {
     );
     QuaggaInit = true;
 
-    Quagga.onDetected(function (result) {
+    Quagga.onDetected(async function (result) {
       //TODO: scanner currently returns current + all prior scans on each scan, only want current
       //TODO: scanner should close frame after scanning is complete
-      let code = result.codeResult.code;
-      codeCollection.push(code);
+      let returned = result.codeResult.code;
+      setCode((code = returned));
+
+      //codeCollection.push(code);
       console.log(
-        'Barcode detected and processed : [' + code + ']',
-        result,
-        typeof result.codeResult.code
-        //query spoonacular for the product
+        'Barcode detected and processed : [' + code + typeof code + ']'
       );
       Quagga.stop();
-      getProduct(codeCollection[0]);
-      codeCollection = codeCollection.slice(0, 1);
-      toggle.style.display = 'none';
-      _scannerIsRunning = false;
+      Quagga.offDetected();
+      await getProduct(code);
+      //getProduct(code);
+      //codeCollection = codeCollection.slice(0, 1);
+      //toggle.style.display = 'none';
+      //_scannerIsRunning = false;
+      // Quagga.onProcessed((result) => {
+      //   console.log(result);
+      //   // getProduct(code);
+      // });
+      //Quagga.stop();
     });
+
+    // history.push('/');
+  }
+
+  async function getProduct(code) {
+    //THUNK
+    try {
+      let {
+        data,
+      } = await axios.get(`https://api.edamam.com/api/food-database/v2/parser?upc=${code}&app_id=2b951423&app_key=
+    0a3f7f60c2858ebe6e8ed1059ef0052e`);
+      let product = data.hints[0].food.label;
+
+      console.log(product);
+
+      console.log(props);
+      if (!productList.includes(product)) {
+        setProductList([...productList, product]);
+        if (!productList.includes(product)) {
+          props.setIngredient(product, props.user);
+        }
+      }
+      formatNames(product);
+      //console.log('92',);
+    } catch (error) {
+      console.log('error returning product via upc', error);
+    }
+  }
+
+  async function formatNames(product) {
+    //let productList = [];
+    console.log('Line 100 ->>>>>>>', product);
+    let name = await product.replaceAll(' ', '+');
+
+    if (!productList.includes(name) && name !== '') {
+      setProductList([...productList, name]);
+    } else {
+      console.log(`Product List already contains ${name}`);
+    }
+
+    console.log(name, productList);
+  }
+
+  function getRecipe(productList) {
+    let fullQuery = '';
+    let searchPrefix = `https://api.edamam.com/search?`;
+    let searchAppend = '';
+    let searchKeys = `app_id=ee8d7e3a&app_key=f2876f55d65442e23c22ec308974a5f7`;
+
+    for (let i = 0; i < productList.length; i++) {
+      searchAppend += `q=${productList[i]}&`;
+    }
+
+    fullQuery = searchPrefix + searchAppend + searchKeys;
+
+    console.log(
+      `fetching recipes including: ` + productList + productList.length
+    );
+    fetch(fullQuery)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setRecipes([...recipes, data]);
+        //dbService.collection('ingredients').add
+        console.log(recipes);
+      })
+      .catch(() => {
+        console.log('error returning recipes with name');
+      });
   }
 
   return (
@@ -146,6 +185,15 @@ const Search = () => {
           Start/Stop Scan
         </button>
         <div id="scanner"></div>
+        <Button
+          onClick={() => {
+            getRecipe(productList);
+          }}
+          variant="outline-success"
+          type="submit"
+        >
+          Get Recipes
+        </Button>
       </header>
       <div>
         <input
@@ -158,11 +206,23 @@ const Search = () => {
             <button onClick={getRecipe}>Get Recipe</button>
           </div> */}
       </div>
+      <Image />
     </div>
   );
 };
 function mapState(state) {
-  return { user: state.user };
+  return { user: state.user, ingredients: state.ingredients };
 }
 
-export default connect(mapState, null)(Search);
+function mapDispatch(dispatch) {
+  return {
+    setIngredient: (ingredient, user) => {
+      dispatch(setIngredient(ingredient, user));
+    },
+    fetchIngredients: (user) => {
+      dispatch(fetchIngredients(user));
+    },
+  };
+}
+
+export default connect(mapState, mapDispatch)(Search);

@@ -1,3 +1,4 @@
+
 import Image from "./Image";
 import { authService } from "../fbase";
 import React from "react";
@@ -13,10 +14,7 @@ const Home = () => {
   return (
     <>
       <div>
-        <Image />
-      </div>
-      <div>
-        <Search />
+        <Search history={props.history} />
       </div>
       <Link to="/auth">
         <button onClick={onClick}>Log Out</button>

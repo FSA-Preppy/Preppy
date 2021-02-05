@@ -1,3 +1,4 @@
+
 import { IfFirebaseAuthed } from "@react-firebase/auth";
 import { dbService } from "../fbase";
 
@@ -5,6 +6,7 @@ const GET_INGREDIENTS = "GET_INGREDIENTS";
 const EDIT_INGREDIENTS = "EDIT_INGREDIENTS";
 const DELETE_INGREDIENTS = "DELETE_INGREDIENTS";
 const ADD_INGREDIENTS = "ADD_INGREDIENTS";
+const SET_INGREDIENT = 'SET_INGREDIENT';
 
 const getIngredients = (ingredients) => {
   return {
@@ -32,11 +34,16 @@ const deleteIngredients = (ingredients) => {
   };
 };
 
+const _setIngredient = (ingredient) => ({
+  type: SET_INGREDIENT,
+  ingredient,
+});
+
 export const fetchIngredients = (userId) => {
   return async (dispatch) => {
     try {
       const res = await dbService
-        .collection("ingredients")
+        .collection('ingredients')
         .onSnapshot((snapshot) => {
           dispatch(
             getIngredients(
@@ -67,6 +74,22 @@ export const addIngredientThunk = (userId, ingredient) => {
     }
   };
 };
+
+export const setIngredient = (ingredient, userId) => {
+  return async (dispatch) => {
+    try {
+      console.log('thunk', ingredient);
+      await dbService.collection('ingredients').add({
+        name: ingredient,
+        createdAt: Date.now(),
+        creatorId: userId,})
+      dispatch(_setIngredient(ingredient));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const deleteIngredientThunk = (userId, ingredient) => {
   return async (dispatch) => {
     try {
@@ -106,11 +129,17 @@ export const editIngredientThunk = (userId, ingredient, newName) => {
   };
 };
 let initialState = [];
-// eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS:
       return action.ingredients;
+    case SET_INGREDIENT:
+      if (state.includes(action.ingredient)) {
+        console.log(`STATE ALREADY INCLUDES ${action.ingredient}`);
+        return state;
+      } else {
+        return [...state, action.ingredient];
+      }
     default:
       return state;
   }
