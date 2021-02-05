@@ -34,29 +34,18 @@ const Auth = (props) => {
           email,
           password
         );
-        props.history.push("/home");
       } else {
         data = await authService.signInWithEmailAndPassword(email, password);
-        props.history.push("/home");
       }
     } catch (error) {
       setError(error.message);
     }
   };
 
-  const onClickWithSocial = async (evt) => {
+  const onClickWithSocial = async () => {
     try {
-      const {
-        target: { name },
-      } = evt;
-      let provider;
-      if (name === "google") {
-        provider = new firebaseInstance.auth.GoogleAuthProvider();
-      }
-      const response = await authService.signInWithPopup(provider);
-      if (response) {
-        props.history.push("/home");
-      }
+      const provider = new firebaseInstance.auth.GoogleAuthProvider();
+      await authService.signInWithPopup(provider);
     } catch (error) {
       console.log(error);
     }
@@ -120,16 +109,16 @@ const Auth = (props) => {
               required
             />
             <p className="social-text">Or Sign in with Google</p>
-            <div className="social-media">
-              <button
-                className="social-icon"
-                name="google"
-                onClick={onClickWithSocial}
-              >
-                <i className="fab fa-google" />
-              </button>
-            </div>
           </form>
+          <div className="social-media">
+            <button
+              className="social-icon"
+              name="google"
+              onClick={onClickWithSocial}
+            >
+              <i className="fab fa-google" />
+            </button>
+          </div>
           <form onSubmit={onSubmit} className="sign-up-form" value="signup">
             <h2 className="title">
               <img className="preppy-logo" src={preppyLogo} alt="Preppy" />
