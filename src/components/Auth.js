@@ -1,9 +1,9 @@
 import { authService, firebaseInstance } from "../fbase";
 import React, { useState, useEffect } from "react";
 import "../styles/authstyle.css";
-import chefImg from "../styles/images/chefNoBG.png";
 import signinBG from "../styles/images/signinNoBG.png";
 import preppyLogo from "../styles/images/PreppyLogoFinal.png";
+import loginImg from "../styles/images/login.png";
 
 const Auth = (props) => {
   const [email, setEmail] = useState("");
@@ -88,7 +88,7 @@ const Auth = (props) => {
           <form onSubmit={onSubmit} className="sign-in-form">
             <h2 className="title">
               <img className="preppy-logo" src={preppyLogo} alt="Preppy" />
-              Sign in
+              Log In
             </h2>
             <div className="input-field">
               <i className="fas fa-envelope"></i>
@@ -126,14 +126,14 @@ const Auth = (props) => {
                 name="google"
                 onClick={onClickWithSocial}
               >
-                Google Icon
+                <i className="fab fa-google" />
               </button>
             </div>
           </form>
           <form onSubmit={onSubmit} className="sign-up-form" value="signup">
             <h2 className="title">
               <img className="preppy-logo" src={preppyLogo} alt="Preppy" />
-              Sign up
+              Sign Up
             </h2>
             <div className="input-field">
               <i className="fas fa-envelope"></i>
@@ -167,18 +167,22 @@ const Auth = (props) => {
 
       <div className="panels-container">
         <div className="panel left-panel">
-          <div className="content">
-            <h3>New here ?</h3>
-            <p>Sign up here, and start with Preppy today!</p>
-            <button
-              className="btn transparent"
-              id="sign-up-btn"
-              onClick={() => reset()}
-            >
-              Sign up
-            </button>
+          <div className="content-container">
+            <div className="content">
+              <h3>New here ?</h3>
+              <p>Sign up here, and start with Preppy today!</p>
+              <button
+                className="btn transparent"
+                id="sign-up-btn"
+                onClick={() => reset()}
+              >
+                Sign up
+              </button>
+            </div>
           </div>
-          <img src={chefImg} className="image" alt="" />
+          <div className="loginImg-container">
+            <img src={loginImg} className="image" alt="" />
+          </div>
         </div>
         <div className="panel right-panel">
           <div className="content">
@@ -189,7 +193,7 @@ const Auth = (props) => {
               id="sign-in-btn"
               onClick={() => reset()}
             >
-              Sign in
+              Log In
             </button>
           </div>
           <img src={signinBG} className="image" alt="" />
