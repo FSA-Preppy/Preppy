@@ -119,54 +119,54 @@ const Search = (props) => {
           props.setIngredient(product, props.user);
         }
       }
-      formatNames(product);
+      //formatNames(product);
       //console.log('92',);
     } catch (error) {
       console.log('error returning product via upc', error);
     }
   }
 
-  async function formatNames(product) {
-    //let productList = [];
-    console.log('Line 100 ->>>>>>>', product);
-    let name = await product.replaceAll(' ', '+');
+  // async function formatNames(product) {
+  //   //let productList = [];
+  //   console.log('Line 100 ->>>>>>>', product);
+  //   let name = await product.replaceAll(' ', '+');
 
-    if (!productList.includes(name) && name !== '') {
-      setProductList([...productList, name]);
-    } else {
-      console.log(`Product List already contains ${name}`);
-    }
+  //   if (!productList.includes(name) && name !== '') {
+  //     setProductList([...productList, name]);
+  //   } else {
+  //     console.log(`Product List already contains ${name}`);
+  //   }
 
-    console.log(name, productList);
-  }
+  //   console.log(name, productList);
+  // }
 
-  function getRecipe(productList) {
-    let fullQuery = '';
-    let searchPrefix = `https://api.edamam.com/search?`;
-    let searchAppend = '';
-    let searchKeys = `app_id=ee8d7e3a&app_key=f2876f55d65442e23c22ec308974a5f7`;
+  // function getRecipe(productList) {
+  //   let fullQuery = '';
+  //   let searchPrefix = `https://api.edamam.com/search?`;
+  //   let searchAppend = '';
+  //   let searchKeys = `app_id=ee8d7e3a&app_key=f2876f55d65442e23c22ec308974a5f7`;
 
-    for (let i = 0; i < productList.length; i++) {
-      searchAppend += `q=${productList[i]}&`;
-    }
+  //   for (let i = 0; i < productList.length; i++) {
+  //     searchAppend += `q=${productList[i]}&`;
+  //   }
 
-    fullQuery = searchPrefix + searchAppend + searchKeys;
+  //   fullQuery = searchPrefix + searchAppend + searchKeys;
 
-    console.log(
-      `fetching recipes including: ` + productList + productList.length
-    );
-    fetch(fullQuery)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setRecipes([...recipes, data]);
-        //dbService.collection('ingredients').add
-        console.log(recipes);
-      })
-      .catch(() => {
-        console.log('error returning recipes with name');
-      });
-  }
+  //   console.log(
+  //     `fetching recipes including: ` + productList + productList.length
+  //   );
+  //   fetch(fullQuery)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setRecipes([...recipes, data]);
+  //       //dbService.collection('ingredients').add
+  //       console.log(recipes);
+  //     })
+  //     .catch(() => {
+  //       console.log('error returning recipes with name');
+  //     });
+  // }
 
   return (
     <div>
@@ -184,26 +184,17 @@ const Search = (props) => {
           Start/Stop Scan
         </button>
         <div id="scanner"></div>
-        <Button
-          onClick={() => {
-            getRecipe(productList);
-          }}
-          variant="outline-success"
-          type="submit"
-        >
-          Get Recipes
-        </Button>
       </header>
       <div>
-        <input
+        {/* <input
           type="string"
           placeholder="food item name"
           onChange={handleChange}
           onSubmit={handleSubmit}
         />
-        {/* <div>
+         <div>
             <button onClick={getRecipe}>Get Recipe</button>
-          </div> */}
+          </div>  */}
       </div>
       <Image />
     </div>
