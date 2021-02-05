@@ -7,7 +7,6 @@ import Button from 'react-bootstrap/Button';
 import Image from './Image';
 import { setIngredient, fetchIngredients } from '../store/index';
 import { useHistory } from 'react-router-dom';
-import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
 
 //todo, replace axios calls with thunks; manually add items(possibly with autocomplete via an); add items using returned barcode information
 
