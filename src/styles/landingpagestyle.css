@@ -65,7 +65,7 @@ img {
   justify-content: center;
   height: 70px;
 }
-button {
+#landing-page-btn {
   height: 50px;
   width: 200px;
   border-radius: 50px;
@@ -79,11 +79,11 @@ button {
   font-family: "Sen", sans-serif;
   color: rgb(65, 58, 87);
 }
-button:hover {
-  background-color: rgb(65, 58, 87);
-  border-color: rgb(65, 58, 87);
+#landing-page-btn:hover {
+  background-color: rgb(58, 59, 50);
+  border-color: rgb(58, 59, 50);
   font-family: "Sen", sans-serif;
-  color: rgb(65, 58, 87);
+  color: rgb(58, 59, 50);
   cursor: pointer;
 }
 .get-started {

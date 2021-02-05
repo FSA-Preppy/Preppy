@@ -56,7 +56,7 @@ const LandingPage = () => {
         </SwiperSlide>
       </Swiper>
       <div className="button-container">
-        <button>
+        <button id="landing-page-btn">
           <Link to="/auth" className="get-started">
             Get Started
           </Link>
