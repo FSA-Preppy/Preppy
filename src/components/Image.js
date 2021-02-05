@@ -8,7 +8,6 @@ import {
 } from "../store";
 import axios from "axios";
 import { connect } from "react-redux";
-import Fridge from "./Fridge";
 
 const Image = (props) => {
   const { register, handleSubmit } = useForm();
