@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { storageService } from "../fbase";
 import { useForm } from "react-hook-form";
+import "../styles/imagestyle.css";
 import {
   fetchIngredients,
   addIngredientThunk,
@@ -21,7 +22,6 @@ const Image = (props) => {
       const fileRef = storageRef.child(data.image[0].name);
       const upload = await fileRef.put(data.image[0]);
       const url = await upload.ref.getDownloadURL();
-      console.log(upload);
       if (upload) {
         console.log("Uploaded the File");
         const { data } = await axios.get(
@@ -44,22 +44,27 @@ const Image = (props) => {
       console.error(error.message);
     }
   };
-  console.log(props.ingredients);
-
   return (
     <>
-      <form onSubmit={handleSubmit(onFileChange)}>
-        <label htmlFor="videoFile">Upload a video:</label>
-        <input
-          ref={register}
-          type="file"
-          name="image"
-          id="videoFile"
-          capture="environment"
-          accept="camera/*"
-        />
-        <input type="submit" />
-      </form>
+      <div className="image-main-container">
+        <div className="image-header-container">
+          <h1 className="image-title">CAMERA</h1>
+        </div>
+        <div>
+          <form onSubmit={handleSubmit(onFileChange)}>
+            <label htmlFor="videoFile">UPLOAD A PHOTO:</label>
+            <input
+              ref={register}
+              type="file"
+              name="image"
+              id="videoFile"
+              capture="environment"
+              accept="camera/*"
+            />
+            <input type="submit" />
+          </form>
+        </div>
+      </div>
     </>
   );
 };

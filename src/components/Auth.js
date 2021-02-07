@@ -75,7 +75,7 @@ const Auth = (props) => {
       <div className="forms-container">
         <div className="signin-signup">
           <form onSubmit={onSubmit} className="sign-in-form">
-            <h2 className="title">
+            <h2 className="auth-title">
               <img className="preppy-logo" src={preppyLogo} alt="Preppy" />
               Log In
             </h2>
@@ -120,7 +120,7 @@ const Auth = (props) => {
             </button>
           </div>
           <form onSubmit={onSubmit} className="sign-up-form" value="signup">
-            <h2 className="title">
+            <h2 className="auth-title">
               <img className="preppy-logo" src={preppyLogo} alt="Preppy" />
               Sign Up
             </h2>

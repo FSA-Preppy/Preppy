@@ -4,9 +4,9 @@ import Quagga from "@ericblade/quagga2";
 import { connect } from "react-redux";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
-import Image from "./Image";
 import { setIngredient, fetchIngredients } from "../store/index";
 import { useHistory } from "react-router-dom";
+import "../styles/searchstyle.css";
 
 //todo, replace axios calls with thunks; manually add items(possibly with autocomplete via an); add items using returned barcode information
 
@@ -167,24 +167,29 @@ const Search = (props) => {
   // }
 
   return (
-    <div>
-      <header className="scan-header">
-        <button
-          id="scanButton"
-          onClick={() => {
-            // if (_scannerIsRunning) {
-            //   Quagga.stop();
-            //   _scannerIsRunning = false;
-            // } else {
-            getBarCode();
-          }}
-        >
-          Start/Stop Scan
-        </button>
-        <div id="scanner"></div>
-      </header>
-      <div>
-        {/* <input
+    <>
+      <div className="search-main-container">
+        <div className="search-header-container">
+          <h1 className="search-title">SCANNER</h1>
+        </div>
+        <div>
+          <header className="scan-header">
+            <button
+              id="scanButton"
+              onClick={() => {
+                // if (_scannerIsRunning) {
+                //   Quagga.stop();
+                //   _scannerIsRunning = false;
+                // } else {
+                getBarCode();
+              }}
+            >
+              Start/Stop Scan
+            </button>
+            <div id="scanner"></div>
+          </header>
+          <div>
+            {/* <input
           type="string"
           placeholder="food item name"
           onChange={handleChange}
@@ -193,9 +198,10 @@ const Search = (props) => {
          <div>
             <button onClick={getRecipe}>Get Recipe</button>
           </div>  */}
+          </div>
+        </div>
       </div>
-      <Image />
-    </div>
+    </>
   );
 };
 function mapState(state) {

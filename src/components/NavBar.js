@@ -17,10 +17,10 @@ const NavBar = () => {
 
   return (
     <div className="navbar-container">
-      <Link to="/home" className="link">
+      <Link to="/image" className="link">
         <Icon icon={cameraIcon} className="navbar-icon"></Icon>
       </Link>
-      <Link to="/home" className="link">
+      <Link to="/search" className="link">
         <Icon icon={barcodeScan} className="navbar-icon" />
       </Link>
       <Link to="/fridge" className="link">

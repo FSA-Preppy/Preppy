@@ -4,10 +4,13 @@ import "../styles/recipestyle.css";
 const Recipe = () => {
   return (
     <>
-      <div id="header-container">
-        <h1>Recipe Box</h1>
-      </div>
       <div className="animation-area">
+        <div className="header-container">
+          <h1 className="title">RECIPES</h1>
+        </div>
+        <div>
+          <p>LIST OF RECIPES GOES HERE</p>
+        </div>
         <ul className="box-area">
           <li></li>
           <li></li>
