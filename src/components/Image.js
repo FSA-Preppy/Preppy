@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { storageService, dbService } from "../fbase";
+import React, { useEffect } from "react";
+import { storageService } from "../fbase";
 import { useForm } from "react-hook-form";
 import {
   fetchIngredients,
@@ -33,20 +33,8 @@ const Image = (props) => {
             },
           }
         );
-        // console.log(props.addIngredient)
-        // console.log(props.user)
-        // console.log(data.category.name);
-
-        // console.log(props.deleteIngredient(props.user, data.category.name))
-
         if (!props.ingredients.includes(data.category.name)) {
           props.addIngredient(props.user, data.category.name);
-          // window.alert(data.category.name);
-          // dbService.collection("ingredients").add({
-          //   name: data.category.name,
-          //   createdAt: Date.now(),
-          //   creatorId: props.user,
-          // });
         } else {
           window.alert("Same item cannot be added");
         }
