@@ -9,6 +9,17 @@
 body,
 input {
   font-family: "Poppins", sans-serif;
+  box-shadow: none;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 50px rgb(240, 240, 240) inset !important;
+  border-radius: 55px;
 }
 
 .container {
@@ -60,7 +71,7 @@ form.sign-in-form {
   z-index: 2;
 }
 
-.title {
+.auth-title {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -196,6 +207,9 @@ form.sign-in-form {
     height: 300px;
     width: 300px;
   }
+  .input-field input {
+    font-size: 15px;
+  }
 }
 .content-container {
   display: flex;
@@ -284,9 +298,9 @@ form.sign-in-form {
 .container.sign-up-mode .right-panel {
   pointer-events: all;
 }
+
 @media (max-width: 870px) {
   .container {
-    min-height: 800px;
     height: 100vh;
   }
   .signin-signup {
@@ -318,8 +332,8 @@ form.sign-in-form {
   }
 
   .image {
-    height: 200px;
-    width: 200px;
+    height: 220px;
+    width: 220px;
     transition: transform 0.9s ease-in-out;
     transition-delay: 0.6s;
   }
@@ -377,6 +391,14 @@ form.sign-in-form {
   form {
     padding: 0 1.5rem;
   }
+  .forms-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
   .image {
     display: none;
   }
@@ -384,20 +406,27 @@ form.sign-in-form {
     padding: 0.5rem 1rem;
   }
   .container {
-    padding: 1.5rem;
+    padding: 0;
   }
   .container:before {
-    bottom: 72%;
+    bottom: 79%;
     left: 50%;
   }
   .container.sign-up-mode:before {
-    bottom: 28%;
+    bottom: 23%;
     left: 50%;
   }
+  .sign-up-form {
+    margin-top: 40px;
+  }
+
   .panel.left-panel {
     display: flex;
     justify-content: center;
     flex-direction: column;
+  }
+  .input-field input {
+    font-size: 15px;
   }
 }
 
@@ -405,7 +434,202 @@ form.sign-in-form {
   width: 200px;
   height: 130px;
 }
+
 #google-icon {
   height: 20px;
   width: 20px;
+}
+
+@media (max-width: 412px) {
+  .preppy-logo {
+    width: 140px;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 0;
+  }
+  .container:before {
+    bottom: 76.5%;
+    left: 50%;
+  }
+  .container.sign-up-mode:before {
+    bottom: 24.5%;
+    left: 50%;
+  }
+  .sign-up-form {
+    margin-top: 40px;
+  }
+  .input-field {
+    max-width: 250px;
+    width: 100%;
+    background-color: #f0f0f0;
+    margin: 10px 0;
+    height: 35px;
+    border-radius: 55px;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    padding: 0 0.4rem;
+    position: relative;
+  }
+  .input-field i {
+    text-align: center;
+    line-height: 35px;
+    color: #acacac;
+    transition: 0.5s;
+    font-size: 1rem;
+  }
+  .input-field input {
+    background: transparent;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 12px;
+    color: #333;
+  }
+}
+@media (max-width: 375px) {
+  .preppy-logo {
+    width: 140px;
+    height: 100px;
+    padding: 0;
+    margin: 0;
+  }
+  .auth-title {
+    font-size: 25px;
+  }
+  .panel.left-panel {
+    padding-top: 20px;
+  }
+  .panel.right-panel {
+    padding-bottom: 20px;
+  }
+  .container:before {
+    bottom: 74%;
+    left: 50%;
+  }
+  .container.sign-up-mode:before {
+    bottom: 28%;
+    left: 50%;
+  }
+  .sign-up-form {
+    margin-top: 10px;
+  }
+  .input-field {
+    max-width: 250px;
+    width: 100%;
+    background-color: #f0f0f0;
+    margin: 10px 0;
+    height: 35px;
+    border-radius: 55px;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    padding: 0 0.4rem;
+    position: relative;
+  }
+  .input-field i {
+    text-align: center;
+    line-height: 35px;
+    color: #acacac;
+    transition: 0.5s;
+    font-size: 1rem;
+  }
+  .input-field input {
+    background: transparent;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: lighter;
+    font-size: 10px;
+    color: #333;
+  }
+  .social-media {
+    margin-bottom: 30px;
+  }
+}
+@media (max-width: 360px) {
+  .preppy-logo {
+    width: 120px;
+    height: 80px;
+    padding: 0;
+    margin: 0;
+  }
+  .auth-title {
+    font-size: 30px;
+  }
+  .panel.left-panel {
+    padding-top: 20px;
+  }
+  .panel.right-panel {
+    padding-bottom: 20px;
+  }
+  .container:before {
+    bottom: 77%;
+    left: 50%;
+  }
+  .container.sign-up-mode:before {
+    bottom: 23%;
+    left: 50%;
+  }
+  .sign-up-form {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 320px) {
+  .preppy-logo {
+    width: 90px;
+    height: 70px;
+  }
+  .auth-title {
+    font-size: 25px;
+  }
+  .panel.left-panel {
+    padding-top: 15px;
+  }
+  .panel.right-panel {
+    padding-bottom: 20px;
+  }
+  .container:before {
+    bottom: 77%;
+    left: 50%;
+  }
+  .container.sign-up-mode:before {
+    bottom: 25%;
+    left: 50%;
+  }
+  .sign-up-form {
+    margin-top: 0px;
+  }
+  .input-field {
+    max-width: 250px;
+    width: 100%;
+    background-color: #f0f0f0;
+    margin: 10px 0;
+    height: 35px;
+    border-radius: 55px;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    padding: 0 0.4rem;
+    position: relative;
+  }
+  .input-field i {
+    text-align: center;
+    line-height: 35px;
+    color: #acacac;
+    transition: 0.5s;
+    font-size: 1rem;
+  }
+  .input-field input {
+    background: transparent;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  .social-icon {
+    height: 40px;
+    width: 40px;
+  }
 }
