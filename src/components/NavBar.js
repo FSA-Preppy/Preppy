@@ -4,8 +4,9 @@ import { authService } from "../fbase";
 import { useForm } from "react-hook-form";
 import { storageService } from "../fbase";
 import axios from "axios";
-import { addIngredientThunk } from "../store";
+import { addIngredientThunk, removeUser, removeIngredients } from "../store";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import "../styles/navbarstyle.css";
 
 import { Icon } from "@iconify/react";
@@ -17,9 +18,12 @@ import offIcon from "@iconify-icons/el/off";
 
 const NavBar = (props) => {
   const { register, handleSubmit } = useForm();
+  let history = useHistory();
 
   const onClick = () => {
     authService.signOut();
+    props.removingUser();
+    props.removingIngredients();
   };
 
   const onFileChange = async (data) => {
@@ -34,7 +38,7 @@ const NavBar = (props) => {
           `https://api.spoonacular.com/food/images/analyze`,
           {
             params: {
-              apiKey: "5807aee1c71d4f5eac7262df4969ce3b",
+              apiKey: "90fcba9c343249e8b9f8982669437c5c",
               imageUrl: url,
             },
           }
@@ -93,6 +97,8 @@ const mapDispatch = (dispatch) => {
   return {
     addIngredient: (userId, ingredient) =>
       dispatch(addIngredientThunk(userId, ingredient)),
+    removingUser: () => dispatch(removeUser()),
+    removingIngredients: () => dispatch(removeIngredients()),
   };
 };
 
