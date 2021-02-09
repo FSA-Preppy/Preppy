@@ -1,5 +1,4 @@
 
-import { IfFirebaseAuthed } from "@react-firebase/auth";
 import { dbService } from "../fbase";
 
 const GET_INGREDIENTS = "GET_INGREDIENTS";
@@ -42,6 +41,7 @@ const _setIngredient = (ingredient) => ({
 export const fetchIngredients = (userId) => {
   return async (dispatch) => {
     try {
+      console.log('fetchThunk fired!!')
       const res = await dbService
         .collection('ingredients')
         .onSnapshot((snapshot) => {
@@ -62,6 +62,7 @@ export const fetchIngredients = (userId) => {
 export const addIngredientThunk = (userId, ingredient) => {
   return async (dispatch) => {
     try {
+      console.log("addthunk fired!")
       const str = `${ingredient} has been added`
       window.confirm(str)
       const res = await dbService.collection("ingredients").add({
@@ -75,24 +76,10 @@ export const addIngredientThunk = (userId, ingredient) => {
   };
 };
 
-export const setIngredient = (ingredient, userId) => {
-  return async (dispatch) => {
-    try {
-      console.log('thunk', ingredient);
-      await dbService.collection('ingredients').add({
-        name: ingredient,
-        createdAt: Date.now(),
-        creatorId: userId,})
-      dispatch(_setIngredient(ingredient));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
 export const deleteIngredientThunk = (userId, ingredient) => {
   return async (dispatch) => {
     try {
+      console.log('deleteThunk fired')
        await dbService
         .collection("ingredients")
         .onSnapshot((snapshot) => {
@@ -129,6 +116,9 @@ export const editIngredientThunk = (userId, ingredient, newName) => {
   };
 };
 let initialState = [];
+
+
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS:

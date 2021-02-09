@@ -6,7 +6,6 @@ import ingredients, {
   addIngredientThunk,
   deleteIngredientThunk,
   editIngredientThunk,
-  setIngredient
 } from "./ingredients";
 import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
@@ -29,6 +28,5 @@ export {
   addIngredientThunk,
   deleteIngredientThunk,
   editIngredientThunk,
-  setIngredient
 };
 export default store;
