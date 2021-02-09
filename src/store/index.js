@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import user, { setUser } from "./user";
+import user, { removeUser, setUser } from "./user";
 import ingredients, {
+  removeIngredients,
   fetchIngredients,
   addIngredientThunk,
   deleteIngredientThunk,
@@ -20,5 +21,12 @@ const middleware = composeWithDevTools(
 
 const store = createStore(reducer, middleware);
 
-export { setUser, fetchIngredients, addIngredientThunk, deleteIngredientThunk };
+export {
+  removeUser,
+  setUser,
+  fetchIngredients,
+  addIngredientThunk,
+  deleteIngredientThunk,
+  removeIngredients,
+};
 export default store;
