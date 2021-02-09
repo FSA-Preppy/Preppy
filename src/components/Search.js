@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from "react";
-import Quagga from "@ericblade/quagga2";
-import { connect } from "react-redux";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import Quagga from '@ericblade/quagga2';
+import { connect } from 'react-redux';
+import axios from 'axios';
 import {
   setIngredient,
   fetchIngredients,
   addIngredientThunk,
   deleteIngredientThunk,
-} from "../store/index";
-import "../styles/searchstyle.css";
-import { useHistory } from "react-router-dom";
+} from '../store/index';
+import '../styles/searchstyle.css';
+import { useHistory } from 'react-router-dom';
 
 //todo, replace axios calls with thunks; manually add items(possibly with autocomplete via an); add items using returned barcode information
 
 const Search = (props) => {
+  useEffect(() => {
+    getBarCode();
+  }, []);
+
   let history = useHistory();
 
   const { getIngredients, deleteIngredient, user, ingredients } = props;
@@ -21,33 +25,33 @@ const Search = (props) => {
   let _scannerIsRunning = false;
   let QuaggaInit = false;
 
-  let [code, setCode] = useState("");
+  let [code, setCode] = useState('');
 
   useEffect(() => {
     getIngredients(user);
   }, []);
 
   function getBarCode() {
-    let toggle = document.getElementById("scanner");
+    //let toggle = document.getElementById('scanner');
 
-    toggle.style.display = "block";
-    console.log("init starting");
+    //toggle.style.display = 'block';
+    console.log('init starting');
 
     Quagga.init(
       {
         inputStream: {
-          name: "Live",
-          type: "LiveStream",
-          target: document.getElementById("scanner"),
+          name: 'Live',
+          type: 'LiveStream',
+          target: document.getElementById('scanner'),
           constraints: {
-            width: 480,
-            height: 320,
-            facingMode: "environment",
+            width: window.width,
+            height: window.height,
+            facingMode: 'environment',
           },
           frequency: 1,
         },
         decoder: {
-          readers: ["upc_reader"],
+          readers: ['upc_reader'],
         },
       },
       function (err) {
@@ -56,7 +60,7 @@ const Search = (props) => {
           return;
         }
 
-        console.log("Initialization finished. Ready to start");
+        console.log('Initialization finished. Ready to start');
         Quagga.start();
 
         _scannerIsRunning = true;
@@ -69,10 +73,10 @@ const Search = (props) => {
       setCode((code = returned));
 
       console.log(
-        "Barcode detected and processed : [" + code + typeof code + "]"
+        'Barcode detected and processed : [' + code + typeof code + ']'
       );
-      Quagga.stop();
       Quagga.offDetected();
+      Quagga.stop();
       await getProduct(code);
     });
   }
@@ -87,13 +91,13 @@ const Search = (props) => {
       let product = data.hints[0].food.label;
 
       if (!ingredients.includes(product)) {
-        props.addIngredient(props.user, product);
-        history.push("/fridge");
+        await props.addIngredient(props.user, product);
+        history.push('/fridge');
       } else {
-        window.alert("Same item cannot be added");
+        window.alert('Same item cannot be added');
       }
     } catch (error) {
-      console.log("error returning product via upc", error);
+      console.log('error returning product via upc', error);
     }
   }
 
@@ -105,15 +109,9 @@ const Search = (props) => {
         </div>
         <div>
           <header className="scan-header">
-            <button
-              id="scanButton"
-              onClick={() => {
-                getBarCode();
-              }}
-            >
-              Start/Stop Scan
-            </button>
-            <div id="scanner"></div>
+            <div id="scanner">
+              {/* <button onClick={() => getBarCode()}>Scan</button> */}
+            </div>
           </header>
         </div>
       </div>
