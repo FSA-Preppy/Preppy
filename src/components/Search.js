@@ -2,12 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Quagga from '@ericblade/quagga2';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import {
-  setIngredient,
-  fetchIngredients,
-  addIngredientThunk,
-  deleteIngredientThunk,
-} from '../store/index';
+import { addIngredientThunk } from '../store/index';
 import '../styles/searchstyle.css';
 import { useHistory } from 'react-router-dom';
 
@@ -20,21 +15,11 @@ const Search = (props) => {
 
   let history = useHistory();
 
-  const { getIngredients, deleteIngredient, user, ingredients } = props;
-
-  let _scannerIsRunning = false;
-  let QuaggaInit = false;
+  const { user, ingredients } = props;
 
   let [code, setCode] = useState('');
 
-  useEffect(() => {
-    getIngredients(user);
-  }, []);
-
   function getBarCode() {
-    //let toggle = document.getElementById('scanner');
-
-    //toggle.style.display = 'block';
     console.log('init starting');
 
     Quagga.init(
@@ -53,6 +38,7 @@ const Search = (props) => {
         decoder: {
           readers: ['upc_reader'],
         },
+        locate: false,
       },
       function (err) {
         if (err) {
@@ -62,11 +48,8 @@ const Search = (props) => {
 
         console.log('Initialization finished. Ready to start');
         Quagga.start();
-
-        _scannerIsRunning = true;
       }
     );
-    QuaggaInit = true;
 
     Quagga.onDetected(async function (result) {
       let returned = result.codeResult.code;
@@ -91,7 +74,7 @@ const Search = (props) => {
       let product = data.hints[0].food.label;
 
       if (!ingredients.includes(product)) {
-        await props.addIngredient(props.user, product);
+        await props.addIngredient(user, product);
         history.push('/fridge');
       } else {
         window.alert('Same item cannot be added');
@@ -128,11 +111,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    getIngredients: (userId) => dispatch(fetchIngredients(userId)),
     addIngredient: (userId, ingredient) =>
       dispatch(addIngredientThunk(userId, ingredient)),
-    deleteIngredient: (userId, ingredient) =>
-      dispatch(deleteIngredientThunk(userId, ingredient)),
   };
 };
 
