@@ -13,10 +13,12 @@ import { useHistory } from "react-router-dom";
 
 const Image = (props) => {
   const { register, handleSubmit } = useForm();
-let history = useHistory()
+  let history = useHistory();
+
   useEffect(() => {
     props.getIngredients(props.user);
   }, []);
+
   const onFileChange = async (data) => {
     try {
       const storageRef = storageService.ref();
@@ -29,7 +31,7 @@ let history = useHistory()
           `https://api.spoonacular.com/food/images/analyze`,
           {
             params: {
-              apiKey: "56845686f90a46a6a81e02c55bccd615",
+              apiKey: "8f5700d0c1fd431e92d0677d5153a3c9",
               imageUrl: url,
             },
           }
@@ -46,6 +48,7 @@ let history = useHistory()
       console.error(error.message);
     }
   };
+
   return (
     <>
       <div className="image-main-container">
