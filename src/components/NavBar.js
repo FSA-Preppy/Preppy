@@ -1,6 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { authService } from "../fbase";
+import { useForm } from "react-hook-form";
+import { storageService } from "../fbase";
+import axios from "axios";
+import { addIngredientThunk } from "../store";
+import { connect } from "react-redux";
 import "../styles/navbarstyle.css";
 
 import { Icon } from "@iconify/react";
@@ -10,16 +15,59 @@ import barcodeScan from "@iconify-icons/mdi/barcode-scan";
 import cameraIcon from "@iconify-icons/mdi/camera";
 import offIcon from "@iconify-icons/el/off";
 
-const NavBar = () => {
+const NavBar = (props) => {
+  const { register, handleSubmit } = useForm();
+
   const onClick = () => {
     authService.signOut();
   };
 
+  const onFileChange = async (data) => {
+    try {
+      const storageRef = storageService.ref();
+      const fileRef = storageRef.child(data.image[0].name);
+      const upload = await fileRef.put(data.image[0]);
+      const url = await upload.ref.getDownloadURL();
+      if (upload) {
+        console.log("Uploaded the File");
+        const { data } = await axios.get(
+          `https://api.spoonacular.com/food/images/analyze`,
+          {
+            params: {
+              apiKey: "8f5700d0c1fd431e92d0677d5153a3c9",
+              imageUrl: url,
+            },
+          }
+        );
+        if (!props.ingredients.includes(data.category.name)) {
+          props.addIngredient(props.user, data.category.name);
+        } else {
+          window.alert("Same item cannot be added");
+        }
+        if (data) upload.ref.delete();
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   return (
     <div className="navbar-container">
-      <Link to="/image" className="link">
+      {/* <Link to="/image" className="link"> */}
+      <label htmlFor="videoFile">
+        <input
+          onChange={handleSubmit(onFileChange)}
+          ref={register}
+          type="file"
+          name="image"
+          id="videoFile"
+          capture="environment"
+          accept="camera/*"
+          style={{ display: "none" }}
+        />
         <Icon icon={cameraIcon} className="navbar-icon"></Icon>
-      </Link>
+      </label>
+      {/* </Link> */}
       <Link to="/search" className="link">
         <Icon icon={barcodeScan} className="navbar-icon" />
       </Link>
@@ -36,4 +84,18 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+const mapState = (state) => {
+  return {
+    user: state.user,
+    ingredients: state.ingredients,
+  };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    addIngredient: (userId, ingredient) =>
+      dispatch(addIngredientThunk(userId, ingredient)),
+  };
+};
+
+export default connect(mapState, mapDispatch)(NavBar);

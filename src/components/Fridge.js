@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../styles/fridgestyle.css";
-
-import {
-  addIngredientThunk,
-  deleteIngredientThunk,
-  fetchIngredients,
-} from "../store";
+import { deleteIngredientThunk } from "../store";
 
 import axios from "axios";
 import { dbService } from "../fbase";
@@ -15,10 +10,6 @@ import { dbService } from "../fbase";
 const Fridge = (props) => {
   const { getIngredients, deleteIngredient, user, ingredients } = props;
   const [activeIng, setActiveIng] = useState([]);
-  let history = useHistory()
-  useEffect(() => {
-    getIngredients(user);
-  }, []);
 
   async function formatNames(activeIngredients) {
     let productList = [];
@@ -27,7 +18,6 @@ const Fridge = (props) => {
       name = activeIngredients[i].replaceAll(" ", "+");
       productList.push(name);
     }
-
     getRecipe(productList);
   }
 
@@ -94,8 +84,8 @@ const Fridge = (props) => {
         <div>
           <div>
             <button onClick={() => formatNames(activeIng)}>Get Recipes!</button>
-            {ingredients.map((singleIngredient) => (
-              <>
+            {ingredients.map((singleIngredient, idx) => (
+              <Fragment key={idx}>
                 <div>{singleIngredient}</div>
                 {/* {activeIng.includes(singleIngredient) ? (
               <button
@@ -123,13 +113,12 @@ const Fridge = (props) => {
                 )
                 <button
                   onClick={() => {
-                    deleteIngredient(user, singleIngredient)
+                    deleteIngredient(user, singleIngredient);
                   }}
                 >
                   delete
                 </button>
-                <Link to={`/fridge/${singleIngredient}/edit`}>edit</Link>
-              </>
+              </Fragment>
             ))}
           </div>
         </div>
@@ -156,9 +145,6 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    getIngredients: (userId) => dispatch(fetchIngredients(userId)),
-    addIngredient: (userId, ingredient) =>
-      dispatch(addIngredientThunk(userId, ingredient)),
     deleteIngredient: (userId, ingredient) =>
       dispatch(deleteIngredientThunk(userId, ingredient)),
   };

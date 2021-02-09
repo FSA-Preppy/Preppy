@@ -11,8 +11,6 @@ import NavBar from "./NavBar";
 import LandingPage from "./LandingPage";
 import Fridge from "./Fridge";
 import Recipe from "./Recipe";
-import Edit from "./Edit";
-import Image from "./Image";
 import Search from "./Search";
 
 const Routes = ({ isLoggedIn }) => {
@@ -22,12 +20,10 @@ const Routes = ({ isLoggedIn }) => {
         {isLoggedIn ? (
           <>
             <Switch>
-              <Route exact path="/fridge/:name/edit" component={Edit} />
               <Route exact path="/fridge" component={Fridge} />
-              <Route exact path="/image" component={Image} />
               <Route exact path="/recipe" component={Recipe} />
               <Route exact path="/search" component={Search} />
-              <Redirect from="*" to="/image" component={Image} />
+              <Redirect from="*" to="/fridge" component={Fridge} />
             </Switch>
             <NavBar />
           </>

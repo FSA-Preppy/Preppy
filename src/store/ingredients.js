@@ -1,11 +1,9 @@
-
 import { dbService } from "../fbase";
 
 const GET_INGREDIENTS = "GET_INGREDIENTS";
-const EDIT_INGREDIENTS = "EDIT_INGREDIENTS";
 const DELETE_INGREDIENTS = "DELETE_INGREDIENTS";
 const ADD_INGREDIENTS = "ADD_INGREDIENTS";
-const SET_INGREDIENT = 'SET_INGREDIENT';
+const SET_INGREDIENT = "SET_INGREDIENT";
 
 const getIngredients = (ingredients) => {
   return {
@@ -17,12 +15,6 @@ const addIngredients = (ingredient) => {
   return {
     type: ADD_INGREDIENTS,
     ingredient,
-  };
-};
-const editIngredients = (ingredients) => {
-  return {
-    type: EDIT_INGREDIENTS,
-    ingredients,
   };
 };
 
@@ -41,9 +33,9 @@ const _setIngredient = (ingredient) => ({
 export const fetchIngredients = (userId) => {
   return async (dispatch) => {
     try {
-      console.log('fetchThunk fired!!')
+      console.log("fetchThunk fired!!");
       const res = await dbService
-        .collection('ingredients')
+        .collection("ingredients")
         .onSnapshot((snapshot) => {
           dispatch(
             getIngredients(
@@ -62,14 +54,15 @@ export const fetchIngredients = (userId) => {
 export const addIngredientThunk = (userId, ingredient) => {
   return async (dispatch) => {
     try {
-      console.log("addthunk fired!")
-      const str = `${ingredient} has been added`
-      window.confirm(str)
+      console.log("addthunk fired!");
+      const str = `${ingredient} has been added`;
+      window.confirm(str);
       const res = await dbService.collection("ingredients").add({
         name: ingredient,
         createdAt: Date.now(),
         creatorId: userId,
       });
+      dispatch(addIngredients(ingredient));
     } catch (err) {
       console.error(err.message);
     }
@@ -79,44 +72,24 @@ export const addIngredientThunk = (userId, ingredient) => {
 export const deleteIngredientThunk = (userId, ingredient) => {
   return async (dispatch) => {
     try {
-      console.log('deleteThunk fired')
-       await dbService
-        .collection("ingredients")
-        .onSnapshot((snapshot) => {
-          snapshot.docs.filter(
+      console.log("deleteThunk fired");
+      await dbService.collection("ingredients").onSnapshot((snapshot) => {
+        snapshot.docs
+          .filter(
             (doc) =>
               doc.data().creatorId === userId && doc.data().name === ingredient
-          ).map(item => {
+          )
+          .map((item) => {
             dbService.doc(`ingredients/${item.id}`).delete();
-          })
-        });
+          });
+      });
     } catch (err) {
       console.error(err.message);
     }
   };
 };
-export const editIngredientThunk = (userId, ingredient, newName) => {
-  return async (dispatch) => {
-    try {
-       await dbService
-        .collection("ingredients")
-        .onSnapshot((snapshot) => {
-          snapshot.docs.filter(
-            (doc) =>
-              doc.data().creatorId === userId && doc.data().name === ingredient
-          ).map(item => {
-            dbService.doc(`ingredients/${item.id}`).update({
-              name: newName
-            });
-          })
-        });
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-};
-let initialState = [];
 
+let initialState = [];
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, action) => {

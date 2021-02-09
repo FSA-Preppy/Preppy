@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Routes from "./Routes";
 import { authService } from "../fbase";
 import { connect } from "react-redux";
-import { setUser } from "../store";
+import { setUser, fetchIngredients } from "../store";
 
 function App(props) {
   const [init, setInit] = useState(false);
@@ -13,6 +13,7 @@ function App(props) {
       if (user) {
         setIsLoggedIn(true);
         props.setUser(user.uid);
+        props.getIngredients(user.uid);
       } else setIsLoggedIn(false);
       setInit(true);
     });
@@ -24,11 +25,13 @@ function App(props) {
 const mapState = (state) => {
   return {
     user: state.user,
+    ingredients: state.ingredients,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
+    getIngredients: (userId) => dispatch(fetchIngredients(userId)),
     setUser: (user) => dispatch(setUser(user)),
   };
 };
