@@ -8,7 +8,7 @@ import axios from "axios";
 import { dbService } from "../fbase";
 
 const Fridge = (props) => {
-  const { getIngredients, deleteIngredient, user, ingredients } = props;
+  const { deleteIngredient, user, ingredients } = props;
   const [activeIng, setActiveIng] = useState([]);
 
   async function formatNames(activeIngredients) {

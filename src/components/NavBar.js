@@ -34,7 +34,7 @@ const NavBar = (props) => {
           `https://api.spoonacular.com/food/images/analyze`,
           {
             params: {
-              apiKey: "8f5700d0c1fd431e92d0677d5153a3c9",
+              apiKey: "5807aee1c71d4f5eac7262df4969ce3b",
               imageUrl: url,
             },
           }
@@ -53,8 +53,7 @@ const NavBar = (props) => {
 
   return (
     <div className="navbar-container">
-      {/* <Link to="/image" className="link"> */}
-      <label htmlFor="videoFile">
+      <label htmlFor="videoFile" className="link">
         <input
           onChange={handleSubmit(onFileChange)}
           ref={register}
@@ -67,7 +66,6 @@ const NavBar = (props) => {
         />
         <Icon icon={cameraIcon} className="navbar-icon"></Icon>
       </label>
-      {/* </Link> */}
       <Link to="/search" className="link">
         <Icon icon={barcodeScan} className="navbar-icon" />
       </Link>

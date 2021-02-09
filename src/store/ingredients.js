@@ -3,7 +3,6 @@ import { dbService } from "../fbase";
 const GET_INGREDIENTS = "GET_INGREDIENTS";
 const DELETE_INGREDIENTS = "DELETE_INGREDIENTS";
 const ADD_INGREDIENTS = "ADD_INGREDIENTS";
-const SET_INGREDIENT = "SET_INGREDIENT";
 
 const getIngredients = (ingredients) => {
   return {
@@ -24,11 +23,6 @@ const deleteIngredients = (ingredients) => {
     ingredients,
   };
 };
-
-const _setIngredient = (ingredient) => ({
-  type: SET_INGREDIENT,
-  ingredient,
-});
 
 export const fetchIngredients = (userId) => {
   return async (dispatch) => {
@@ -62,7 +56,7 @@ export const addIngredientThunk = (userId, ingredient) => {
         createdAt: Date.now(),
         creatorId: userId,
       });
-      dispatch(addIngredients(ingredient));
+      // dispatch(addIngredients(ingredient));
     } catch (err) {
       console.error(err.message);
     }
@@ -96,13 +90,8 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS:
       return action.ingredients;
-    case SET_INGREDIENT:
-      if (state.includes(action.ingredient)) {
-        console.log(`STATE ALREADY INCLUDES ${action.ingredient}`);
-        return state;
-      } else {
-        return [...state, action.ingredient];
-      }
+    case ADD_INGREDIENTS:
+      return [...state, action.ingredients];
     default:
       return state;
   }
