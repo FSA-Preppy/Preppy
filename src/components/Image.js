@@ -9,10 +9,11 @@ import {
 } from "../store";
 import axios from "axios";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const Image = (props) => {
   const { register, handleSubmit } = useForm();
-
+let history = useHistory()
   useEffect(() => {
     props.getIngredients(props.user);
   }, []);
@@ -28,13 +29,14 @@ const Image = (props) => {
           `https://api.spoonacular.com/food/images/analyze`,
           {
             params: {
-              apiKey: "4b34c62d3a0844dda95902bf18ec9dc1",
+              apiKey: "56845686f90a46a6a81e02c55bccd615",
               imageUrl: url,
             },
           }
         );
         if (!props.ingredients.includes(data.category.name)) {
           props.addIngredient(props.user, data.category.name);
+          history.push("/fridge");
         } else {
           window.alert("Same item cannot be added");
         }

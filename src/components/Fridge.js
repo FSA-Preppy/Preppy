@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "../styles/fridgestyle.css";
 
 import {
@@ -14,9 +14,8 @@ import { dbService } from "../fbase";
 
 const Fridge = (props) => {
   const { getIngredients, deleteIngredient, user, ingredients } = props;
-
   const [activeIng, setActiveIng] = useState([]);
-
+  let history = useHistory()
   useEffect(() => {
     getIngredients(user);
   }, []);
@@ -124,7 +123,7 @@ const Fridge = (props) => {
                 )
                 <button
                   onClick={() => {
-                    deleteIngredient(user, singleIngredient);
+                    deleteIngredient(user, singleIngredient)
                   }}
                 >
                   delete
@@ -135,14 +134,14 @@ const Fridge = (props) => {
           </div>
         </div>
         {/* css animation boxes */}
-        <ul className="fridge-box-area">
+        {/* <ul className="fridge-box-area">
           <li></li>
           <li></li>
           <li></li>
           <li></li>
           <li></li>
           <li></li>
-        </ul>
+        </ul> */}
       </div>
     </>
   );
