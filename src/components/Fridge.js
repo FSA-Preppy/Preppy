@@ -2,13 +2,13 @@ import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "../styles/fridgestyle.css";
-import { deleteIngredientThunk, addRecipeThunk} from "../store";
+import { deleteIngredientThunk, addRecipeThunk } from "../store";
 
 import axios from "axios";
 import { dbService } from "../fbase";
 
 const Fridge = (props) => {
-  const {deleteIngredient, user, ingredients, addRecipes} = props;
+  const { deleteIngredient, user, ingredients, addRecipes } = props;
   const [activeIng, setActiveIng] = useState([]);
 
   async function formatNames(activeIngredients) {
@@ -37,35 +37,45 @@ const Fridge = (props) => {
         </div>
         <div>
           <div>
-            <button onClick={() => formatNames(activeIng)}>Get Recipes!</button>
-            {ingredients.map((singleIngredient, idx) => {
-              return (
-                <Fragment key={idx}>
-                  <div>{singleIngredient}</div>
-                  {activeIng.includes(singleIngredient) ? (
-                    <button onClick={() => removeActiveIng(singleIngredient)}>
-                      Remove from board
-                    </button>
-                  ) : (
+            <ul className="fridge-box-area">
+              <button onClick={() => formatNames(activeIng)}>
+                Get Recipes!
+              </button>
+              {ingredients.map((singleIngredient, idx) => {
+                return (
+                  <Fragment key={idx}>
+                    <div>{singleIngredient}</div>
+                    {activeIng.includes(singleIngredient) ? (
+                      <button onClick={() => removeActiveIng(singleIngredient)}>
+                        Remove from board
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          settingActiveIng(singleIngredient);
+                        }}
+                      >
+                        Add to board
+                      </button>
+                    )}
                     <button
                       onClick={() => {
-                        settingActiveIng(singleIngredient);
+                        removeActiveIng(singleIngredient);
+                        deleteIngredient(user, singleIngredient);
                       }}
                     >
-                      Add to board
+                      delete
                     </button>
-                  )}
-                  <button
-                    onClick={() => {
-                      removeActiveIng(singleIngredient);
-                      deleteIngredient(user, singleIngredient);
-                    }}
-                  >
-                    delete
-                  </button>
-                </Fragment>
-              );
-            })}
+                  </Fragment>
+                );
+              })}
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
           </div>
         </div>
         {/* css animation boxes */}
@@ -93,7 +103,8 @@ const mapDispatch = (dispatch) => {
   return {
     deleteIngredient: (userId, ingredient) =>
       dispatch(deleteIngredientThunk(userId, ingredient)),
-      addRecipes: (userId, productList) => dispatch(addRecipeThunk(userId, productList)),
+    addRecipes: (userId, productList) =>
+      dispatch(addRecipeThunk(userId, productList)),
   };
 };
 
