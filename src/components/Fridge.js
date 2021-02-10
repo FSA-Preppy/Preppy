@@ -2,11 +2,12 @@ import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
 import "../styles/fridgestyle.css";
 import { deleteIngredientThunk, addRecipeThunk } from "../store";
+import { useHistory } from "react-router-dom";
 
 const Fridge = (props) => {
   const { deleteIngredient, user, ingredients, addRecipes } = props;
   const [activeIng, setActiveIng] = useState([]);
-
+  let history = useHistory()
   async function formatNames(activeIngredients) {
     let productList = [];
     let name = "";
@@ -14,7 +15,9 @@ const Fridge = (props) => {
       name = activeIngredients[i].replaceAll(" ", "+");
       productList.push(name);
     }
-    addRecipes(user, productList);
+    const output = await addRecipes(user, productList, history)
+    console.log(output);
+    if(output) setActiveIng([]);
   }
 
   const settingActiveIng = (singleIngredient) => {
@@ -34,7 +37,7 @@ const Fridge = (props) => {
         <div>
           <div>
             <ul className="fridge-box-area">
-              <button onClick={() => formatNames(activeIng)}>
+              <button disabled={!activeIng.length} onClick={() => formatNames(activeIng)}>
                 Get Recipes!
               </button>
               {ingredients.map((singleIngredient, idx) => {
@@ -91,8 +94,8 @@ const mapDispatch = (dispatch) => {
   return {
     deleteIngredient: (userId, ingredient) =>
       dispatch(deleteIngredientThunk(userId, ingredient)),
-    addRecipes: (userId, productList) =>
-      dispatch(addRecipeThunk(userId, productList)),
+    addRecipes: (userId, productList, history) =>
+      dispatch(addRecipeThunk(userId, productList, history)),
   };
 };
 
