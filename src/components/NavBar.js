@@ -50,6 +50,7 @@ const NavBar = (props) => {
           window.alert("Item already exist in fridge");
         }
         if (data) upload.ref.delete();
+        history.push("/fridge");
       }
     } catch (error) {
       window.alert("Image was not recognized");

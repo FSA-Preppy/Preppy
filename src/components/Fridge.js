@@ -33,24 +33,15 @@ const Fridge = (props) => {
     console.log(
       `fetching recipes including: ` + productList + productList.length
     );
-    //replace with thunk call to fetch recipes
     try {
       const { data } = await axios.get(fullQuery);
-      console.log(data.hits[0].recipe);
-      // console.log(data.hits[0].recipe.image);
-      // console.log(data.hits[0].recipe.url);
-      // console.log(data.hits[0].recipe.label);
-
       let recipeImage = "";
       let recipeUrl = "";
       let recipeLabel = "";
       for (let i = 0; i < data.hits.length; i++) {
-        //console.log('fore loop');
-        console.log(data.hits[i]);
         recipeImage = data.hits[i].recipe.image;
         recipeUrl = data.hits[i].recipe.url;
         recipeLabel = data.hits[i].recipe.label;
-
         await dbService.collection("recipes").add({
           name: recipeLabel,
           image: recipeImage,
@@ -59,15 +50,19 @@ const Fridge = (props) => {
           creatorId: user,
         });
       }
-      //console.log(data.hits.)
       window.confirm(`Fetching Recipes including: ${productList}`);
     } catch (err) {
       console.error(err.message);
     }
-    //setRecipes([...recipes, data]);
-    //dbService.collection('ingredients').add
-    //replace with thunk call to push returned recipes to user DB
   }
+
+  const settingActiveIng = (singleIngredient) => {
+    setActiveIng([...activeIng, singleIngredient]);
+  };
+
+  const removeActiveIng = (singleIngredient) => {
+    setActiveIng(activeIng.filter((item) => item !== singleIngredient));
+  };
 
   return (
     <>
@@ -78,36 +73,27 @@ const Fridge = (props) => {
         <div>
           <div>
             <button onClick={() => formatNames(activeIng)}>Get Recipes!</button>
+            <div></div>
             {ingredients.map((singleIngredient, idx) => {
               return (
                 <Fragment key={idx}>
                   <div>{singleIngredient}</div>
-                  {/* {activeIng.includes(singleIngredient) ? (
-              <button
-                onClick={setActiveIng(
-                  activeIng.filter((item) => {
-                    return item !== singleIngredient;
-                  })
-                )}
-              >
-                Remove from board
-              </button>
-            ) :  */}
-                  (
+                  {activeIng.includes(singleIngredient) ? (
+                    <button onClick={() => removeActiveIng(singleIngredient)}>
+                      Remove from board
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        settingActiveIng(singleIngredient);
+                      }}
+                    >
+                      Add to board
+                    </button>
+                  )}
                   <button
                     onClick={() => {
-                      activeIng.push(singleIngredient);
-                      window.alert(
-                        `${singleIngredient} added to the recipe search!`
-                      );
-                      console.log(activeIng);
-                    }}
-                  >
-                    Add to board
-                  </button>
-                  )
-                  <button
-                    onClick={() => {
+                      removeActiveIng(singleIngredient);
                       deleteIngredient(user, singleIngredient);
                     }}
                   >
