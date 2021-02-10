@@ -20,7 +20,15 @@ const Fridge = (props) => {
     }
     addRecipes(user, productList);
   }
-  
+
+  const settingActiveIng = (singleIngredient) => {
+    setActiveIng([...activeIng, singleIngredient]);
+  };
+
+  const removeActiveIng = (singleIngredient) => {
+    setActiveIng(activeIng.filter((item) => item !== singleIngredient));
+  };
+
   return (
     <>
       <div className="fridge-animation-area">
@@ -30,42 +38,34 @@ const Fridge = (props) => {
         <div>
           <div>
             <button onClick={() => formatNames(activeIng)}>Get Recipes!</button>
-            {ingredients.map((singleIngredient, idx) => (
-              <Fragment key={idx}>
-                <div>{singleIngredient}</div>
-                {/* {activeIng.includes(singleIngredient) ? (
-              <button
-                onClick={setActiveIng(
-                  activeIng.filter((item) => {
-                    return item !== singleIngredient;
-                  })
-                )}
-              >
-                Remove from board
-              </button>
-            ) :  */}
-                (
-                <button
-                  onClick={() => {
-                    activeIng.push(singleIngredient);
-                    window.alert(
-                      `${singleIngredient} added to the recipe search!`
-                    );
-                    console.log(activeIng);
-                  }}
-                >
-                  Add to board
-                </button>
-                )
-                <button
-                  onClick={() => {
-                    deleteIngredient(user, singleIngredient);
-                  }}
-                >
-                  delete
-                </button>
-              </Fragment>
-            ))}
+            {ingredients.map((singleIngredient, idx) => {
+              return (
+                <Fragment key={idx}>
+                  <div>{singleIngredient}</div>
+                  {activeIng.includes(singleIngredient) ? (
+                    <button onClick={() => removeActiveIng(singleIngredient)}>
+                      Remove from board
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        settingActiveIng(singleIngredient);
+                      }}
+                    >
+                      Add to board
+                    </button>
+                  )}
+                  <button
+                    onClick={() => {
+                      removeActiveIng(singleIngredient);
+                      deleteIngredient(user, singleIngredient);
+                    }}
+                  >
+                    delete
+                  </button>
+                </Fragment>
+              );
+            })}
           </div>
         </div>
         {/* css animation boxes */}

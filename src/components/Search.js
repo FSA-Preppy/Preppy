@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { addIngredientThunk } from "../store/index";
 import "../styles/searchstyle.css";
-import { useHistory } from "react-router-dom";
 import edamamAPIKey from "../config/edamamAPI";
 //todo, replace axios calls with thunks; manually add items(possibly with autocomplete via an); add items using returned barcode information
 
@@ -13,7 +12,6 @@ const Search = (props) => {
     getBarCode();
   }, []);
 
-  let history = useHistory();
   const { user, ingredients } = props;
   let [code, setCode] = useState("");
 
@@ -52,7 +50,6 @@ const Search = (props) => {
       console.log(
         "Barcode detected and processed : [" + code + typeof code + "]"
       );
-      window.alert("Item has been added to your fridge");
       Quagga.offDetected();
       Quagga.stop();
       await getProduct(code);
@@ -68,13 +65,19 @@ const Search = (props) => {
     ${edamamAPIKey}`);
       let product = data.hints[0].food.label;
 
-      if (!ingredients.includes(product)) {
-        await props.addIngredient(user, product);
-      } else {
-        window.alert("Item already exist in fridge");
+      if (product) {
+        if (!ingredients.includes(product)) {
+          console.log("user-->", user);
+          await props.addIngredient(user, product);
+        } else {
+          window.alert("Item already exist in fridge");
+        }
       }
     } catch (error) {
       window.alert("Barcode was not recognized");
+      Quagga.offDetected();
+      Quagga.stop();
+      getBarCode();
       console.log("error returning product via upc", error);
     }
   }
