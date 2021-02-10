@@ -16,7 +16,7 @@ const Recipe = (props) => {
           <ul>
             {recipes.map((recipe) => {
               return (
-                <li>
+                <li key={recipe.id}>
                   <img
                     src={recipe.image}
                     style={{ height: "10rem", width: "12rem" }}
