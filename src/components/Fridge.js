@@ -1,13 +1,14 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import "../styles/fridgestyle.css";
-import { deleteIngredientThunk, fetchIngredients } from "../store";
+import { deleteIngredientThunk, addRecipeThunk} from "../store";
 
 import axios from "axios";
 import { dbService } from "../fbase";
 
 const Fridge = (props) => {
-  const { deleteIngredient, user, ingredients } = props;
+  const {deleteIngredient, user, ingredients, addRecipes} = props;
   const [activeIng, setActiveIng] = useState([]);
 
   async function formatNames(activeIngredients) {
@@ -17,58 +18,9 @@ const Fridge = (props) => {
       name = activeIngredients[i].replaceAll(" ", "+");
       productList.push(name);
     }
-    getRecipe(productList);
+    addRecipes(user, productList);
   }
-
-  async function getRecipe(productList) {
-    let fullQuery = "";
-    let searchPrefix = `https://api.edamam.com/search?`;
-    let searchAppend = "";
-    let searchKeys = `app_id=ee8d7e3a&app_key=f2876f55d65442e23c22ec308974a5f7&from=0&to=4`;
-
-    for (let i = 0; i < productList.length; i++) {
-      searchAppend += `q=${productList[i]}&`;
-    }
-    fullQuery = searchPrefix + searchAppend + searchKeys;
-    console.log(
-      `fetching recipes including: ` + productList + productList.length
-    );
-    //replace with thunk call to fetch recipes
-    try {
-      const { data } = await axios.get(fullQuery);
-      console.log(data.hits[0].recipe);
-      // console.log(data.hits[0].recipe.image);
-      // console.log(data.hits[0].recipe.url);
-      // console.log(data.hits[0].recipe.label);
-
-      let recipeImage = "";
-      let recipeUrl = "";
-      let recipeLabel = "";
-      for (let i = 0; i < data.hits.length; i++) {
-        //console.log('fore loop');
-        console.log(data.hits[i]);
-        recipeImage = data.hits[i].recipe.image;
-        recipeUrl = data.hits[i].recipe.url;
-        recipeLabel = data.hits[i].recipe.label;
-
-        await dbService.collection("recipes").add({
-          name: recipeLabel,
-          image: recipeImage,
-          url: recipeUrl,
-          createdAt: Date.now(),
-          creatorId: user,
-        });
-      }
-      //console.log(data.hits.)
-      window.confirm(`Fetching Recipes including: ${productList}`);
-    } catch (err) {
-      console.error(err.message);
-    }
-    //setRecipes([...recipes, data]);
-    //dbService.collection('ingredients').add
-    //replace with thunk call to push returned recipes to user DB
-  }
-
+  
   return (
     <>
       <div className="fridge-animation-area">
@@ -78,11 +30,10 @@ const Fridge = (props) => {
         <div>
           <div>
             <button onClick={() => formatNames(activeIng)}>Get Recipes!</button>
-            {ingredients.map((singleIngredient, idx) => {
-              return (
-                <Fragment key={idx}>
-                  <div>{singleIngredient}</div>
-                  {/* {activeIng.includes(singleIngredient) ? (
+            {ingredients.map((singleIngredient, idx) => (
+              <Fragment key={idx}>
+                <div>{singleIngredient}</div>
+                {/* {activeIng.includes(singleIngredient) ? (
               <button
                 onClick={setActiveIng(
                   activeIng.filter((item) => {
@@ -93,29 +44,28 @@ const Fridge = (props) => {
                 Remove from board
               </button>
             ) :  */}
-                  (
-                  <button
-                    onClick={() => {
-                      activeIng.push(singleIngredient);
-                      window.alert(
-                        `${singleIngredient} added to the recipe search!`
-                      );
-                      console.log(activeIng);
-                    }}
-                  >
-                    Add to board
-                  </button>
-                  )
-                  <button
-                    onClick={() => {
-                      deleteIngredient(user, singleIngredient);
-                    }}
-                  >
-                    delete
-                  </button>
-                </Fragment>
-              );
-            })}
+                (
+                <button
+                  onClick={() => {
+                    activeIng.push(singleIngredient);
+                    window.alert(
+                      `${singleIngredient} added to the recipe search!`
+                    );
+                    console.log(activeIng);
+                  }}
+                >
+                  Add to board
+                </button>
+                )
+                <button
+                  onClick={() => {
+                    deleteIngredient(user, singleIngredient);
+                  }}
+                >
+                  delete
+                </button>
+              </Fragment>
+            ))}
           </div>
         </div>
         {/* css animation boxes */}
@@ -143,7 +93,7 @@ const mapDispatch = (dispatch) => {
   return {
     deleteIngredient: (userId, ingredient) =>
       dispatch(deleteIngredientThunk(userId, ingredient)),
-    getIngredients: (userId) => dispatch(fetchIngredients(userId)),
+      addRecipes: (userId, productList) => dispatch(addRecipeThunk(userId, productList)),
   };
 };
 
