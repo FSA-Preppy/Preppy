@@ -1,39 +1,11 @@
 import axios from "axios";
-import { dbService } from "../fbase";
 
 const GET_RECIPE = "GET_RECIPE";
-const ADD_RECIPE = "ADD_RECIPE";
 
 const getRecipe = (recipes) => {
   return {
     type: GET_RECIPE,
     recipes,
-  };
-};
-
-const addRecipe = (recipes) => {
-  return {
-    type: ADD_RECIPE,
-    recipes,
-  };
-};
-export const fetchRecipe = (userId) => {
-  return async (dispatch) => {
-    try {
-      console.log("recipeThunk fired!!");
-
-      const res = await dbService.collection("recipes").get();
-      let array = [];
-
-      res.forEach((doc) => {
-        if (doc.data().creatorId === userId) {
-          array.push(doc.data());
-        }
-      });
-      dispatch(getRecipe(array));
-    } catch (err) {
-      console.error(err.message);
-    }
   };
 };
 
@@ -55,27 +27,18 @@ export const addRecipeThunk = (userId, productList) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(fullQuery);
-      console.log(data.hits[0].recipe);
-
-      let recipeImage = "";
-      let recipeUrl = "";
-      let recipeLabel = "";
+      let array = [];
       for (let i = 0; i < data.hits.length; i++) {
-        console.log(data.hits[i]);
-        recipeImage = data.hits[i].recipe.image;
-        recipeUrl = data.hits[i].recipe.url;
-        recipeLabel = data.hits[i].recipe.label;
-
-        await dbService.collection("recipes").add({
-          name: recipeLabel,
-          image: recipeImage,
-          url: recipeUrl,
+        array.push({
+          image: data.hits[i].recipe.image,
+          url: data.hits[i].recipe.url,
+          name: data.hits[i].recipe.label,
           createdAt: Date.now(),
           creatorId: userId,
         });
       }
       window.confirm(`Fetching Recipes including: ${productList}`);
-      dispatch(addRecipe(productList));
+      dispatch(getRecipe(array));
     } catch (err) {
       console.error(err.message);
     }
@@ -83,13 +46,13 @@ export const addRecipeThunk = (userId, productList) => {
 };
 
 let initialState = [];
+
 // eslint-disable-next-line import/no-anonymous-default-export
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_RECIPE:
       return action.recipes;
-    case ADD_RECIPE:
-      return [...state, action.recipes];
     default:
       return state;
   }
