@@ -5,7 +5,7 @@ import axios from "axios";
 import { addIngredientThunk } from "../store/index";
 import "../styles/searchstyle.css";
 import { useHistory } from "react-router-dom";
-
+import edamamAPIKey from "../config/edamamAPI";
 //todo, replace axios calls with thunks; manually add items(possibly with autocomplete via an); add items using returned barcode information
 
 const Search = (props) => {
@@ -19,7 +19,6 @@ const Search = (props) => {
 
   function getBarCode() {
     console.log("init starting");
-
     Quagga.init(
       {
         inputStream: {
@@ -43,19 +42,17 @@ const Search = (props) => {
           console.log(err);
           return;
         }
-
         console.log("Initialization finished. Ready to start");
         Quagga.start();
       }
     );
-
     Quagga.onDetected(async function (result) {
       let returned = result.codeResult.code;
       setCode((code = returned));
-
       console.log(
         "Barcode detected and processed : [" + code + typeof code + "]"
       );
+      window.alert("Item has been added to your fridge");
       Quagga.offDetected();
       Quagga.stop();
       await getProduct(code);
@@ -68,15 +65,16 @@ const Search = (props) => {
       let {
         data,
       } = await axios.get(`https://api.edamam.com/api/food-database/v2/parser?upc=${code}&app_id=2b951423&app_key=
-    0a3f7f60c2858ebe6e8ed1059ef0052e`);
+    ${edamamAPIKey}`);
       let product = data.hints[0].food.label;
 
       if (!ingredients.includes(product)) {
         await props.addIngredient(user, product);
       } else {
-        window.alert("Same item cannot be added");
+        window.alert("Item already exist in fridge");
       }
     } catch (error) {
+      window.alert("Barcode was not recognized");
       console.log("error returning product via upc", error);
     }
   }
