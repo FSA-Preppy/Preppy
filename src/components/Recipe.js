@@ -1,15 +1,10 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { fetchRecipe } from '../store';
-import '../styles/recipestyle.css';
+import React from "react";
+import { connect } from "react-redux";
+import "../styles/recipestyle.css";
 
 const Recipe = (props) => {
-  const { user, recipes, getRecipes } = props;
-  useEffect(() => {
-    getRecipes(user);
-  }, []);
-  console.log(props);
-  console.log(recipes);
+  const { recipes } = props;
+
   return (
     <>
       <div className="animation-area">
@@ -24,7 +19,7 @@ const Recipe = (props) => {
                 <li>
                   <img
                     src={recipe.image}
-                    style={{ height: '10rem', width: '12rem' }}
+                    style={{ height: "10rem", width: "12rem" }}
                   />
                   <br></br>
                   <a href={recipe.url}>{recipe.name}</a>
@@ -48,8 +43,4 @@ const Recipe = (props) => {
 
 const mapState = (state) => ({ user: state.user, recipes: state.recipes });
 
-const mapDispatch = (dispatch) => ({
-  getRecipes: (userId) => dispatch(fetchRecipe(userId)),
-});
-
-export default connect(mapState, mapDispatch)(Recipe);
+export default connect(mapState, null)(Recipe);

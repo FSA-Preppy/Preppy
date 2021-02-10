@@ -1,11 +1,7 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import "../styles/fridgestyle.css";
 import { deleteIngredientThunk, addRecipeThunk } from "../store";
-
-import axios from "axios";
-import { dbService } from "../fbase";
 
 const Fridge = (props) => {
   const { deleteIngredient, user, ingredients, addRecipes } = props;
@@ -69,6 +65,7 @@ const Fridge = (props) => {
                   </Fragment>
                 );
               })}
+              {/* css animation boxes */}
               <li></li>
               <li></li>
               <li></li>
@@ -78,15 +75,6 @@ const Fridge = (props) => {
             </ul>
           </div>
         </div>
-        {/* css animation boxes */}
-        {/* <ul className="fridge-box-area">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul> */}
       </div>
     </>
   );
