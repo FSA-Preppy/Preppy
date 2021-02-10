@@ -7,6 +7,7 @@ import axios from "axios";
 import { addIngredientThunk, removeUser, removeIngredients } from "../store";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
+import spoonacularAPIKey from "../config/spoonacularAPI";
 import "../styles/navbarstyle.css";
 
 import { Icon } from "@iconify/react";
@@ -38,7 +39,7 @@ const NavBar = (props) => {
           `https://api.spoonacular.com/food/images/analyze`,
           {
             params: {
-              apiKey: "90fcba9c343249e8b9f8982669437c5c",
+              apiKey: spoonacularAPIKey,
               imageUrl: url,
             },
           }
@@ -46,11 +47,12 @@ const NavBar = (props) => {
         if (!props.ingredients.includes(data.category.name)) {
           props.addIngredient(props.user, data.category.name);
         } else {
-          window.alert("Same item cannot be added");
+          window.alert("Item already exist in fridge");
         }
         if (data) upload.ref.delete();
       }
     } catch (error) {
+      window.alert("Image was not recognized");
       console.error(error.message);
     }
   };
