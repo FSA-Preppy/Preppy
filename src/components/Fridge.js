@@ -70,9 +70,10 @@ const Fridge = (props) => {
                                   {activeIng.includes(singleIngredient) ? (
                                     <button
                                       className="fridge-button"
-                                      onClick={() =>
-                                        removeActiveIng(singleIngredient)
-                                      }
+                                      onClick={() => {
+                                        removeActiveIng(singleIngredient);
+                                        notifyRemove();
+                                      }}
                                     >
                                       Remove from board
                                     </button>
@@ -81,6 +82,7 @@ const Fridge = (props) => {
                                       className="fridge-button"
                                       onClick={() => {
                                         settingActiveIng(singleIngredient);
+                                        notifyAdd();
                                       }}
                                     >
                                       Add to board
