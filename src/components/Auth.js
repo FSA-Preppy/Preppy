@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import { authService, firebaseInstance } from '../fbase';
-import React, { useState, useEffect } from 'react';
-import '../styles/authstyle.css';
-import signinBG from '../styles/images/signinNoBG.png';
-import preppyLogo from '../styles/images/PreppyLogoFinal.png';
-import loginImg from '../styles/images/login.png';
-=======
 import { authService, firebaseInstance } from "../fbase";
 import React, { useState, useEffect } from "react";
 import "../styles/authstyle.css";
@@ -13,24 +5,19 @@ import signinBG from "../styles/images/signinNoBG.png";
 import preppyLogo from "../styles/images/PreppyLogoFinal.png";
 import loginImg from "../styles/images/login.png";
 import { Alert } from "@material-ui/lab";
->>>>>>> FE: styled login,fridge,recipe views and added error messages to login/signup
 
 const Auth = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(false);
-<<<<<<< HEAD
-  const [error, setError] = useState('');
-=======
   const [error, setError] = useState(null);
->>>>>>> FE: styled login,fridge,recipe views and added error messages to login/signup
 
   const onChange = (evt) => {
     const {
       target: { name, value },
     } = evt;
-    if (name === 'email') setEmail(value);
-    else if (name === 'password') setPassword(value);
+    if (name === "email") setEmail(value);
+    else if (name === "password") setPassword(value);
   };
 
   const onSubmit = async (evt) => {
@@ -73,27 +60,21 @@ const Auth = () => {
   };
 
   const reset = () => {
-<<<<<<< HEAD
-    setEmail('');
-    setPassword('');
-=======
     setEmail("");
     setPassword("");
-    setError(null);
->>>>>>> FE: styled login,fridge,recipe views and added error messages to login/signup
     setNewAccount(!newAccount);
   };
 
   //CSS related functions*****
   useEffect(() => {
-    const sign_in_btn = document.querySelector('#sign-in-btn');
-    const sign_up_btn = document.querySelector('#sign-up-btn');
-    const container = document.querySelector('.container');
-    sign_up_btn.addEventListener('click', () => {
-      container.classList.add('sign-up-mode');
+    const sign_in_btn = document.querySelector("#sign-in-btn");
+    const sign_up_btn = document.querySelector("#sign-up-btn");
+    const container = document.querySelector(".container");
+    sign_up_btn.addEventListener("click", () => {
+      container.classList.add("sign-up-mode");
     });
-    sign_in_btn.addEventListener('click', () => {
-      container.classList.remove('sign-up-mode');
+    sign_in_btn.addEventListener("click", () => {
+      container.classList.remove("sign-up-mode");
     });
   });
 

@@ -5,13 +5,9 @@
 .fridge-title {
   color: rgb(34, 34, 34);
   font-size: 70px;
-<<<<<<< HEAD
   font-family: "Architects Daughter", cursive;
   text-decoration: underline;
-=======
-  font-family: "Mansalva", cursive;
   z-index: 1;
->>>>>>> FE: styled login,fridge,recipe views and added error messages to login/signup
 }
 
 .fridge-header-container {

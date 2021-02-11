@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import "../styles/fridgestyle.css";
@@ -9,11 +8,8 @@ import SwiperCore, { Navigation, Pagination, A11y } from "swiper";
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
-<<<<<<< HEAD
 import { notifyAdd, notifyRemove } from "../toast";
 import "react-toastify/dist/ReactToastify.css";
-=======
->>>>>>> FE: styled login,fridge,recipe views and added error messages to login/signup
 
 SwiperCore.use([Navigation, Pagination, A11y]);
 
@@ -23,9 +19,9 @@ const Fridge = (props) => {
   let history = useHistory();
   async function formatNames(activeIngredients) {
     let productList = [];
-    let name = '';
+    let name = "";
     for (let i = 0; i < activeIngredients.length; i++) {
-      name = activeIngredients[i].replaceAll(' ', '+');
+      name = activeIngredients[i].replaceAll(" ", "+");
       productList.push(name);
     }
     const output = await addRecipes(user, productList, history);
@@ -69,7 +65,7 @@ const Fridge = (props) => {
                               <div className="single-ingredient-container">
                                 <div className="fridge-left-panel">
                                   <div className="ingredient-name">
-                                    {singleIngredient.split('_').join(' ')}
+                                    {singleIngredient.split("_").join(" ")}
                                   </div>
                                   {activeIng.includes(singleIngredient) ? (
                                     <button
@@ -118,17 +114,10 @@ const Fridge = (props) => {
                         </div>
                         <button
                           className="get-recipe-button"
-
                           style={{ display: "none" }}
-<<<<<<< HEAD
                           onClick={() => {
                             formatNames(activeIng);
-                            
                           }}
-
-=======
-                          onClick={() => formatNames(activeIng)}
->>>>>>> FE: styled login,fridge,recipe views and added error messages to login/signup
                         >
                           Get Recipes!
                         </button>
@@ -145,7 +134,7 @@ const Fridge = (props) => {
                       {activeIng.map((ingredient, idx) => {
                         return (
                           <div key={idx} className="recipe-ingredient-name">
-                            {ingredient.split('_').join(' ')}
+                            {ingredient.split("_").join(" ")}
                           </div>
                         );
                       })}
