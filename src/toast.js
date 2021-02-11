@@ -2,8 +2,20 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 toast.configure();
-export const notifyAdd = () => {
+export const notifyAddFridge = () => {
   toast.success(`👨‍🍳  Successfully added to your Fridge`, {
+    position: "top-right",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+};
+
+export const notifyAdd = () => {
+  toast.success(`👨‍🍳  Successfully added to the board`, {
     position: "top-right",
     autoClose: 1000,
     hideProgressBar: false,
