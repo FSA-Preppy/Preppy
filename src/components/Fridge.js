@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import "../styles/fridgestyle.css";
@@ -19,9 +20,9 @@ const Fridge = (props) => {
   let history = useHistory();
   async function formatNames(activeIngredients) {
     let productList = [];
-    let name = "";
+    let name = '';
     for (let i = 0; i < activeIngredients.length; i++) {
-      name = activeIngredients[i].replaceAll(" ", "+");
+      name = activeIngredients[i].replaceAll(' ', '+');
       productList.push(name);
     }
     const output = await addRecipes(user, productList, history);
@@ -58,11 +59,14 @@ const Fridge = (props) => {
                       >
                         {ingredients.map((singleIngredient, idx) => {
                           return (
-                            <SwiperSlide className="single-ingredient-swiper-wrapper">
+                            <SwiperSlide
+                              key={idx}
+                              className="single-ingredient-swiper-wrapper"
+                            >
                               <div className="single-ingredient-container">
                                 <div className="fridge-left-panel">
                                   <div className="ingredient-name">
-                                    {singleIngredient.split("_").join(" ")}
+                                    {singleIngredient.split('_').join(' ')}
                                   </div>
                                   {activeIng.includes(singleIngredient) ? (
                                     <button
@@ -113,11 +117,13 @@ const Fridge = (props) => {
                         </div>
                         <button
                           className="get-recipe-button"
+
                           style={{ display: "none" }}
                           onClick={() => {
                             formatNames(activeIng);
                             
                           }}
+
                         >
                           Get Recipes!
                         </button>
@@ -131,10 +137,10 @@ const Fridge = (props) => {
                       </button>
                     )}
                     <div>
-                      {activeIng.map((ingredient) => {
+                      {activeIng.map((ingredient, idx) => {
                         return (
-                          <div className="recipe-ingredient-name">
-                            {ingredient.split("_").join(" ")}
+                          <div key={idx} className="recipe-ingredient-name">
+                            {ingredient.split('_').join(' ')}
                           </div>
                         );
                       })}
