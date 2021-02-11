@@ -8,10 +8,9 @@ import SwiperCore, { Navigation, Pagination, A11y } from "swiper";
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
-import { ToastContainer, toast } from "react-toastify";
+import { notifyAdd, notifyRemove } from "../toast";
 import "react-toastify/dist/ReactToastify.css";
 
-toast.configure();
 SwiperCore.use([Navigation, Pagination, A11y]);
 
 const Fridge = (props) => {
@@ -37,28 +36,7 @@ const Fridge = (props) => {
   const removeActiveIng = (singleIngredient) => {
     setActiveIng(activeIng.filter((item) => item !== singleIngredient));
   };
-  const notifyAdd = () => {
-    toast.success(`🔪  Successfully added`, {
-      position: "bottom-right",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
-  const notifyRemove = () => {
-    toast.error(`🔪  Removed from board!`, {
-      position: "bottom-right",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
+
   return (
     <>
       <div className="fridge-animation-area">

@@ -21,6 +21,9 @@ import silverwareForkKnife from "@iconify-icons/mdi/silverware-fork-knife";
 import barcodeScan from "@iconify-icons/mdi/barcode-scan";
 import cameraIcon from "@iconify-icons/mdi/camera";
 import offIcon from "@iconify-icons/el/off";
+import { notifyDuplicate, notifyImgError } from "../toast";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const NavBar = (props) => {
   const { register, handleSubmit } = useForm();
@@ -53,13 +56,13 @@ const NavBar = (props) => {
         if (!props.ingredients.includes(data.category.name)) {
           props.addIngredient(props.user, data.category.name);
         } else {
-          window.alert("Item already exist in fridge");
+          notifyDuplicate()
         }
         if (data) upload.ref.delete();
         history.push("/fridge");
       }
     } catch (error) {
-      window.alert("Image was not recognized");
+      notifyImgError();
       console.error(error.message);
     }
   };
