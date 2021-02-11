@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Mansalva&display=swap");
 
 .title {
-  color: #fff;
+  color: rgb(34, 34, 34);
   font-size: 70px;
   font-family: "Mansalva", cursive;
 }
@@ -16,7 +16,7 @@
   background-color: transparent;
 }
 .animation-area {
-  background: linear-gradient(to left, #fdc500, rgb(0, 179, 170));
+  background: linear-gradient(to left, rgb(239, 255, 250), rgb(242, 207, 212));
   width: 100%;
   height: 90vh;
 }
