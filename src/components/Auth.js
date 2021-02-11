@@ -1,15 +1,29 @@
+<<<<<<< HEAD
 import { authService, firebaseInstance } from '../fbase';
 import React, { useState, useEffect } from 'react';
 import '../styles/authstyle.css';
 import signinBG from '../styles/images/signinNoBG.png';
 import preppyLogo from '../styles/images/PreppyLogoFinal.png';
 import loginImg from '../styles/images/login.png';
+=======
+import { authService, firebaseInstance } from "../fbase";
+import React, { useState, useEffect } from "react";
+import "../styles/authstyle.css";
+import signinBG from "../styles/images/signinNoBG.png";
+import preppyLogo from "../styles/images/PreppyLogoFinal.png";
+import loginImg from "../styles/images/login.png";
+import { Alert } from "@material-ui/lab";
+>>>>>>> FE: styled login,fridge,recipe views and added error messages to login/signup
 
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newAccount, setNewAccount] = useState(false);
+<<<<<<< HEAD
   const [error, setError] = useState('');
+=======
+  const [error, setError] = useState(null);
+>>>>>>> FE: styled login,fridge,recipe views and added error messages to login/signup
 
   const onChange = (evt) => {
     const {
@@ -30,7 +44,22 @@ const Auth = () => {
         await authService.signInWithEmailAndPassword(email, password);
       }
     } catch (error) {
-      setError(error.message);
+      if (
+        error.message ===
+        "The password is invalid or the user does not have a password."
+      ) {
+        setError("Invalid password. Please try again.");
+      } else if (
+        error.message ===
+        "There is no user record corresponding to this identifier. The user may have been deleted."
+      ) {
+        setError("User account does not exist");
+      } else if (
+        error.message ===
+        "The email address is already in use by another account."
+      ) {
+        setError("Email address already in use");
+      } else setError(error.message);
     }
   };
 
@@ -44,8 +73,14 @@ const Auth = () => {
   };
 
   const reset = () => {
+<<<<<<< HEAD
     setEmail('');
     setPassword('');
+=======
+    setEmail("");
+    setPassword("");
+    setError(null);
+>>>>>>> FE: styled login,fridge,recipe views and added error messages to login/signup
     setNewAccount(!newAccount);
   };
 
@@ -67,6 +102,11 @@ const Auth = () => {
       <div className="forms-container">
         <div className="signin-signup">
           <form onSubmit={onSubmit} className="sign-in-form">
+            {error ? (
+              <Alert severity="error" style={{ margin: 10 }}>
+                {error}
+              </Alert>
+            ) : null}
             <h2 className="auth-title">
               <img className="preppy-logo" src={preppyLogo} alt="Preppy" />
               Log In
@@ -82,7 +122,6 @@ const Auth = () => {
                 onChange={onChange}
               />
             </div>
-            <span>{error}</span>
             <div className="input-field">
               <i className="fas fa-lock"></i>
               <input
@@ -100,9 +139,7 @@ const Auth = () => {
               className="btn solid"
               required
             />
-            <p className="social-text">Or Sign in with Google</p>
-          </form>
-          <div className="social-media">
+            <p className="social-text">Sign in with Google</p>
             <button
               className="social-icon"
               name="google"
@@ -110,8 +147,14 @@ const Auth = () => {
             >
               <i className="fab fa-google" />
             </button>
-          </div>
+          </form>
+          {/* <div className="social-media"></div> */}
           <form onSubmit={onSubmit} className="sign-up-form" value="signup">
+            {error ? (
+              <Alert severity="error" style={{ margin: 10 }}>
+                {error}
+              </Alert>
+            ) : null}
             <h2 className="auth-title">
               <img className="preppy-logo" src={preppyLogo} alt="Preppy" />
               Sign Up
@@ -127,7 +170,6 @@ const Auth = () => {
                 onChange={onChange}
               />
             </div>
-            <span>{error}</span>
             <div className="input-field">
               <i className="fas fa-lock"></i>
               <input

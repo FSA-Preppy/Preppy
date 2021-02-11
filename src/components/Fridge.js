@@ -9,8 +9,11 @@ import SwiperCore, { Navigation, Pagination, A11y } from "swiper";
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
+<<<<<<< HEAD
 import { notifyAdd, notifyRemove } from "../toast";
 import "react-toastify/dist/ReactToastify.css";
+=======
+>>>>>>> FE: styled login,fridge,recipe views and added error messages to login/signup
 
 SwiperCore.use([Navigation, Pagination, A11y]);
 
@@ -72,8 +75,7 @@ const Fridge = (props) => {
                                     <button
                                       className="fridge-button"
                                       onClick={() =>
-                                        {removeActiveIng(singleIngredient);
-                                        notifyRemove()}
+                                        removeActiveIng(singleIngredient)
                                       }
                                     >
                                       Remove from board
@@ -83,7 +85,6 @@ const Fridge = (props) => {
                                       className="fridge-button"
                                       onClick={() => {
                                         settingActiveIng(singleIngredient);
-                                        notifyAdd();
                                       }}
                                     >
                                       Add to board
@@ -119,11 +120,15 @@ const Fridge = (props) => {
                           className="get-recipe-button"
 
                           style={{ display: "none" }}
+<<<<<<< HEAD
                           onClick={() => {
                             formatNames(activeIng);
                             
                           }}
 
+=======
+                          onClick={() => formatNames(activeIng)}
+>>>>>>> FE: styled login,fridge,recipe views and added error messages to login/signup
                         >
                           Get Recipes!
                         </button>
