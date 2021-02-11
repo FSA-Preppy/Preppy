@@ -85,15 +85,13 @@ const Search = (props) => {
       }
     } catch (error) {
       notifyBarcodeError();
-        }
-      }
-    } 
       Quagga.offDetected();
       Quagga.stop();
       getBarCode();
       console.log('error returning product via upc', error);
     }
   }
+
 
   return (
     <>
@@ -109,7 +107,7 @@ const Search = (props) => {
       </div>
     </>
   );
-};
+}
 
 const mapState = (state) => {
   return {
