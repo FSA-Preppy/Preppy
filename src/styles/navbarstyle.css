@@ -10,18 +10,6 @@
 .navbar-icon {
   height: 45px;
   width: 45px;
-  color: rgb(58, 59, 50);
-  padding-right: 10px;
-  padding-left: 10px;
-  margin-left: 15px;
-  margin-right: 15px;
-  background-color: #fdc500;
-  border-radius: 50%;
-  z-index: 10;
-}
-.navbar-icon:hover {
-  height: 45px;
-  width: 45px;
   color: #fdc500;
   padding-right: 10px;
   padding-left: 10px;
@@ -29,8 +17,28 @@
   margin-right: 15px;
   background-color: rgb(58, 59, 50);
   border-radius: 50%;
+  z-index: 10;
+}
+.navbar-icon:hover {
+  height: 45px;
+  width: 45px;
+  color: #ffc800;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+  background-color: rgb(34, 34, 34);
+  box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 3px #fff;
+  border-radius: 50%;
   transition: 0.3s ease-in-out;
 }
+
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width: 540px) {
   .link {
     height: 57px;
@@ -41,11 +49,11 @@
   .navbar-icon {
     height: 43px;
     width: 43px;
-    color: rgb(58, 59, 50);
+    color: #fdc500;
     padding-right: 7px;
     padding-left: 7px;
     margin: 15px;
-    background-color: #fdc500;
+    background-color: rgb(58, 59, 50);
     border-radius: 50%;
   }
   .navbar-icon:hover {
@@ -55,7 +63,8 @@
     padding-right: 7px;
     padding-left: 7px;
     margin: 15px;
-    background-color: rgb(58, 59, 50);
+    background-color: rgb(34, 34, 34);
+    box-shadow: 0 0 5px #fff, 0 0 15px #fff, 0 0 2px #fff;
     border-radius: 50%;
     transition: 0.3s ease-in-out;
   }
@@ -71,11 +80,11 @@
   .navbar-icon {
     height: 43px;
     width: 43px;
-    color: rgb(58, 59, 50);
+    color: #fdc500;
     padding-right: 7px;
     padding-left: 7px;
     margin: 15px;
-    background-color: #fdc500;
+    background-color: rgb(58, 59, 50);
     border-radius: 50%;
   }
 
@@ -86,7 +95,8 @@
     padding-right: 7px;
     padding-left: 7px;
     margin: 15px;
-    background-color: rgb(58, 59, 50);
+    background-color: rgb(34, 34, 34);
+    box-shadow: 0 0 5px #fff, 0 0 15px #fff, 0 0 2px #fff;
     border-radius: 50%;
     transition: 0.3s ease-in-out;
   }
@@ -102,11 +112,11 @@
   .navbar-icon {
     height: 35px;
     width: 35px;
-    color: rgb(58, 59, 50);
+    color: #fdc500;
     padding-right: 7px;
     padding-left: 7px;
     margin: 10px;
-    background-color: #fdc500;
+    background-color: rgb(58, 59, 50);
     border-radius: 50%;
   }
 
@@ -117,7 +127,8 @@
     padding-right: 7px;
     padding-left: 7px;
     margin: 10px;
-    background-color: rgb(58, 59, 50);
+    background-color: rgb(34, 34, 34);
+    box-shadow: 0 0 5px #fff, 0 0 15px #fff, 0 0 2px #fff;
     border-radius: 50%;
     transition: 0.3s ease-in-out;
     cursor: pointer;
