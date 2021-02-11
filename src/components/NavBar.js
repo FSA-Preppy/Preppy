@@ -60,7 +60,7 @@ const NavBar = (props) => {
 
   return (
     <div className="navbar-container">
-      <label htmlFor="videoFile" className="link">
+      <label htmlFor="videoFile" className="link" style={{ cursor: "pointer" }}>
         <input
           onChange={handleSubmit(onFileChange)}
           ref={register}
