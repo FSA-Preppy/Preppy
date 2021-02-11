@@ -1,13 +1,17 @@
 import axios from "axios";
-import { recipeAPIKey } from "../config/edamamAPI"
-const GET_RECIPE = "GET_RECIPE";
+import { recipeAPIKey } from "../config/edamamAPI";
+
+const GET_RECIPES = "GET_RECIPES";
+const REMOVE_RECIPES = "REMOVE_RECIPES";
 
 const getRecipe = (recipes) => {
   return {
-    type: GET_RECIPE,
+    type: GET_RECIPES,
     recipes,
   };
 };
+
+export const removeRecipes = () => ({ type: REMOVE_RECIPES });
 
 export const addRecipeThunk = (userId, productList, history) => {
   return async (dispatch) => {
@@ -15,7 +19,7 @@ export const addRecipeThunk = (userId, productList, history) => {
       let fullQuery = "";
       let searchPrefix = `https://api.edamam.com/search?q=`;
       let searchAppend = "";
-      let searchKeys = `&app_id=ee8d7e3a&app_key=${recipeAPIKey}&from=0&to=4`
+      let searchKeys = `&app_id=ee8d7e3a&app_key=${recipeAPIKey}&from=0&to=4`;
 
       for (let i = 0; i < productList.length; i++) {
         searchAppend += `${productList[i]}+`;
@@ -58,8 +62,10 @@ let initialState = [];
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_RECIPE:
+    case GET_RECIPES:
       return action.recipes;
+    case REMOVE_RECIPES:
+      return [];
     default:
       return state;
   }

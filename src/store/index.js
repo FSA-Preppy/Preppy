@@ -6,7 +6,7 @@ import ingredients, {
   addIngredientThunk,
   deleteIngredientThunk,
 } from "./ingredients";
-import recipes, { addRecipeThunk } from "./recipe";
+import recipes, { addRecipeThunk, removeRecipes } from "./recipe";
 import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -31,5 +31,6 @@ export {
   deleteIngredientThunk,
   removeIngredients,
   addRecipeThunk,
+  removeRecipes,
 };
 export default store;
