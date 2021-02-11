@@ -1,6 +1,6 @@
 
 import { dbService } from "../fbase";
-import { notifyAdd, notifyDelete} from "../toast";
+import { notifyAddFridge, notifyDelete} from "../toast";
 import "react-toastify/dist/ReactToastify.css";
 
 const GET_INGREDIENTS = 'GET_INGREDIENTS';
@@ -57,7 +57,7 @@ export const fetchIngredients = (userId) => {
 export const addIngredientThunk = (userId, ingredient) => {
   return async (dispatch) => {
     try {
-      notifyAdd()
+      notifyAddFridge()
       await dbService.collection('ingredients').add({
         name: ingredient,
         createdAt: Date.now(),
