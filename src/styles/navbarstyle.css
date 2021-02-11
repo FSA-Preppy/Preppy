@@ -4,7 +4,8 @@
   flex-direction: row;
   align-items: center;
   height: 10vh;
-  background: linear-gradient(to right, rgb(0, 179, 170), rgb(0, 121, 115));
+  background: linear-gradient(to right, #fdc500, #fdc500);
+  z-index: 10;
 }
 .navbar-icon {
   height: 45px;
@@ -16,6 +17,7 @@
   margin-right: 15px;
   background-color: #fdc500;
   border-radius: 50%;
+  z-index: 10;
 }
 .navbar-icon:hover {
   height: 45px;
@@ -118,5 +120,6 @@
     background-color: rgb(58, 59, 50);
     border-radius: 50%;
     transition: 0.3s ease-in-out;
+    cursor: pointer;
   }
 } ;

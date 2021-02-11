@@ -9,7 +9,7 @@ const Recipe = (props) => {
     <>
       <div className="animation-area">
         <div className="header-container">
-          <h1 className="title">RECIPES</h1>
+          <h1 className="title">Recipes</h1>
         </div>
 
         <>

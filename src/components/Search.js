@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { addIngredientThunk } from "../store/index";
 import "../styles/searchstyle.css";
-import {edamamAPIKey} from "../config/edamamAPI";
+import { edamamAPIKey } from "../config/edamamAPI";
 //todo, replace axios calls with thunks; manually add items(possibly with autocomplete via an); add items using returned barcode information
 
 const Search = (props) => {
@@ -86,7 +86,7 @@ const Search = (props) => {
     <>
       <div className="search-main-container">
         <div className="search-header-container">
-          <h1 className="search-title">SCANNER</h1>
+          <h1 className="search-title">Scanner</h1>
         </div>
         <div>
           <header className="scan-header">

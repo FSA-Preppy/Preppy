@@ -1,13 +1,20 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import "../styles/fridgestyle.css";
 import { deleteIngredientThunk, addRecipeThunk } from "../store";
 import { useHistory } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Navigation, Pagination, A11y } from "swiper";
+import "swiper/swiper.scss";
+import "swiper/components/navigation/navigation.scss";
+import "swiper/components/pagination/pagination.scss";
+
+SwiperCore.use([Navigation, Pagination, A11y]);
 
 const Fridge = (props) => {
   const { deleteIngredient, user, ingredients, addRecipes } = props;
   const [activeIng, setActiveIng] = useState([]);
-  let history = useHistory()
+  let history = useHistory();
   async function formatNames(activeIngredients) {
     let productList = [];
     let name = "";
@@ -15,9 +22,9 @@ const Fridge = (props) => {
       name = activeIngredients[i].replaceAll(" ", "+");
       productList.push(name);
     }
-    const output = await addRecipes(user, productList, history)
+    const output = await addRecipes(user, productList, history);
     console.log(output);
-    if(output) setActiveIng([]);
+    if (output) setActiveIng([]);
   }
 
   const settingActiveIng = (singleIngredient) => {
@@ -32,49 +39,113 @@ const Fridge = (props) => {
     <>
       <div className="fridge-animation-area">
         <div className="fridge-header-container">
-          <h1 className="fridge-title">FRIDGE</h1>
+          <h1 className="fridge-title">Fridge</h1>
         </div>
         <div>
           <div>
             <ul className="fridge-box-area">
-              <button disabled={!activeIng.length} onClick={() => formatNames(activeIng)}>
-                Get Recipes!
-              </button>
-              {ingredients.map((singleIngredient, idx) => {
-                return (
-                  <Fragment key={idx}>
-                    <div>{singleIngredient}</div>
-                    {activeIng.includes(singleIngredient) ? (
-                      <button onClick={() => removeActiveIng(singleIngredient)}>
-                        Remove from board
-                      </button>
+              <div className="fridge-btn-container">
+                <div className="single-ingredient-box">
+                  <div className="fridge-swiper-container">
+                    <div className="fridge-swiper-wrapper">
+                      <Swiper
+                        effect="fade"
+                        spaceBetween={0}
+                        slidesPerView={1}
+                        pagination={{ clickable: true }}
+                      >
+                        {ingredients.map((singleIngredient, idx) => {
+                          return (
+                            <SwiperSlide className="single-ingredient-swiper-wrapper">
+                              <div className="single-ingredient-container">
+                                <div className="fridge-left-panel">
+                                  <div className="ingredient-name">
+                                    {singleIngredient.split("_").join(" ")}
+                                  </div>
+                                  {activeIng.includes(singleIngredient) ? (
+                                    <button
+                                      className="fridge-button"
+                                      onClick={() =>
+                                        removeActiveIng(singleIngredient)
+                                      }
+                                    >
+                                      Remove from board
+                                    </button>
+                                  ) : (
+                                    <button
+                                      className="fridge-button"
+                                      onClick={() => {
+                                        settingActiveIng(singleIngredient);
+                                      }}
+                                    >
+                                      Add to board
+                                    </button>
+                                  )}
+                                  <button
+                                    className="fridge-button"
+                                    onClick={() => {
+                                      removeActiveIng(singleIngredient);
+                                      deleteIngredient(user, singleIngredient);
+                                    }}
+                                  >
+                                    Remove
+                                  </button>
+                                </div>
+                              </div>
+                            </SwiperSlide>
+                          );
+                        })}
+                      </Swiper>
+                    </div>
+                  </div>
+                </div>
+                <div className="get-recipe-box">
+                  <div className="get-recipe-container">
+                    {!activeIng.length ? (
+                      <>
+                        <div id="recipe-notice">
+                          WANT <strong id="preppy">PREPPY</strong> RECIPES?
+                          <br></br>ADD INGREDIENTS TO THE BOARD!
+                        </div>
+                        <button
+                          className="get-recipe-button"
+                          style={{ display: "none" }}
+                          onClick={() => formatNames(activeIng)}
+                        >
+                          Get Recipes!
+                        </button>
+                      </>
                     ) : (
                       <button
-                        onClick={() => {
-                          settingActiveIng(singleIngredient);
-                        }}
+                        className="get-recipe-button"
+                        onClick={() => formatNames(activeIng)}
                       >
-                        Add to board
+                        Get Recipes!
                       </button>
                     )}
-                    <button
-                      onClick={() => {
-                        removeActiveIng(singleIngredient);
-                        deleteIngredient(user, singleIngredient);
-                      }}
-                    >
-                      delete
-                    </button>
-                  </Fragment>
-                );
-              })}
-              {/* css animation boxes */}
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
+                    <div>
+                      {activeIng.map((ingredient) => {
+                        return (
+                          <div className="recipe-ingredient-name">
+                            {ingredient.split("_").join(" ")}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* background css animation boxes */}
+              <li className="fas fa-hamburger"></li>
+              <li className="fas fa-fish"></li>
+              <li className="fas fa-drumstick-bite"></li>
+              <li className="fas fa-lemon"></li>
+              <li className="fas fa-pizza-slice"></li>
+              <li className="fas fa-carrot"></li>
+              <li className="fas fa-cheese"></li>
+              <li className="fas fa-ice-cream"></li>
+              <li className="fas fa-cookie"></li>
+              {/* background css animation boxes */}
             </ul>
           </div>
         </div>

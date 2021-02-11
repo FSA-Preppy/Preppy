@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mansalva&display=swap");
 
 #scanner {
   display: flex;
@@ -14,7 +15,7 @@ video {
 .search-title {
   color: #fff;
   font-size: 70px;
-  font-family: "Gochi Hand", cursive;
+  font-family: "Mansalva", cursive;
 }
 
 .search-header-container {
