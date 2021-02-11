@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { recipeAPIKey } from '../config/edamamAPI';
+import { notifyFetchError, notifyRecipeError } from "../toast"
 
 const GET_RECIPES = 'GET_RECIPES';
 const REMOVE_RECIPES = 'REMOVE_RECIPES';
@@ -32,7 +33,7 @@ export const addRecipeThunk = (userId, productList, history) => {
       );
       const { data } = await axios.get(fullQuery);
       if (data.hits.length === 0) {
-        alert('No recipes are found. Please use other ingredients');
+        notifyRecipeError();
         return true;
       }
       let array = [];
@@ -50,7 +51,7 @@ export const addRecipeThunk = (userId, productList, history) => {
       dispatch(getRecipe(array));
       history.push('/recipe');
     } catch (err) {
-      window.alert('Unable to fetch recipes. Please try again');
+      notifyFetchError();
       console.error(err.message);
     }
   };
