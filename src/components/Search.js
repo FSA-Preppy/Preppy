@@ -6,6 +6,8 @@ import { addIngredientThunk } from "../store/index";
 import "../styles/searchstyle.css";
 import { edamamAPIKey } from "../config/edamamAPI";
 //todo, replace axios calls with thunks; manually add items(possibly with autocomplete via an); add items using returned barcode information
+import { notifyDuplicate, notifyBarcodeError } from "../toast";
+import "react-toastify/dist/ReactToastify.css";
 
 const Search = (props) => {
   useEffect(() => {
@@ -70,11 +72,11 @@ const Search = (props) => {
           console.log("user-->", user);
           await props.addIngredient(user, product);
         } else {
-          window.alert("Item already exist in fridge");
+          notifyDuplicate();
         }
       }
     } catch (error) {
-      window.alert("Barcode was not recognized");
+      notifyBarcodeError();
       Quagga.offDetected();
       Quagga.stop();
       getBarCode();

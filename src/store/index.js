@@ -10,6 +10,8 @@ import recipes, { addRecipeThunk, removeRecipes } from "./recipe";
 import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const reducer = combineReducers({
   user,
