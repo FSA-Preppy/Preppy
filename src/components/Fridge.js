@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import "../styles/fridgestyle.css";
@@ -20,9 +19,9 @@ const Fridge = (props) => {
   let history = useHistory();
   async function formatNames(activeIngredients) {
     let productList = [];
-    let name = '';
+    let name = "";
     for (let i = 0; i < activeIngredients.length; i++) {
-      name = activeIngredients[i].replaceAll(' ', '+');
+      name = activeIngredients[i].replaceAll(" ", "+");
       productList.push(name);
     }
     const output = await addRecipes(user, productList, history);
@@ -66,14 +65,13 @@ const Fridge = (props) => {
                               <div className="single-ingredient-container">
                                 <div className="fridge-left-panel">
                                   <div className="ingredient-name">
-                                    {singleIngredient.split('_').join(' ')}
+                                    {singleIngredient.split("_").join(" ")}
                                   </div>
                                   {activeIng.includes(singleIngredient) ? (
                                     <button
                                       className="fridge-button"
                                       onClick={() =>
-                                        {removeActiveIng(singleIngredient);
-                                        notifyRemove()}
+                                        removeActiveIng(singleIngredient)
                                       }
                                     >
                                       Remove from board
@@ -83,7 +81,6 @@ const Fridge = (props) => {
                                       className="fridge-button"
                                       onClick={() => {
                                         settingActiveIng(singleIngredient);
-                                        notifyAdd();
                                       }}
                                     >
                                       Add to board
@@ -117,13 +114,10 @@ const Fridge = (props) => {
                         </div>
                         <button
                           className="get-recipe-button"
-
                           style={{ display: "none" }}
                           onClick={() => {
                             formatNames(activeIng);
-                            
                           }}
-
                         >
                           Get Recipes!
                         </button>
@@ -140,7 +134,7 @@ const Fridge = (props) => {
                       {activeIng.map((ingredient, idx) => {
                         return (
                           <div key={idx} className="recipe-ingredient-name">
-                            {ingredient.split('_').join(' ')}
+                            {ingredient.split("_").join(" ")}
                           </div>
                         );
                       })}
