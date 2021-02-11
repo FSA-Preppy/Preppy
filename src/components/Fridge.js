@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import "../styles/fridgestyle.css";
@@ -8,6 +9,7 @@ import SwiperCore, { Navigation, Pagination, A11y } from "swiper";
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
+import { notifyAdd, notifyRemove } from "../toast";
 
 SwiperCore.use([Navigation, Pagination, A11y]);
 
@@ -17,9 +19,9 @@ const Fridge = (props) => {
   let history = useHistory();
   async function formatNames(activeIngredients) {
     let productList = [];
-    let name = "";
+    let name = '';
     for (let i = 0; i < activeIngredients.length; i++) {
-      name = activeIngredients[i].replaceAll(" ", "+");
+      name = activeIngredients[i].replaceAll(' ', '+');
       productList.push(name);
     }
     const output = await addRecipes(user, productList, history);
@@ -56,11 +58,14 @@ const Fridge = (props) => {
                       >
                         {ingredients.map((singleIngredient, idx) => {
                           return (
-                            <SwiperSlide className="single-ingredient-swiper-wrapper">
+                            <SwiperSlide
+                              key={idx}
+                              className="single-ingredient-swiper-wrapper"
+                            >
                               <div className="single-ingredient-container">
                                 <div className="fridge-left-panel">
                                   <div className="ingredient-name">
-                                    {singleIngredient.split("_").join(" ")}
+                                    {singleIngredient.split('_').join(' ')}
                                   </div>
                                   {activeIng.includes(singleIngredient) ? (
                                     <button
@@ -124,10 +129,10 @@ const Fridge = (props) => {
                       </button>
                     )}
                     <div>
-                      {activeIng.map((ingredient) => {
+                      {activeIng.map((ingredient, idx) => {
                         return (
-                          <div className="recipe-ingredient-name">
-                            {ingredient.split("_").join(" ")}
+                          <div key={idx} className="recipe-ingredient-name">
+                            {ingredient.split('_').join(' ')}
                           </div>
                         );
                       })}

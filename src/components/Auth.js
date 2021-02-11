@@ -6,9 +6,9 @@ import preppyLogo from "../styles/images/PreppyLogoFinal.png";
 import loginImg from "../styles/images/login.png";
 import { Alert } from "@material-ui/lab";
 
-const Auth = (props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Auth = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [newAccount, setNewAccount] = useState(false);
   const [error, setError] = useState(null);
 
@@ -16,27 +16,19 @@ const Auth = (props) => {
     const {
       target: { name, value },
     } = evt;
-    if (name === "email") setEmail(value);
-    else if (name === "password") setPassword(value);
+    if (name === 'email') setEmail(value);
+    else if (name === 'password') setPassword(value);
   };
 
   const onSubmit = async (evt) => {
     try {
       evt.preventDefault();
-      console.log("props-->", props);
-      const {
-        target: { value },
-      } = evt;
 
-      let data;
       if (newAccount) {
         //If the new account was created, the user is signed in automatically.
-        data = await authService.createUserWithEmailAndPassword(
-          email,
-          password
-        );
+        await authService.createUserWithEmailAndPassword(email, password);
       } else {
-        data = await authService.signInWithEmailAndPassword(email, password);
+        await authService.signInWithEmailAndPassword(email, password);
       }
     } catch (error) {
       if (
@@ -76,14 +68,14 @@ const Auth = (props) => {
 
   //CSS related functions*****
   useEffect(() => {
-    const sign_in_btn = document.querySelector("#sign-in-btn");
-    const sign_up_btn = document.querySelector("#sign-up-btn");
-    const container = document.querySelector(".container");
-    sign_up_btn.addEventListener("click", () => {
-      container.classList.add("sign-up-mode");
+    const sign_in_btn = document.querySelector('#sign-in-btn');
+    const sign_up_btn = document.querySelector('#sign-up-btn');
+    const container = document.querySelector('.container');
+    sign_up_btn.addEventListener('click', () => {
+      container.classList.add('sign-up-mode');
     });
-    sign_in_btn.addEventListener("click", () => {
-      container.classList.remove("sign-up-mode");
+    sign_in_btn.addEventListener('click', () => {
+      container.classList.remove('sign-up-mode');
     });
   });
 

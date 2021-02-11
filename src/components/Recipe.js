@@ -1,6 +1,6 @@
-import React from "react";
-import { connect } from "react-redux";
-import "../styles/recipestyle.css";
+import React from 'react';
+import { connect } from 'react-redux';
+import '../styles/recipestyle.css';
 
 const Recipe = (props) => {
   const { recipes } = props;
@@ -18,8 +18,9 @@ const Recipe = (props) => {
               return (
                 <li key={recipe.id}>
                   <img
+                    alt={recipe.name}
                     src={recipe.image}
-                    style={{ height: "10rem", width: "12rem" }}
+                    style={{ height: '10rem', width: '12rem' }}
                   />
                   <br></br>
                   <a href={recipe.url}>{recipe.name}</a>

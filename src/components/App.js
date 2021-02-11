@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from "react";
-import Routes from "./Routes";
-import { authService } from "../fbase";
-import { connect } from "react-redux";
-import { setUser, fetchIngredients } from "../store";
+import React, { useState, useEffect } from 'react';
+import Routes from './Routes';
+import { authService } from '../fbase';
+import { connect } from 'react-redux';
+import { setUser, fetchIngredients } from '../store';
 
 function App(props) {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { setUser, getIngredients } = props;
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
         setIsLoggedIn(true);
-        props.setUser(user.uid);
-        props.getIngredients(user.uid);
+        setUser(user.uid);
+        getIngredients(user.uid);
       } else setIsLoggedIn(false);
       setInit(true);
     });
