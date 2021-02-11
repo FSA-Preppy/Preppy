@@ -4,12 +4,13 @@ import "../styles/authstyle.css";
 import signinBG from "../styles/images/signinNoBG.png";
 import preppyLogo from "../styles/images/PreppyLogoFinal.png";
 import loginImg from "../styles/images/login.png";
+import { Alert } from "@material-ui/lab";
 
 const Auth = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
 
   const onChange = (evt) => {
     const {
@@ -38,7 +39,22 @@ const Auth = (props) => {
         data = await authService.signInWithEmailAndPassword(email, password);
       }
     } catch (error) {
-      setError(error.message);
+      if (
+        error.message ===
+        "The password is invalid or the user does not have a password."
+      ) {
+        setError("Invalid password. Please try again.");
+      } else if (
+        error.message ===
+        "There is no user record corresponding to this identifier. The user may have been deleted."
+      ) {
+        setError("User account does not exist");
+      } else if (
+        error.message ===
+        "The email address is already in use by another account."
+      ) {
+        setError("Email address already in use");
+      } else setError(error.message);
     }
   };
 
@@ -54,6 +70,7 @@ const Auth = (props) => {
   const reset = () => {
     setEmail("");
     setPassword("");
+    setError(null);
     setNewAccount(!newAccount);
   };
 
@@ -75,6 +92,11 @@ const Auth = (props) => {
       <div className="forms-container">
         <div className="signin-signup">
           <form onSubmit={onSubmit} className="sign-in-form">
+            {error ? (
+              <Alert severity="error" style={{ margin: 10 }}>
+                {error}
+              </Alert>
+            ) : null}
             <h2 className="auth-title">
               <img className="preppy-logo" src={preppyLogo} alt="Preppy" />
               Log In
@@ -90,7 +112,6 @@ const Auth = (props) => {
                 onChange={onChange}
               />
             </div>
-            <span>{error}</span>
             <div className="input-field">
               <i className="fas fa-lock"></i>
               <input
@@ -108,9 +129,7 @@ const Auth = (props) => {
               className="btn solid"
               required
             />
-            <p className="social-text">Or Sign in with Google</p>
-          </form>
-          <div className="social-media">
+            <p className="social-text">Sign in with Google</p>
             <button
               className="social-icon"
               name="google"
@@ -118,8 +137,14 @@ const Auth = (props) => {
             >
               <i className="fab fa-google" />
             </button>
-          </div>
+          </form>
+          {/* <div className="social-media"></div> */}
           <form onSubmit={onSubmit} className="sign-up-form" value="signup">
+            {error ? (
+              <Alert severity="error" style={{ margin: 10 }}>
+                {error}
+              </Alert>
+            ) : null}
             <h2 className="auth-title">
               <img className="preppy-logo" src={preppyLogo} alt="Preppy" />
               Sign Up
@@ -135,7 +160,6 @@ const Auth = (props) => {
                 onChange={onChange}
               />
             </div>
-            <span>{error}</span>
             <div className="input-field">
               <i className="fas fa-lock"></i>
               <input

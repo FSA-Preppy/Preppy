@@ -12,7 +12,7 @@ const Recipe = (props) => {
           <h1 className="title">Recipes</h1>
         </div>
 
-        <>
+        <div>
           <ul>
             {recipes.map((recipe) => {
               return (
@@ -27,7 +27,7 @@ const Recipe = (props) => {
               );
             })}
           </ul>
-        </>
+        </div>
         {/* <ul className="box-area">
           <li></li>
           <li></li>
