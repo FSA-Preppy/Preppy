@@ -4,7 +4,12 @@ import { authService } from "../fbase";
 import { useForm } from "react-hook-form";
 import { storageService } from "../fbase";
 import axios from "axios";
-import { addIngredientThunk, removeUser, removeIngredients } from "../store";
+import {
+  addIngredientThunk,
+  removeUser,
+  removeIngredients,
+  removeRecipes,
+} from "../store";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import spoonacularAPIKey from "../config/spoonacularAPI";
@@ -25,6 +30,7 @@ const NavBar = (props) => {
     authService.signOut();
     props.removingUser();
     props.removingIngredients();
+    props.removeRecipes();
   };
 
   const onFileChange = async (data) => {
@@ -102,6 +108,7 @@ const mapDispatch = (dispatch) => {
       dispatch(addIngredientThunk(userId, ingredient)),
     removingUser: () => dispatch(removeUser()),
     removingIngredients: () => dispatch(removeIngredients()),
+    removeRecipes: () => dispatch(removeRecipes()),
   };
 };
 
