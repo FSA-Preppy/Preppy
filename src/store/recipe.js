@@ -1,8 +1,8 @@
-import axios from "axios";
-import { recipeAPIKey } from "../config/edamamAPI";
+import axios from 'axios';
+import { recipeAPIKey } from '../config/edamamAPI';
 
-const GET_RECIPES = "GET_RECIPES";
-const REMOVE_RECIPES = "REMOVE_RECIPES";
+const GET_RECIPES = 'GET_RECIPES';
+const REMOVE_RECIPES = 'REMOVE_RECIPES';
 
 const getRecipe = (recipes) => {
   return {
@@ -16,9 +16,9 @@ export const removeRecipes = () => ({ type: REMOVE_RECIPES });
 export const addRecipeThunk = (userId, productList, history) => {
   return async (dispatch) => {
     try {
-      let fullQuery = "";
+      let fullQuery = '';
       let searchPrefix = `https://api.edamam.com/search?q=`;
-      let searchAppend = "";
+      let searchAppend = '';
       let searchKeys = `&app_id=ee8d7e3a&app_key=${recipeAPIKey}&from=0&to=4`;
 
       for (let i = 0; i < productList.length; i++) {
@@ -32,7 +32,7 @@ export const addRecipeThunk = (userId, productList, history) => {
       );
       const { data } = await axios.get(fullQuery);
       if (data.hits.length === 0) {
-        alert("No recipes are found. Please use other ingredients");
+        alert('No recipes are found. Please use other ingredients');
         return true;
       }
       let array = [];
@@ -48,9 +48,9 @@ export const addRecipeThunk = (userId, productList, history) => {
         });
       }
       dispatch(getRecipe(array));
-      history.push("/recipe");
+      history.push('/recipe');
     } catch (err) {
-      window.alert("Unable to fetch recipes. Please try again");
+      window.alert('Unable to fetch recipes. Please try again');
       console.error(err.message);
     }
   };
@@ -58,9 +58,7 @@ export const addRecipeThunk = (userId, productList, history) => {
 
 let initialState = [];
 
-// eslint-disable-next-line import/no-anonymous-default-export
-
-export default (state = initialState, action) => {
+const recipeReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_RECIPES:
       return action.recipes;
@@ -70,3 +68,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default recipeReducer;

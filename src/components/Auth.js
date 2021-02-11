@@ -1,41 +1,33 @@
-import { authService, firebaseInstance } from "../fbase";
-import React, { useState, useEffect } from "react";
-import "../styles/authstyle.css";
-import signinBG from "../styles/images/signinNoBG.png";
-import preppyLogo from "../styles/images/PreppyLogoFinal.png";
-import loginImg from "../styles/images/login.png";
+import { authService, firebaseInstance } from '../fbase';
+import React, { useState, useEffect } from 'react';
+import '../styles/authstyle.css';
+import signinBG from '../styles/images/signinNoBG.png';
+import preppyLogo from '../styles/images/PreppyLogoFinal.png';
+import loginImg from '../styles/images/login.png';
 
-const Auth = (props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Auth = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [newAccount, setNewAccount] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const onChange = (evt) => {
     const {
       target: { name, value },
     } = evt;
-    if (name === "email") setEmail(value);
-    else if (name === "password") setPassword(value);
+    if (name === 'email') setEmail(value);
+    else if (name === 'password') setPassword(value);
   };
 
   const onSubmit = async (evt) => {
     try {
       evt.preventDefault();
-      console.log("props-->", props);
-      const {
-        target: { value },
-      } = evt;
 
-      let data;
       if (newAccount) {
         //If the new account was created, the user is signed in automatically.
-        data = await authService.createUserWithEmailAndPassword(
-          email,
-          password
-        );
+        await authService.createUserWithEmailAndPassword(email, password);
       } else {
-        data = await authService.signInWithEmailAndPassword(email, password);
+        await authService.signInWithEmailAndPassword(email, password);
       }
     } catch (error) {
       setError(error.message);
@@ -52,21 +44,21 @@ const Auth = (props) => {
   };
 
   const reset = () => {
-    setEmail("");
-    setPassword("");
+    setEmail('');
+    setPassword('');
     setNewAccount(!newAccount);
   };
 
   //CSS related functions*****
   useEffect(() => {
-    const sign_in_btn = document.querySelector("#sign-in-btn");
-    const sign_up_btn = document.querySelector("#sign-up-btn");
-    const container = document.querySelector(".container");
-    sign_up_btn.addEventListener("click", () => {
-      container.classList.add("sign-up-mode");
+    const sign_in_btn = document.querySelector('#sign-in-btn');
+    const sign_up_btn = document.querySelector('#sign-up-btn');
+    const container = document.querySelector('.container');
+    sign_up_btn.addEventListener('click', () => {
+      container.classList.add('sign-up-mode');
     });
-    sign_in_btn.addEventListener("click", () => {
-      container.classList.remove("sign-up-mode");
+    sign_in_btn.addEventListener('click', () => {
+      container.classList.remove('sign-up-mode');
     });
   });
 

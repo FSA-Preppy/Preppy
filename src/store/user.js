@@ -1,12 +1,10 @@
-import axios from "axios";
-
-const SET_USER = "SET_USER";
-const REMOVE_USER = "REMOVE_USER";
+const SET_USER = 'SET_USER';
+const REMOVE_USER = 'REMOVE_USER';
 
 export const setUser = (user) => ({ type: SET_USER, user });
 export const removeUser = () => ({ type: REMOVE_USER });
 
-export default function (state = {}, action) {
+const userReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_USER:
       return action.user;
@@ -15,4 +13,6 @@ export default function (state = {}, action) {
     default:
       return state;
   }
-}
+};
+
+export default userReducer;

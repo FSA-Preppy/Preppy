@@ -1,37 +1,45 @@
-import React, { useState, useEffect } from "react";
-import Quagga from "@ericblade/quagga2";
-import { connect } from "react-redux";
-import axios from "axios";
-import { addIngredientThunk } from "../store/index";
-import "../styles/searchstyle.css";
-import { edamamAPIKey } from "../config/edamamAPI";
+import React, { useState, useEffect } from 'react';
+import Quagga from '@ericblade/quagga2';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import { addIngredientThunk } from '../store/index';
+import '../styles/searchstyle.css';
+import { edamamAPIKey } from '../config/edamamAPI';
 //todo, replace axios calls with thunks; manually add items(possibly with autocomplete via an); add items using returned barcode information
 
 const Search = (props) => {
   useEffect(() => {
-    getBarCode();
+    let mounted = true;
+    if (mounted === true) {
+      getBarCode();
+    }
+    return function cleanup() {
+      Quagga.offDetected();
+      Quagga.stop();
+      mounted = false;
+    };
   }, []);
 
   const { user, ingredients } = props;
-  let [code, setCode] = useState("");
+  let [code, setCode] = useState('');
 
   function getBarCode() {
-    console.log("init starting");
+    console.log('init starting');
     Quagga.init(
       {
         inputStream: {
-          name: "Live",
-          type: "LiveStream",
-          target: document.getElementById("scanner"),
+          name: 'Live',
+          type: 'LiveStream',
+          target: document.getElementById('scanner'),
           constraints: {
             width: window.width,
             height: window.height,
-            facingMode: "environment",
+            facingMode: 'environment',
           },
           frequency: 1,
         },
         decoder: {
-          readers: ["upc_reader"],
+          readers: ['upc_reader'],
         },
         locate: false,
       },
@@ -40,7 +48,7 @@ const Search = (props) => {
           console.log(err);
           return;
         }
-        console.log("Initialization finished. Ready to start");
+        console.log('Initialization finished. Ready to start');
         Quagga.start();
       }
     );
@@ -48,7 +56,7 @@ const Search = (props) => {
       let returned = result.codeResult.code;
       setCode((code = returned));
       console.log(
-        "Barcode detected and processed : [" + code + typeof code + "]"
+        'Barcode detected and processed : [' + code + typeof code + ']'
       );
       Quagga.offDetected();
       Quagga.stop();
@@ -67,18 +75,18 @@ const Search = (props) => {
 
       if (product) {
         if (!ingredients.includes(product)) {
-          console.log("user-->", user);
+          console.log('user-->', user);
           await props.addIngredient(user, product);
         } else {
-          window.alert("Item already exist in fridge");
+          window.alert('Item already exist in fridge');
         }
       }
     } catch (error) {
-      window.alert("Barcode was not recognized");
+      window.alert('Barcode was not recognized');
       Quagga.offDetected();
       Quagga.stop();
       getBarCode();
-      console.log("error returning product via upc", error);
+      console.log('error returning product via upc', error);
     }
   }
 
