@@ -96,7 +96,6 @@
     padding-left: 7px;
     margin: 15px;
     background-color: rgb(34, 34, 34);
-    box-shadow: 0 0 5px #fff, 0 0 15px #fff, 0 0 2px #fff;
     border-radius: 50%;
     transition: 0.3s ease-in-out;
   }
@@ -128,7 +127,6 @@
     padding-left: 7px;
     margin: 10px;
     background-color: rgb(34, 34, 34);
-    box-shadow: 0 0 5px #fff, 0 0 15px #fff, 0 0 2px #fff;
     border-radius: 50%;
     transition: 0.3s ease-in-out;
     cursor: pointer;
