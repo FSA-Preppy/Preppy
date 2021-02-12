@@ -24,9 +24,6 @@ const LandingPage = () => {
         slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
-        onReachEnd={() => console.log("reached the end!")}
       >
         <SwiperSlide>
           <div className="image-container">

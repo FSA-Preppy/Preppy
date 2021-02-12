@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Mansalva&display=swap");
 
 .title {
   color: rgb(34, 34, 34);
   font-size: 70px;
-  font-family: "Mansalva", cursive;
+  font-family: "Architects Daughter", cursive;
+  text-decoration: underline;
 }
 
 .header-container {

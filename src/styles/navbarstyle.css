@@ -102,7 +102,7 @@
   }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 370px) {
   .link {
     height: 57px;
     display: flex;
