@@ -83,14 +83,14 @@
   font-size: 38px;
   color: rgb(81, 44, 5);
 }
-/* .fridge-box-area li:nth-child(5) {
+.fridge-box-area li:nth-child(5) {
   left: 80%;
   width: 50px;
   height: 190px;
   animation-delay: 0s;
   font-size: 40px;
   color: rgb(255, 153, 0);
-} */
+}
 .fridge-box-area li:nth-child(6) {
   left: 15%;
   width: 150px;
@@ -215,6 +215,7 @@
   flex-direction: column;
   height: 50%;
 }
+
 .ingredient-name {
   font-size: 14px;
   font-size: 6vw;
@@ -454,11 +455,10 @@
     align-items: flex-start;
   }
   .single-ingredient-container {
-    margin-right: 0px;
     height: 300px;
     display: flex;
     justify-content: flex-start;
-    margin-bottom: 400px;
+    margin: 600px 0 0 0;
     width: 100%;
   }
   .recipe-ingredient-name {
@@ -509,6 +509,6 @@
   }
   .single-ingredient-container {
     width: 400px;
-    margin-top: 555px;
+    margin: 555px 0 0 0;
   }
 }
