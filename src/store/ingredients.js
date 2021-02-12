@@ -60,7 +60,6 @@ export const addIngredientThunk = (userId, ingredient) => {
         createdAt: Date.now(),
         creatorId: userId,
       });
-      console.log("ingredient-->", ingredient);
       dispatch(addIngredients(ingredient));
     } catch (err) {
       console.error(err.message);
@@ -73,15 +72,12 @@ export const deleteIngredientThunk = (userId, ingredient) => {
     try {
       notifyDelete();
       console.log("deleteThunk fired");
-      await dbService.collection("ingredients").onSnapshot((snapshot) => {
-        snapshot.docs
-          .filter(
-            (doc) =>
-              doc.data().creatorId === userId && doc.data().name === ingredient
-          )
-          .map((item) => {
-            return dbService.doc(`ingredients/${item.id}`).delete();
-          });
+      const res = await dbService.collection("ingredients").get();
+
+      res.forEach((doc) => {
+        if (doc.data().creatorId === userId && doc.data().name === ingredient) {
+          dbService.collection(`ingredients`).doc(doc.id).delete();
+        }
       });
       dispatch(deleteIngredients(ingredient));
     } catch (err) {
