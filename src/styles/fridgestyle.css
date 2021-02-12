@@ -1,6 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Mansalva&display=swap");
-/* @import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+/* #root > div.animation-area > div:nth-child(2) {
+  overflow-y: scroll;
+  height: 84%;
+ }
+ #root > div.animation-area > div:nth-child(2) > ul {
+  text-align: center;
+ } */
 
 .fridge-title {
   color: rgb(34, 34, 34);
@@ -9,7 +15,6 @@
   text-decoration: underline;
   z-index: 1;
 }
-
 .fridge-header-container {
   font-size: 25px;
   display: flex;
@@ -35,8 +40,8 @@
   position: absolute;
   display: block;
   list-style: none;
-  width: 25px;
-  height: 25px;
+  width: 100px;
+  height: 100px;
   background: transparent;
   animation: animate 20s linear infinite;
   bottom: -150px;
@@ -78,14 +83,14 @@
   font-size: 38px;
   color: rgb(81, 44, 5);
 }
-.fridge-box-area li:nth-child(5) {
+/* .fridge-box-area li:nth-child(5) {
   left: 80%;
-  width: 210px;
+  width: 50px;
   height: 190px;
   animation-delay: 0s;
-  font-size: 80px;
+  font-size: 40px;
   color: rgb(255, 153, 0);
-}
+} */
 .fridge-box-area li:nth-child(6) {
   left: 15%;
   width: 150px;
@@ -121,81 +126,38 @@
   color: rgb(148, 89, 16);
 }
 
-.fridge-btn-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  height: 100vh;
+.fridge-swiper-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
 }
-.single-ingredient-name {
-  font-weight: bolder;
-  font-size: 30px;
-}
-.get-recipe-box {
+.fridge-swiper-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 50%;
+  /* height: 500px; */
+  /* margin-bottom: 100px; */
+  margin-left: 50px;
 }
-.single-ingredient-box {
+.get-recipe-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: unset;
+  width: 50%;
+  height: 680px;
+  margin-right: 50px;
 }
-.get-recipe-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  height: 75%;
-  z-index: 2;
-}
-.recipe-ingredient-name {
-  font-size: 30px;
-  color: rgb(26, 26, 26);
-  font-family: "Mansalva", cursive;
-}
-.single-ingredient-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50vh;
-  margin-bottom: 50px;
-}
-.fridge-left-panel {
+.get-recipe-title {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 50vh;
+  z-index: 1;
 }
-.fridge-button {
-  width: 200px;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  height: 30px;
-  border-radius: 49px;
-  color: rgb(58, 59, 50);
-  text-transform: uppercase;
-  font-weight: 600;
-  margin: 10px 0;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.fridge-button:hover {
-  width: 200px;
-  background-color: #fdc500;
-  outline: none;
-  height: 30px;
-  border-radius: 49px;
-  color: rgb(58, 59, 50);
-  text-transform: uppercase;
-  font-weight: 600;
-  margin: 10px 0;
-  cursor: pointer;
-}
-
 .get-recipe-button {
   width: 200px;
   background-color: #fff;
@@ -210,7 +172,6 @@
   cursor: pointer;
   font-size: 14px;
 }
-
 .get-recipe-button:hover {
   width: 200px;
   background-color: #fdc500;
@@ -222,72 +183,82 @@
   font-weight: 600;
   margin: 10px 0;
   cursor: pointer;
-  box-shadow: 0 0 20px #fff, 0 0 40px #fdc500, 0 0 5px #fdc500;
+  box-shadow: 0 0 20px rgb(174, 5, 5), 0 0 40px #fd7600, 0 0 20px #16be06;
   transition-delay: 0s;
 }
-.ingredient-name {
-  font-size: 100px;
-  font-weight: bolder;
-  font-family: "Mansalva", cursive;
-  color: rgb(34, 34, 34);
-  margin-bottom: 20px;
-  word-wrap: normal;
+.recipe-ingredient-name {
   text-align: center;
-}
-
-.fridge-swiper-container {
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-}
-.fridge-swiper-wrapper {
-  display: flex;
-  width: 50vw;
-  height: 50vh;
-  justify-content: center;
-  align-items: center;
-}
-.single-ingredient-swiper-wrapper {
-  display: flex;
-  width: 50vw;
-  height: 50vh;
-  justify-content: center;
-  align-items: center;
-}
-.notice-container {
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  width: 100%;
-  height: 100%;
+  font-size: 3vw;
+  color: rgb(26, 26, 26);
+  font-family: "Architects Daughter", cursive;
 }
 #recipe-notice {
   color: rgb(34, 34, 34);
-  font-size: 30px;
+  font-size: 2vw;
   text-align: center;
+  font-weight: lighter;
+  font-family: "Poppins", sans-serif;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 #preppy {
   font-size: 60px;
 }
-#root > div.animation-area > div:nth-child(2) {
-  overflow-y: scroll;
-  height: 84%;
+.single-ingredient-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 50%;
 }
-#root > div.animation-area > div:nth-child(2) > ul {
+.ingredient-name {
+  font-size: 14px;
+  font-size: 6vw;
+  font-weight: bolder;
+  font-weight: 900;
+  font-family: "Architects Daughter", cursive;
+  color: rgb(34, 34, 34);
+  word-wrap: normal;
   text-align: center;
 }
-@keyframes animate {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-1000px) rotate(360deg);
-    opacity: 1;
-  }
+.fridge-button {
+  width: 200px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  height: 30px;
+  border-radius: 49px;
+  color: rgb(58, 59, 50);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 5px 0;
+  cursor: pointer;
+  font-size: 14px;
 }
+.fridge-button:hover {
+  width: 200px;
+  background-color: #fdc500;
+  outline: none;
+  height: 30px;
+  border-radius: 49px;
+  color: rgb(58, 59, 50);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 5px 0;
+  cursor: pointer;
+  font-size: 14px;
+}
+
 @media (max-width: 1024px) {
+  .single-ingredient-container {
+    margin-right: 0px;
+    z-index: 4;
+  }
+
   .fridge-button {
     width: 200px;
     background-color: #fdc500;
@@ -298,407 +269,246 @@
     color: rgb(58, 59, 50);
     text-transform: uppercase;
     font-weight: 600;
-    margin: 10px 0;
+    margin: 5px 0;
     cursor: pointer;
     font-size: 14px;
   }
-  .fridge-button:hover {
-    width: 200px;
-    background-color: #fdc500;
-    border: none;
-    outline: none;
+  .fridge-animation-area {
+    background: linear-gradient(
+      to left,
+      rgb(242, 207, 212),
+      rgb(239, 255, 250)
+    );
+    width: 100%;
+    height: 90vh;
+  }
+  .fridge-box-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .fridge-box-area li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    animation: animate 10s linear infinite;
+    bottom: -150px;
+    z-index: 0;
+  }
+  .fridge-box-area li:nth-child(9) {
+    left: 77%;
+    width: 30px;
     height: 30px;
-    border-radius: 49px;
-    color: rgb(58, 59, 50);
-    text-transform: uppercase;
-    font-weight: 600;
-    margin: 10px 0;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  #recipe-notice {
-    font-size: 22px;
-    text-align: center;
-  }
-  .ingredient-name {
-    font-size: 80px;
-  }
-  .single-ingredient-swiper-wrapper {
-    display: flex;
-    width: 50vw;
-    height: 40vh;
-    justify-content: center;
-    align-items: center;
+    font-size: 40px;
+    animation-delay: 5s;
+    animation-duration: 15s;
+    color: rgb(195, 236, 245);
+    z-index: 0;
   }
 
-  .get-recipe-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    height: 75%;
-    z-index: 2;
-    margin-bottom: 100px;
-    margin-right: 50px;
+  .fridge-box-area li:nth-child(2) {
+    left: 69%;
+    width: 30px;
+    height: 30px;
+    animation-delay: 8s;
+    animation-duration: 15s;
+    font-size: 150px;
+    color: rgb(254, 152, 0);
+    z-index: 0;
+  }
+  .fridge-box-area li:nth-child(3) {
+    left: 20%;
+    width: 100px;
+    height: 100px;
+    animation-delay: 7s;
+    font-size: 44px;
+    color: rgb(3, 146, 96);
+    z-index: 0;
+  }
+  .fridge-box-area li:nth-child(4) {
+    left: 42%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 6s;
+    animation-duration: 15s;
+    font-size: 38px;
+    color: rgb(81, 44, 5);
+    z-index: 0;
+  }
+  .fridge-box-area li:nth-child(5) {
+    left: 80%;
+    width: 210px;
+    height: 190px;
+    animation-delay: 5s;
+    font-size: 80px;
+    color: rgb(255, 153, 0);
+    z-index: 0;
+  }
+  .fridge-box-area li:nth-child(6) {
+    left: 15%;
+    width: 150px;
+    height: 70px;
+    animation-delay: 4s;
+    font-size: 33px;
+    color: rgb(190, 10, 10);
+    z-index: 0;
+  }
+  .fridge-box-area li:nth-child(7) {
+    left: 10%;
+    width: 110px;
+    height: 90px;
+    animation-delay: 3s;
+    font-size: 140px;
+    color: rgb(255, 132, 0);
+    z-index: 0;
+  }
+  .fridge-box-area li:nth-child(8) {
+    left: 70%;
+    width: 50px;
+    height: 150px;
+    animation-duration: 17s;
+    animation-delay: 1s;
+    font-size: 110px;
+    color: rgb(255, 213, 0);
+    z-index: 0;
+  }
+  .fridge-box-area li:nth-child(10) {
+    left: 20%;
+    width: 200px;
+    height: 50px;
+    animation-duration: 10s;
+    animation-delay: 2s;
+    font-size: 70px;
+    color: rgb(148, 89, 16);
+    z-index: 0;
+  }
+  @keyframes animate {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-1400px) rotate(360deg);
+      opacity: 1;
+    }
   }
 }
-@media (max-width: 890px) {
+@media (max-width: 925px) {
+  #recipe-notice {
+    font-size: 18px;
+  }
   #preppy {
     font-size: 40px;
   }
+}
+@media (max-width: 765px) {
+  .fridge-swiper-wrapper {
+    width: 45%;
+  }
   #recipe-notice {
-    font-size: 15px;
-    text-align: center;
+    font-size: 16px;
   }
-  .ingredient-name {
-    font-size: 60px;
-  }
-}
-
-@media (max-width: 799px) {
-  .fridge-btn-container {
-    display: grid;
-    grid-template-rows: repeat(auto-fit, minmax(1fr, 200px));
-    height: 70vh;
-  }
-  .single-ingredient-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80%;
-  }
-  .get-recipe-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    height: 75%;
-    z-index: 2;
-    margin-bottom: 0px;
-    margin-right: 0px;
-  }
-  .fridge-swiper-container {
-    height: 300px;
-    margin-top: 250px;
-  }
-  .fridge-left-panel {
-    height: 250px;
-  }
-  .fridge-animation-area {
-    background: linear-gradient(
-      to left,
-      rgb(242, 207, 212),
-      rgb(239, 255, 250)
-    );
-    width: 100%;
-    /* height: 120vh; */
-  }
-  .fridge-box-area {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    height: 90vh;
-    overflow-y: scroll;
-  }
-  .fridge-box-area li {
-    position: absolute;
-    display: block;
-    list-style: none;
-    width: 25px;
-    height: 25px;
-    background: transparent;
-    animation: animate 10s linear infinite;
-    bottom: -100px;
-    z-index: 0;
-  }
-  .fridge-box-area li:nth-child(9) {
-    left: 77%;
-    width: 30px;
-    height: 30px;
-    font-size: 40px;
-    animation-duration: 15s;
-    color: rgb(195, 236, 245);
-  }
-
-  .fridge-box-area li:nth-child(2) {
-    left: 69%;
-    width: 30px;
-    height: 30px;
-    animation-duration: 20s;
-    font-size: 150px;
-    color: rgb(254, 152, 0);
-  }
-  .fridge-box-area li:nth-child(3) {
-    left: 20%;
-    width: 100px;
-    height: 100px;
-    animation-duration: 30s;
-    font-size: 44px;
-    color: rgb(3, 146, 96);
-  }
-  .fridge-box-area li:nth-child(4) {
-    left: 42%;
-    width: 150px;
-    height: 150px;
-    animation-duration: 15s;
-    font-size: 38px;
-    color: rgb(81, 44, 5);
-  }
-  .fridge-box-area li:nth-child(5) {
-    left: 80%;
-    width: 210px;
-    height: 190px;
-    font-size: 80px;
-    color: rgb(255, 153, 0);
-  }
-  .fridge-box-area li:nth-child(6) {
-    left: 15%;
-    width: 150px;
-    height: 70px;
-    font-size: 33px;
-    color: rgb(190, 10, 10);
-  }
-  .fridge-box-area li:nth-child(7) {
-    left: 10%;
-    width: 110px;
-    height: 90px;
-    font-size: 140px;
-    color: rgb(255, 132, 0);
-  }
-  .fridge-box-area li:nth-child(8) {
-    left: 70%;
-    width: 50px;
-    height: 150px;
-    animation-duration: 10s;
-    animation-delay: 0s;
-    font-size: 110px;
-    color: rgb(255, 213, 0);
-  }
-  .fridge-box-area li:nth-child(10) {
-    left: 20%;
-    width: 200px;
-    height: 50px;
-    animation-duration: 30s;
-    font-size: 70px;
-    color: rgb(148, 89, 16);
-  }
-
-  @keyframes animate {
-    0% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(-3000px) rotate(360deg);
-      opacity: 1;
-    }
-  }
-}
-
-@media (max-width: 650px) {
-  .fridge-btn-container {
-    display: grid;
-    grid-template-rows: repeat(auto-fit, minmax(1fr, 200px));
-    height: 70vh;
-  }
-  .single-ingredient-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80%;
-  }
-  .get-recipe-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    height: 75%;
-    z-index: 2;
-    margin-bottom: 0px;
-    margin-right: 0px;
-  }
-  .fridge-swiper-container {
-    height: 300px;
-    margin-top: 250px;
-  }
-  .fridge-left-panel {
-    height: 250px;
-  }
-  .fridge-animation-area {
-    background: linear-gradient(
-      to left,
-      rgb(242, 207, 212),
-      rgb(239, 255, 250)
-    );
-    width: 100%;
-    /* height: 120vh; */
-  }
-  .fridge-box-area {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    /* height: 120vh; */
-  }
-  .fridge-box-area li {
-    position: absolute;
-    display: block;
-    list-style: none;
-    width: 25px;
-    height: 25px;
-    background: transparent;
-    animation: animate 20s linear infinite;
-    bottom: -100px;
-    z-index: 0;
-  }
-  .fridge-box-area li:nth-child(9) {
-    left: 77%;
-    width: 30px;
-    height: 30px;
-    font-size: 40px;
-    animation-duration: 15s;
-    color: rgb(195, 236, 245);
-  }
-
-  .fridge-box-area li:nth-child(2) {
-    left: 69%;
-    width: 30px;
-    height: 30px;
-    animation-duration: 10s;
-    font-size: 150px;
-    color: rgb(254, 152, 0);
-  }
-  .fridge-box-area li:nth-child(3) {
-    left: 20%;
-    width: 100px;
-    height: 100px;
-    animation-duration: 30s;
-    font-size: 44px;
-    color: rgb(3, 146, 96);
-  }
-  .fridge-box-area li:nth-child(4) {
-    left: 42%;
-    width: 150px;
-    height: 150px;
-    animation-duration: 15s;
-    font-size: 38px;
-    color: rgb(81, 44, 5);
-  }
-  .fridge-box-area li:nth-child(5) {
-    left: 80%;
-    width: 210px;
-    height: 190px;
-    font-size: 80px;
-    color: rgb(255, 153, 0);
-  }
-  .fridge-box-area li:nth-child(6) {
-    left: 15%;
-    width: 150px;
-    height: 70px;
-    font-size: 33px;
-    color: rgb(190, 10, 10);
-  }
-  .fridge-box-area li:nth-child(7) {
-    left: 10%;
-    width: 110px;
-    height: 90px;
-    font-size: 140px;
-    color: rgb(255, 132, 0);
-  }
-  .fridge-box-area li:nth-child(8) {
-    left: 70%;
-    width: 50px;
-    height: 150px;
-    animation-duration: 10s;
-    animation-delay: 0s;
-    font-size: 110px;
-    color: rgb(255, 213, 0);
-  }
-  .fridge-box-area li:nth-child(10) {
-    left: 20%;
-    width: 200px;
-    height: 50px;
-    animation-duration: 15s;
-    font-size: 70px;
-    color: rgb(148, 89, 16);
-  }
-
-  @keyframes animate {
-    0% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(-3000px) rotate(360deg);
-      opacity: 1;
-    }
-  }
-}
-@media (max-width: 450px) {
   #preppy {
     font-size: 30px;
   }
+}
+@media (max-width: 662px) {
+  .fridge-swiper-wrapper {
+    width: 43%;
+  }
   #recipe-notice {
-    font-size: 15px;
-    text-align: center;
+    font-size: 16px;
   }
-  .ingredient-name {
-    font-size: 40px;
-  }
-  .single-ingredient-box {
-    width: 100%;
-  }
-  .fridge-button {
-    width: 150px;
-    background-color: #fdc500;
-    border: none;
-    outline: none;
-    height: 30px;
-    border-radius: 49px;
-    color: rgb(58, 59, 50);
-    text-transform: uppercase;
-    font-weight: 600;
-    margin: 10px 0;
-    cursor: pointer;
-    font-size: 12px;
-  }
-  .fridge-button:hover {
-    width: 150px;
-    background-color: #fdc500;
-    border: none;
-    outline: none;
-    height: 30px;
-    border-radius: 49px;
-    color: rgb(58, 59, 50);
-    text-transform: uppercase;
-    font-weight: 600;
-    margin: 10px 0;
-    cursor: pointer;
-    font-size: 12px;
-  }
-  .get-recipe-button:hover {
-    width: 200px;
-    background-color: #fdc500;
-    outline: none;
-    height: 30px;
-    border-radius: 49px;
-    color: rgb(58, 59, 50);
-    text-transform: uppercase;
-    font-weight: 600;
-    margin: 10px 0;
-    cursor: pointer;
-    box-shadow: 0 0 20px #fff, 0 0 40px #fdc500, 0 0 5px #fdc500;
-    transition-delay: 0s;
+  #preppy {
+    font-size: 30px;
   }
 }
 
-@media (max-width: 425px) {
-  .fridge-btn-container {
-    width: 200px;
+@media (max-width: 585px) {
+  .fridge-swiper-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .fridge-swiper-wrapper {
     margin-right: 0;
+    margin-left: 0;
+    height: 400px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .get-recipe-wrapper {
+    margin: 0;
+    height: 400px;
+    width: 100vw;
+    display: flex;
+    align-items: flex-start;
+  }
+  .single-ingredient-container {
+    margin-right: 0px;
+    height: 300px;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 400px;
+    width: 100%;
+  }
+  .recipe-ingredient-name {
+    font-size: 20px;
+    height: 40px;
+    padding: 10px 20px;
+    font-weight: 900;
+  }
+  .get-recipe-title {
+    width: 100%;
+  }
+  .ingredient-container {
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+  }
+}
+
+@media (max-width: 475px) {
+  .fridge-button {
+    font-size: 12px;
+    width: 170px;
+  }
+  .fridge-button:hover {
+    font-size: 12px;
+    width: 170px;
+  }
+  .get-recipe-button {
+    font-size: 12px;
+    width: 170px;
+  }
+  .get-recipe-button:hover {
+    font-size: 12px;
+    width: 170px;
+  }
+  .single-ingredient-container {
+    margin-top: 555px;
+  }
+}
+@media (max-width: 410px) {
+  .fridge-swiper-wrapper {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+  }
+  .single-ingredient-container {
+    width: 400px;
+    margin-top: 555px;
   }
 }

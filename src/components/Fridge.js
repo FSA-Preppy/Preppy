@@ -46,68 +46,60 @@ const Fridge = (props) => {
         <div>
           <div>
             <ul className="fridge-box-area">
-              <div className="fridge-btn-container">
-                <div className="single-ingredient-box">
-                  <div className="fridge-swiper-container">
-                    <div className="fridge-swiper-wrapper">
-                      <Swiper
-                        effect="fade"
-                        spaceBetween={0}
-                        slidesPerView={1}
-                        pagination={{ clickable: true }}
-                      >
-                        {ingredients.map((singleIngredient, idx) => {
-                          return (
-                            <SwiperSlide
-                              key={idx}
-                              className="single-ingredient-swiper-wrapper"
+              <div className="fridge-swiper-container">
+                <div className="fridge-swiper-wrapper">
+                  <Swiper
+                    effect="fade"
+                    spaceBetween={2}
+                    slidesPerView={1}
+                    pagination={{ clickable: true }}
+                  >
+                    {ingredients.map((singleIngredient, idx) => {
+                      return (
+                        <SwiperSlide key={idx}>
+                          <div className="single-ingredient-container">
+                            <div className="ingredient-name">
+                              {singleIngredient.split("_").join(" ")}
+                            </div>
+                            {activeIng.includes(singleIngredient) ? (
+                              <button
+                                className="fridge-button"
+                                onClick={() => {
+                                  removeActiveIng(singleIngredient);
+                                  notifyRemove();
+                                }}
+                              >
+                                Remove from board
+                              </button>
+                            ) : (
+                              <button
+                                className="fridge-button"
+                                onClick={() => {
+                                  settingActiveIng(singleIngredient);
+                                  notifyAdd();
+                                }}
+                              >
+                                Add to board
+                              </button>
+                            )}
+                            <button
+                              className="fridge-button"
+                              onClick={() => {
+                                removeActiveIng(singleIngredient);
+                                deleteIngredient(user, singleIngredient);
+                              }}
                             >
-                              <div className="single-ingredient-container">
-                                <div className="fridge-left-panel">
-                                  <div className="ingredient-name">
-                                    {singleIngredient.split("_").join(" ")}
-                                  </div>
-                                  {activeIng.includes(singleIngredient) ? (
-                                    <button
-                                      className="fridge-button"
-                                      onClick={() => {
-                                        removeActiveIng(singleIngredient);
-                                        notifyRemove();
-                                      }}
-                                    >
-                                      Remove from board
-                                    </button>
-                                  ) : (
-                                    <button
-                                      className="fridge-button"
-                                      onClick={() => {
-                                        settingActiveIng(singleIngredient);
-                                        notifyAdd();
-                                      }}
-                                    >
-                                      Add to board
-                                    </button>
-                                  )}
-                                  <button
-                                    className="fridge-button"
-                                    onClick={() => {
-                                      removeActiveIng(singleIngredient);
-                                      deleteIngredient(user, singleIngredient);
-                                    }}
-                                  >
-                                    Remove
-                                  </button>
-                                </div>
-                              </div>
-                            </SwiperSlide>
-                          );
-                        })}
-                      </Swiper>
-                    </div>
-                  </div>
+                              Remove
+                            </button>
+                          </div>
+                        </SwiperSlide>
+                      );
+                    })}
+                  </Swiper>
                 </div>
-                <div className="get-recipe-box">
-                  <div className="get-recipe-container">
+                <div className="get-recipe-wrapper">
+                  <div className="get-recipe-title">
+                    {" "}
                     {!activeIng.length ? (
                       <>
                         <div id="recipe-notice">
@@ -132,18 +124,21 @@ const Fridge = (props) => {
                         Get Recipes!
                       </button>
                     )}
-                    <div>
+                    <div className="ingredient-container">
                       {activeIng.map((ingredient, idx) => {
                         return (
-                          <div key={idx} className="recipe-ingredient-name">
-                            {ingredient.split("_").join(" ")}
-                          </div>
+                          <>
+                            <div key={idx} className="recipe-ingredient-name">
+                              {ingredient.split("_").join(" ")}
+                            </div>
+                          </>
                         );
                       })}
                     </div>
                   </div>
                 </div>
               </div>
+
               {/* background css animation boxes */}
               <li className="fas fa-hamburger"></li>
               <li className="fas fa-fish"></li>
