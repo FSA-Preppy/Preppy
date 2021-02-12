@@ -1,12 +1,11 @@
-
 import { dbService } from "../fbase";
-import { notifyAddFridge, notifyDelete} from "../toast";
+import { notifyAddFridge, notifyDelete } from "../toast";
 import "react-toastify/dist/ReactToastify.css";
 
-const GET_INGREDIENTS = 'GET_INGREDIENTS';
-const DELETE_INGREDIENTS = 'DELETE_INGREDIENTS';
-const ADD_INGREDIENTS = 'ADD_INGREDIENTS';
-const REMOVE_INGREDIENTS = 'REMOVE_INGREDIENTS';
+const GET_INGREDIENTS = "GET_INGREDIENTS";
+const DELETE_INGREDIENTS = "DELETE_INGREDIENTS";
+const ADD_INGREDIENTS = "ADD_INGREDIENTS";
+const REMOVE_INGREDIENTS = "REMOVE_INGREDIENTS";
 
 const getIngredients = (ingredients) => {
   return {
@@ -37,9 +36,9 @@ export const removeIngredients = () => {
 export const fetchIngredients = (userId) => {
   return async (dispatch) => {
     try {
-      console.log('fetchThunk fired!!');
+      console.log("fetchThunk fired!!");
 
-      const res = await dbService.collection('ingredients').get();
+      const res = await dbService.collection("ingredients").get();
       let array = [];
 
       res.forEach((doc) => {
@@ -57,13 +56,12 @@ export const fetchIngredients = (userId) => {
 export const addIngredientThunk = (userId, ingredient) => {
   return async (dispatch) => {
     try {
-      notifyAddFridge()
-      await dbService.collection('ingredients').add({
+      notifyAddFridge();
+      await dbService.collection("ingredients").add({
         name: ingredient,
         createdAt: Date.now(),
         creatorId: userId,
       });
-      console.log('ingredient-->', ingredient);
       dispatch(addIngredients(ingredient));
     } catch (err) {
       console.error(err.message);
@@ -74,17 +72,14 @@ export const addIngredientThunk = (userId, ingredient) => {
 export const deleteIngredientThunk = (userId, ingredient) => {
   return async (dispatch) => {
     try {
-      notifyDelete()
+      notifyDelete();
       console.log("deleteThunk fired");
-      await dbService.collection("ingredients").onSnapshot((snapshot) => {
-        snapshot.docs
-          .filter(
-            (doc) =>
-              doc.data().creatorId === userId && doc.data().name === ingredient
-          )
-          .map((item) => {
-            return dbService.doc(`ingredients/${item.id}`).delete();
-          });
+      const res = await dbService.collection("ingredients").get();
+
+      res.forEach((doc) => {
+        if (doc.data().creatorId === userId && doc.data().name === ingredient) {
+          dbService.collection(`ingredients`).doc(doc.id).delete();
+        }
       });
       dispatch(deleteIngredients(ingredient));
     } catch (err) {
