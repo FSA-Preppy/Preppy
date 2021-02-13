@@ -37,10 +37,8 @@ export const fetchIngredients = (userId) => {
   return async (dispatch) => {
     try {
       console.log("fetchThunk fired!!");
-
       const res = await dbService.collection("ingredients").get();
       let array = [];
-
       res.forEach((doc) => {
         if (doc.data().creatorId === userId) {
           array.push(doc.data().name);

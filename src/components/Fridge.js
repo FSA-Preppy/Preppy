@@ -17,6 +17,7 @@ const Fridge = (props) => {
   const { deleteIngredient, user, ingredients, addRecipes } = props;
   const [activeIng, setActiveIng] = useState([]);
   let history = useHistory();
+
   async function formatNames(activeIngredients) {
     let productList = [];
     let name = "";
@@ -52,7 +53,7 @@ const Fridge = (props) => {
                     effect="fade"
                     spaceBetween={2}
                     slidesPerView={1}
-                    pagination={{ clickable: true }}
+                    pagination={{ clickable: true, dynamicBullets: true }}
                   >
                     {ingredients.map((singleIngredient, idx) => {
                       return (

@@ -23,7 +23,7 @@ const LandingPage = () => {
         spaceBetween={0}
         slidesPerView={1}
         navigation
-        pagination={{ clickable: true }}
+        pagination={{ clickable: true, dynamicBullets: true }}
       >
         <SwiperSlide>
           <div className="image-container">
