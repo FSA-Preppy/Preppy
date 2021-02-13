@@ -9,22 +9,32 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Pagination, EffectCoverflow } from "swiper";
+import SwiperCore, { Navigation, EffectCoverflow } from "swiper";
 import "swiper/swiper.scss";
 import "swiper/components/effect-coverflow/effect-coverflow.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 
-SwiperCore.use([Navigation, Pagination, EffectCoverflow]);
+SwiperCore.use([Navigation, EffectCoverflow]);
 
 const useStyles = makeStyles({
   root: {
     width: 320,
     height: 370,
     padding: 3,
+    "@media (max-width: 320px)": {
+      width: 250,
+      height: 300,
+      padding: 3,
+    },
   },
   media: {
     height: 270,
+    "@media (max-width: 320px)": {
+      width: 250,
+      height: 220,
+      padding: 3,
+    },
   },
 });
 
@@ -56,21 +66,37 @@ const Recipe = (props) => {
                   modifier: 1,
                   slideShadows: false,
                 }}
-                // pagination={{ clickable: false, dynamicBullets: true }}
+                breakpoints={{
+                  700: {
+                    spaceBetween: 0,
+                    slidesPerView: 4,
+                  },
+                  500: {
+                    spaceBetween: 100,
+                    slidesPerView: 2,
+                  },
+                  411: {
+                    spaceBetween: 100,
+                    slidesPerView: 2,
+                  },
+                  300: {
+                    spaceBetween: 0,
+                    slidesPerView: 1,
+                  },
+                }}
               >
                 {recipes.map((recipe, idx) => {
                   return (
                     <SwiperSlide key={idx}>
                       <div className="recipes-slide" key={recipe.id}>
                         <Card className={classes.root}>
-                          <CardActionArea>
-                            <a href={recipe.url}>
-                              <CardMedia
-                                className={classes.media}
-                                image={recipe.image}
-                                title={recipe.name}
-                              />
-                            </a>
+                          <CardActionArea href={recipe.url} target="_blank">
+                            <CardMedia
+                              className={classes.media}
+                              image={recipe.image}
+                              title={recipe.name}
+                            />
+
                             <CardContent>
                               <div className="recipe-name-container">
                                 <div className="recipe-name">{recipe.name}</div>
@@ -85,13 +111,14 @@ const Recipe = (props) => {
               </Swiper>
             </div>
           </div>
-
+          {/* css animation for background */}
           <li></li>
           <li></li>
           <li></li>
           <li></li>
           <li></li>
           <li></li>
+          {/* css animation for background */}
         </ul>
       </div>
     </>

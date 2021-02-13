@@ -32,3 +32,44 @@ code {
       url("../fonts/architects-daughter-v11-latin-regular.svg#ArchitectsDaughter")
       format("svg"); /* Legacy iOS */
 }
+
+#lock {
+  display: none;
+}
+
+.landscape-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 80vh;
+}
+#landscape-preppy {
+  height: 100px;
+  width: 100px;
+}
+.landscape-header {
+  font-family: "Architects Daughter";
+  margin-bottom: 10px;
+  font-size: 30px;
+}
+.landscape-sub {
+  font-style: normal;
+}
+
+@media screen and (min-width: 320px) and (max-width: 823px) and (orientation: landscape) {
+  #lock {
+    display: block;
+  }
+  #container {
+    display: none;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portait) {
+  #lock {
+    display: none;
+  }
+  #container {
+    display: block;
+  }
+}

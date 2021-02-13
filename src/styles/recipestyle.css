@@ -104,9 +104,12 @@
 .recipes-slide {
   background-position: center;
   background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 300px;
   margin: 0;
-  -webkit-box-reflect: below 1px
+  -webkit-box-reflect: below 0.5px
     linear-gradient(transparent, transparent, #0006);
 }
 .recipe-name-container {

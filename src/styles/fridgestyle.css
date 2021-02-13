@@ -51,10 +51,10 @@
   left: 77%;
   width: 30px;
   height: 30px;
-  font-size: 40px;
+  font-size: 100px;
   animation-delay: 3s;
   animation-duration: 15s;
-  color: rgb(195, 236, 245);
+  color: rgb(255, 255, 255);
 }
 
 .fridge-box-area li:nth-child(2) {
@@ -71,7 +71,7 @@
   width: 100px;
   height: 100px;
   animation-delay: 5.5s;
-  font-size: 44px;
+  font-size: 55px;
   color: rgb(3, 146, 96);
 }
 .fridge-box-area li:nth-child(4) {
@@ -80,23 +80,23 @@
   height: 150px;
   animation-delay: 0s;
   animation-duration: 15s;
-  font-size: 38px;
+  font-size: 90px;
   color: rgb(81, 44, 5);
 }
 .fridge-box-area li:nth-child(5) {
   left: 80%;
-  width: 50px;
-  height: 190px;
-  animation-delay: 0s;
-  font-size: 40px;
+  width: 200px;
+  height: 200px;
+  font-size: 100px;
+  animation-duration: 10s;
   color: rgb(255, 153, 0);
 }
 .fridge-box-area li:nth-child(6) {
-  left: 15%;
+  left: 33%;
   width: 150px;
   height: 70px;
-  animation-delay: 3.5s;
-  font-size: 33px;
+  animation-delay: 8s;
+  font-size: 90px;
   color: rgb(190, 10, 10);
 }
 .fridge-box-area li:nth-child(7) {
@@ -117,12 +117,12 @@
   color: rgb(255, 213, 0);
 }
 .fridge-box-area li:nth-child(10) {
-  left: 20%;
+  left: 50%;
   width: 200px;
-  height: 50px;
-  animation-duration: 30s;
+  height: 120px;
+  animation-duration: 20s;
   animation-delay: 2s;
-  font-size: 70px;
+  font-size: 100px;
   color: rgb(148, 89, 16);
 }
 
@@ -289,7 +289,7 @@
     left: 0;
     width: 100%;
     height: 90%;
-    overflow: hidden;
+    overflow: visible;
     z-index: 0;
   }
   .fridge-box-area li {
@@ -307,10 +307,10 @@
     left: 77%;
     width: 30px;
     height: 30px;
-    font-size: 40px;
+    font-size: 80px;
     animation-delay: 5s;
     animation-duration: 15s;
-    color: rgb(195, 236, 245);
+    color: rgb(255, 255, 255);
     z-index: 0;
   }
 
@@ -329,7 +329,7 @@
     width: 100px;
     height: 100px;
     animation-delay: 7s;
-    font-size: 44px;
+    font-size: 90px;
     color: rgb(3, 146, 96);
     z-index: 0;
   }
@@ -339,25 +339,26 @@
     height: 150px;
     animation-delay: 6s;
     animation-duration: 15s;
-    font-size: 38px;
+    font-size: 88px;
     color: rgb(81, 44, 5);
     z-index: 0;
   }
   .fridge-box-area li:nth-child(5) {
-    left: 80%;
-    width: 210px;
-    height: 190px;
-    animation-delay: 5s;
+    left: 60%;
+    width: 100px;
+    height: 100px;
+    animation-delay: 0s;
+    animation-duration: 20s;
     font-size: 80px;
     color: rgb(255, 153, 0);
     z-index: 0;
   }
   .fridge-box-area li:nth-child(6) {
-    left: 15%;
-    width: 150px;
-    height: 70px;
+    left: 40%;
+    width: 50px;
+    height: 20px;
     animation-delay: 4s;
-    font-size: 33px;
+    font-size: 60px;
     color: rgb(190, 10, 10);
     z-index: 0;
   }
@@ -371,7 +372,7 @@
     z-index: 0;
   }
   .fridge-box-area li:nth-child(8) {
-    left: 70%;
+    left: 83%;
     width: 50px;
     height: 150px;
     animation-duration: 17s;
