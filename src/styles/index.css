@@ -57,19 +57,28 @@ code {
   font-style: normal;
 }
 
-@media screen and (min-width: 320px) and (max-width: 823px) and (orientation: landscape) {
+@media screen and (min-width: 320px) and (max-width: 796px) and (orientation: landscape) {
   #lock {
     display: block;
   }
-  #container {
+  #html-container {
     display: none;
   }
 }
-@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portait) {
+@media screen and (min-width: 320px) and (max-width: 812px) and (orientation: portait) {
   #lock {
     display: none;
   }
-  #container {
+  #html-container {
     display: block;
+  }
+}
+
+@media screen and (max-height: 412px) and (orientation: landscape) {
+  #lock {
+    display: block;
+  }
+  #html-container {
+    display: none;
   }
 }
