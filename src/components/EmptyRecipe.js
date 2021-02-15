@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { useTransition, animated } from "react-spring";
 import "../styles/emptystyle.css";
 
-const Empty = () => {
+const EmptyRecipe = () => {
   const [didMount, setDidMount] = useState(false);
   const ref = useRef([]);
   const [items, set] = useState([]);
@@ -32,9 +32,9 @@ const Empty = () => {
     ref.current.map(clearTimeout);
     ref.current = [];
     set([]);
-    ref.current.push(setTimeout(() => set(["Please", "Add", "Items"]), 2000));
-    ref.current.push(setTimeout(() => set(["Please", "Items"]), 5000));
-    ref.current.push(setTimeout(() => set(["Please", "Add", "Items"]), 8000));
+    ref.current.push(setTimeout(() => set(["Get Started", "Add", "Ingredients"]), 2000));
+    ref.current.push(setTimeout(() => set(["Get Started", "Ingredients"]), 5000));
+    ref.current.push(setTimeout(() => set(["Get Started", "Add", "Ingredients"]), 8000));
   }, []);
 
   useEffect(() => {
@@ -48,8 +48,8 @@ const Empty = () => {
   return (
     <>
       <div className="fridge-animation-area">
-        <div className="fridge-header-container">
-          <div>
+        <h1 className="empty-header">Recipes</h1>
+          <div className="empty-fridge-box">
             {transitions.map(
               ({ item, props: { innerHeight, ...rest }, key }) => (
                 <animated.div
@@ -67,12 +67,11 @@ const Empty = () => {
               )
             )}
           </div>
-        </div>
       </div>
     </>
   );
 };
 
-render(<Empty />, document.getElementById("root"));
+render(<EmptyRecipe />, document.getElementById("root"));
 
-export default Empty;
+export default EmptyRecipe;

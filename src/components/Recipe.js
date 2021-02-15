@@ -14,7 +14,7 @@ import "swiper/swiper.scss";
 import "swiper/components/effect-coverflow/effect-coverflow.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
-import Empty from "./Empty";
+import EmptyRecipe from "./EmptyRecipe";
 
 SwiperCore.use([Navigation, EffectCoverflow]);
 
@@ -128,7 +128,7 @@ const Recipe = (props) => {
           </div>
         </>
       ) : (
-        <Empty />
+        <EmptyRecipe />
       )}
     </>
   );
