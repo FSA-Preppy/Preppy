@@ -39,7 +39,7 @@ const Fridge = (props) => {
   };
   return (
     <>
-      {(ingredients.length) ? (
+      {ingredients.length ? (
         <>
           <div className="fridge-animation-area">
             <div className="fridge-header-container">
@@ -91,7 +91,7 @@ const Fridge = (props) => {
                                     deleteIngredient(user, singleIngredient);
                                   }}
                                 >
-                                  Remove
+                                  DELETE
                                 </button>
                               </div>
                             </SwiperSlide>
