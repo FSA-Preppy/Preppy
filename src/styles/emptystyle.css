@@ -12,6 +12,8 @@
 
 #root > div {
   width: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 .empty-header {
   display: flex;
