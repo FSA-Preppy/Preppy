@@ -13,9 +13,27 @@
 #root > div {
   width: 100%;
 }
-
-.transitions-item {
+.empty-header {
+  display: flex;
+  justify-content: center;
+  color: rgb(34, 34, 34);
+  font-size: 70px;
   font-family: "Architects Daughter", cursive;
+  text-decoration: underline;
+  z-index: 1;
+}
+.empty-fridge-box {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+.transitions-item {
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
+    helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+  background: transparent;
   overflow: hidden;
   width: 100%;
   color: white;

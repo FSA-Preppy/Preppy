@@ -10,7 +10,7 @@ import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 import { notifyAdd, notifyRemove } from "../toast";
 import "react-toastify/dist/ReactToastify.css";
-import Empty from "./Empty";
+import EmptyFridge from "./EmptyFridge";
 
 SwiperCore.use([Navigation, Pagination, A11y]);
 
@@ -161,7 +161,7 @@ const Fridge = (props) => {
           </div>
         </>
       ) : (
-        <Empty />
+        <EmptyFridge />
       )}
     </>
   );
