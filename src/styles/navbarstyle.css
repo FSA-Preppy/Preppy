@@ -3,10 +3,14 @@
   justify-content: center;
   flex-direction: row;
   align-items: center;
+  position: relative;
   height: 10vh;
+  width: 100%;
   background: linear-gradient(to right, #fdc500, #fdc500);
   z-index: 10;
+  -webkit-tap-highlight-color: transparent;
 }
+
 .navbar-icon {
   height: 45px;
   width: 45px;
@@ -64,7 +68,6 @@
     padding-left: 7px;
     margin: 15px;
     background-color: rgb(34, 34, 34);
-    box-shadow: 0 0 5px #fff, 0 0 15px #fff, 0 0 2px #fff;
     border-radius: 50%;
     transition: 0.3s ease-in-out;
   }
@@ -96,6 +99,7 @@
     padding-left: 7px;
     margin: 15px;
     background-color: rgb(34, 34, 34);
+    box-shadow: none;
     border-radius: 50%;
     transition: 0.3s ease-in-out;
   }
@@ -127,6 +131,7 @@
     padding-left: 7px;
     margin: 10px;
     background-color: rgb(34, 34, 34);
+    box-shadow: none;
     border-radius: 50%;
     transition: 0.3s ease-in-out;
     cursor: pointer;

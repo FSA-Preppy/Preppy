@@ -6,19 +6,68 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <script
-      src="https://kit.fontawesome.com/64d58efce2.js"
-      crossorigin="anonymous"
-    ></script>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <link
       rel="apple-touch-icon"
       href="https://firebasestorage.googleapis.com/v0/b/preppy-food.appspot.com/o/PreppyLogoIcon.png?alt=media&token=b5cd3e94-6d9c-4d46-bf5b-4ccf6669f8e2"
     />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+      href="/apple-launch-1125x2436.png"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+      href="/apple-launch-750x1334.png"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)"
+      href="/apple-launch-1242x2208.png"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+      href="/apple-launch-640x1136.png"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
+      href="/apple-launch-1536x2048.png"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
+      href="/apple-launch-1668x2224.png"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
+      href="/apple-launch-2048x2732.png"
+    />
+
     <link rel="manifest" href="manifest.json" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Preppy</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="lock">
+      <div class="landscape-container">
+        <img src="logo192.png" alt="preppy" id="landscape-preppy" />
+        <h1 class="landscape-header">Please rotate your device!</h1>
+        <p class="landscape-sub">We do not support landscape mode yet.</p>
+        <p class="landscape-sub">
+          Please go back to portrait mode for better experience.
+        </p>
+      </div>
+    </div>
+    <div id="html-container">
+      <div id="root"></div>
+    </div>
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", function () {
