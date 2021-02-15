@@ -180,6 +180,7 @@
 .recipe-ingredient-name {
   text-align: center;
   font-size: 3vw;
+  height: auto;
   color: rgb(26, 26, 26);
   font-family: "Architects Daughter", cursive;
 }
@@ -484,7 +485,7 @@
   }
   .recipe-ingredient-name {
     font-size: 20px;
-    height: 40px;
+    height: auto;
     padding: 10px 20px;
     font-weight: 900;
   }
@@ -502,6 +503,18 @@
 }
 
 @media (max-width: 475px) {
+  .swiper-slide.swiper-slide-active {
+    width: 300px;
+  }
+  .ingredient-name {
+    font-size: 2.5vh;
+    font-weight: bolder;
+    font-weight: 900;
+    font-family: "Architects Daughter", cursive;
+    color: rgb(34, 34, 34);
+    word-wrap: normal;
+    text-align: center;
+  }
   .fridge-button {
     font-size: 12px;
     width: 170px;
@@ -524,6 +537,15 @@
   }
 }
 @media (max-width: 410px) {
+  .ingredient-name {
+    font-size: 2.5vh;
+    font-weight: bolder;
+    font-weight: 900;
+    font-family: "Architects Daughter", cursive;
+    color: rgb(34, 34, 34);
+    word-wrap: normal;
+    text-align: center;
+  }
   .fridge-swiper-wrapper {
     width: 200px;
     display: flex;
