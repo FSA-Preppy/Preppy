@@ -179,10 +179,10 @@
 }
 .recipe-ingredient-name {
   text-align: center;
-  font-size: 3vw;
-  height: auto;
+  font-size: 4vw;
   color: rgb(26, 26, 26);
   font-family: "Architects Daughter", cursive;
+  padding: 10px;
 }
 #recipe-notice {
   color: rgb(34, 34, 34);
@@ -209,8 +209,7 @@
 }
 
 .ingredient-name {
-  font-size: 14px;
-  font-size: 6vw;
+  font-size: 3vw;
   font-weight: bolder;
   font-weight: 900;
   font-family: "Architects Daughter", cursive;
@@ -480,14 +479,8 @@
     height: 300px;
     display: flex;
     justify-content: flex-start;
-    margin: 600px 0 0 0;
+    margin: 500px 0 0 0;
     width: 100%;
-  }
-  .recipe-ingredient-name {
-    font-size: 20px;
-    height: auto;
-    padding: 10px 20px;
-    font-weight: 900;
   }
   .get-recipe-title {
     width: 100%;
@@ -500,11 +493,24 @@
     justify-content: center;
     align-content: flex-start;
   }
+  .ingredient-name {
+    font-size: 2.5vh;
+    font-weight: bolder;
+    font-weight: 900;
+    font-family: "Architects Daughter", cursive;
+    color: rgb(34, 34, 34);
+    word-wrap: normal;
+    text-align: center;
+  }
 }
 
 @media (max-width: 475px) {
-  .swiper-slide.swiper-slide-active {
-    width: 300px;
+  .swiper-wrapper {
+    width: 80%;
+  }
+  .swiper-slide {
+    width: 80%;
+    margin: 0;
   }
   .ingredient-name {
     font-size: 2.5vh;
@@ -536,7 +542,17 @@
     margin-top: 555px;
   }
 }
-@media (max-width: 410px) {
+@media (max-width: 414px) {
+  .fridge-swiper-wrapper {
+    width: 300px;
+  }
+  .swiper-wrapper {
+    width: 80%;
+  }
+  .swiper-slide {
+    width: 300px;
+    margin: 0;
+  }
   .ingredient-name {
     font-size: 2.5vh;
     font-weight: bolder;
@@ -553,6 +569,129 @@
   }
   .single-ingredient-container {
     width: 400px;
-    margin: 555px 0 0 0;
+    margin: 500px 0 0 0;
+  }
+  .swiper-pagination {
+    padding: 0;
+  }
+}
+@media (max-width: 375px) {
+  .fridge-swiper-wrapper {
+    width: 300px;
+  }
+  .swiper-wrapper {
+    width: 80%;
+  }
+  .swiper-slide {
+    width: 300px;
+    margin-right: 0;
+  }
+  .ingredient-name {
+    font-size: 2.5vh;
+    font-weight: bolder;
+    font-weight: 900;
+    font-family: "Architects Daughter", cursive;
+    color: rgb(34, 34, 34);
+    word-wrap: normal;
+    text-align: center;
+  }
+  .fridge-swiper-wrapper {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+  }
+  .single-ingredient-container {
+    width: 400px;
+    margin: 500px 0 0 0;
+  }
+}
+@media (max-width: 375px) and (max-height: 667px) {
+  .fridge-swiper-wrapper {
+    width: 300px;
+  }
+  .swiper-wrapper {
+    width: 80%;
+  }
+  .swiper-slide {
+    width: 300px;
+    margin-right: 0;
+  }
+  .ingredient-name {
+    font-size: 2.5vh;
+    font-weight: bolder;
+    font-weight: 900;
+    font-family: "Architects Daughter", cursive;
+    color: rgb(34, 34, 34);
+    word-wrap: normal;
+    text-align: center;
+  }
+  .fridge-swiper-wrapper {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+  }
+  .single-ingredient-container {
+    width: 400px;
+    margin: 450px 0 0 0;
+  }
+}
+@media (max-width: 320px) {
+  .fridge-swiper-wrapper {
+    width: 300px;
+  }
+  .swiper-wrapper {
+    width: 80%;
+  }
+  .swiper-slide {
+    width: 300px;
+    margin-right: 0;
+  }
+  .ingredient-name {
+    font-size: 2.5vh;
+    font-weight: bolder;
+    font-weight: 900;
+    font-family: "Architects Daughter", cursive;
+    color: rgb(34, 34, 34);
+    word-wrap: normal;
+    text-align: center;
+  }
+  .fridge-swiper-wrapper {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+  }
+  .single-ingredient-container {
+    width: 400px;
+    margin: 425px 0 0;
+  }
+}
+@media (max-width: 280px) {
+  .fridge-swiper-wrapper {
+    width: 300px;
+  }
+  .swiper-wrapper {
+    width: 80%;
+  }
+  .swiper-slide {
+    width: 300px;
+    margin-right: 0;
+  }
+  .ingredient-name {
+    font-size: 2.5vh;
+    font-weight: bolder;
+    font-weight: 900;
+    font-family: "Architects Daughter", cursive;
+    color: rgb(34, 34, 34);
+    word-wrap: normal;
+    text-align: center;
+  }
+  .fridge-swiper-wrapper {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+  }
+  .single-ingredient-container {
+    width: 400px;
+    margin: 455px 0 0;
   }
 }
