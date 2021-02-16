@@ -18,6 +18,7 @@ const Fridge = (props) => {
   const { deleteIngredient, user, ingredients, addRecipes } = props;
   const [activeIng, setActiveIng] = useState([]);
   let history = useHistory();
+
   async function formatNames(activeIngredients) {
     let productList = [];
     let name = "";
@@ -58,7 +59,10 @@ const Fridge = (props) => {
                       >
                         {ingredients.map((singleIngredient, idx) => {
                           return (
-                            <SwiperSlide key={idx}>
+                            <SwiperSlide
+                              key={idx}
+                              style={{ width: "300px", marginRight: "" }}
+                            >
                               <div className="single-ingredient-container">
                                 <div className="ingredient-name">
                                   {singleIngredient.split("_").join(" ")}
