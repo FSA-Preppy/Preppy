@@ -1,5 +1,5 @@
 import axios from "axios";
-import { recipeAPIKey } from "../config/edamamAPI";
+import { recipeAPIKey } from "../edamamAPI";
 import { notifyFetchError, notifyRecipeError } from "../toast";
 
 const GET_RECIPES = "GET_RECIPES";

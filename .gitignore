@@ -10,8 +10,9 @@
 
 # production
 /build
-/src/config
-
+/src/firebaseConfig.js
+/src/edamamAPI.js
+/src/spoonacularAPI.js
 
 # misc
 .DS_Store

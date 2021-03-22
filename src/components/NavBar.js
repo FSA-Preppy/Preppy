@@ -7,7 +7,7 @@ import axios from "axios";
 import { addIngredientThunk, removeUser, removeRecipes } from "../store";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import spoonacularAPIKey from "../config/spoonacularAPI";
+import spoonacularAPIKey from "../spoonacularAPI";
 import "../styles/navbarstyle.css";
 
 import { Icon } from "@iconify/react";
