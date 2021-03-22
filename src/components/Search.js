@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { addIngredientThunk } from "../store/index";
 import "../styles/searchstyle.css";
-import { edamamAPIKey } from "../config/edamamAPI";
+import { edamamAPIKey } from "../edamamAPI";
 //todo, replace axios calls with thunks; manually add items(possibly with autocomplete via an); add items using returned barcode information
 import { notifyDuplicate, notifyBarcodeError } from "../toast";
 import "react-toastify/dist/ReactToastify.css";
